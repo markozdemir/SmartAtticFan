@@ -32,11 +32,14 @@ sock.listen(1);
 
 
 def send_response(code, msg, data, conn):
-    clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n"
-            +"\r\n")
-            # +str(json.dumps(data)) if data is not None else "" +"\r\n")
+    if data is None:
+        clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n\r\n")
+    else:
+        clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n"
+             + str(json.dumps(data)) + "\r\n")
     print("Sending response with code and msg:", code, msg)
     clientSocket.close()
+    print(end)
 
 # Some functions
 def get_request_data(data, conn):
@@ -90,4 +93,3 @@ while(True):
             data_print(data)
 
     send_response(200, "OK", None, clientSocket) # also closes conn
-    print(end)
