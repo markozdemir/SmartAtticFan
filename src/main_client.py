@@ -16,6 +16,15 @@ def connect_wifi(ssid, pw):
             pass
     return sta_if.ifconfig()
 
+server_on = True
+def send_data(temp, hum):
+    if server_on: 
+        r = urequests.request("POST", aws_URL, json={"type":"data_send_print", \
+            "data": {"temp": temp, "hum": hum}}, \
+            headers={"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"})
+        print("response", r.text)
+
+
 print("Trying to connect...")
 ipconfig = connect_wifi('router_name', 'pass')
 print("ip:", ipconfig[0])
@@ -25,6 +34,7 @@ try:
     print("Server online")
 except:
     print("Server offline, this may cause problems")
+    server_on = False
 
 
 sensor = dht.DHT22(machine.Pin(14))
@@ -37,10 +47,7 @@ while True:
         hum = sensor.humidity()
         print('Temperature: %3.1f C' %temp)
         print('Humidity: %3.1f %%' %hum)
-        r = urequests.request("POST", aws_URL, json={"type":"data_send_print", \
-            "data": {"temp": temp, "hum": hum}}, \
-            headers={"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"})
-        print("response", r.text)
+        send_data(temp, hum)
     except OSError as e:
         print('Failed to read sensor.')
 
