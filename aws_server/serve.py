@@ -12,16 +12,16 @@ import socket
 import ssl
 import json
 import pymongo
-import requests as urequests
-import random as urandom
+import requests
+import random
 import pickle
 import time
 from sklearn import svm
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
-trainDB = client["fan"]
-trainCollection = trainDB["user"]
+DB = client["fan"]
+db = DB["user"]
 filename = "nn.sav"
 
 # Server setup
@@ -50,10 +50,10 @@ def get_request_data(data, conn):
     if len(data) > 1:
         data = data[1]
     else:
-        send_response(400, "Bad Request", None, conn)
+        send_response(400, "Bad Request 1", None, conn)
         return  None
     if len(data) < 20:
-        send_response(400, "Bad Request", None, conn)
+        send_response(400, "Bad Request 2", None, conn)
         return None
     data = json.loads(data)
     print("Processing request: "+ data["type"])
@@ -66,8 +66,11 @@ def data_print(data):
             strr += "\t" + k + ": " + str(data_vals[k]) + "\n"
         print("Got data:\n" + str(strr))
 
+def ins_data_to_mongo(data):
+        r = db.insert(data)
+        print("Inserted data")
+
 print("Smart Attic Fan Running!")
-import time
 while(True):
     print("Waiting...")
     (clientSocket, clientAddress) = sock.accept();
@@ -82,11 +85,11 @@ while(True):
     if "data_send" in typ:
 
         if "data" not in data:
-            send_response(400, "Bad", None, clientSocket)
+            send_response(400, "Bad Request - missing data", None, clientSocket)
             continue
 
         if "train" in typ:
-            pass
+            ins_data_to_mongo(data['data'])
         elif "test" in typ:
             pass
         elif "print" in typ:
