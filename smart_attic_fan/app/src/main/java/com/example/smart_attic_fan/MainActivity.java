@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,12 +44,14 @@ import javax.net.ssl.HttpsURLConnection;
 public class MainActivity extends AppCompatActivity {
     private final int REQ_CODE = 100;
     private final String ngrokURL = "06e3e0a1a4ae.ngrok.io";
-    TextView textView;
+    private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
+    TextView textView, dataTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.text);
+        dataTextView = (TextView) findViewById(R.id.data);
         ImageView microphone = findViewById(R.id.mic);
         microphone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Device is not supported",
                             Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        final Button get_data_btn = (Button) findViewById(R.id.test);
+        get_data_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    send_req_aws("req_data");
+                } catch (IOException | ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -89,6 +103,26 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    private void send_req_aws(String type) throws IOException, ExecutionException, InterruptedException {
+        Date currentTime = Calendar.getInstance().getTime();
+        int hour = currentTime.getHours();
+        int minute = currentTime.getMinutes();
+        int second = currentTime.getSeconds();
+        System.out.println(hour);
+        String json =   "{\"type\": \"" + type + "\", " +
+                "\"hour\": " + hour + ", " +
+                "\"minute\": " + minute + ", " +
+                "\"second\": " + second + "" +
+                "}";
+        Toast.makeText(getApplicationContext(),
+                "Sending AWS command...",
+                Toast.LENGTH_SHORT).show();
+        textView.setText("Data Received: " + type);
+        Connection c = new Connection();
+        String response = c.execute("http://" + aws_url, json, type).get();
+        dataTextView.setText("Data Received: " + type + "\nServer Response: " + response);
     }
 
     private void send_to_huzzah(String cmd) throws IOException, ExecutionException, InterruptedException {
@@ -143,12 +177,9 @@ public class MainActivity extends AppCompatActivity {
                     String line;
                     InputStream is = con.getInputStream();
                     BufferedReader in = new BufferedReader(new InputStreamReader(is));
-                    while (!(line=in.readLine()).equals("END")) {
-                        if (line == null)
-                            break;
+                    line=in.readLine();
+                    if (line != null)
                         response+=line;
-                        break;
-                    }
                     out.close();
                     con.disconnect();
                 }
