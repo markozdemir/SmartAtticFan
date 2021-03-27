@@ -35,8 +35,7 @@ def send_response(code, msg, data, conn):
     if data is None:
         clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n\r\n")
     else:
-        clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n"
-             + str(json.dumps(data)) + "\r\n")
+        clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n" + str(data) + "\r\n")
     print("Sending response with code and msg:", code, msg)
     clientSocket.close()
     print(end)
@@ -55,7 +54,11 @@ def get_request_data(data, conn):
     if len(data) < 20:
         send_response(400, "Bad Request 2", None, conn)
         return None
-    data = json.loads(data)
+    try:
+        data = json.loads(data)
+    except:
+        send_response(400, "Bad Request 2", None, conn)
+        return None
     print("Processing request: "+ data["type"])
     return data
 
@@ -74,13 +77,29 @@ print("Smart Attic Fan Running!")
 while(True):
     print("Waiting...")
     (clientSocket, clientAddress) = sock.accept();
-    data = clientSocket.recv(1024)
+    data = ""
+    clientSocket.settimeout(.3)
+    while True:
+        d = None
+        try:
+            d =  clientSocket.recv(1024)
+        except:
+            pass
+        print(d)
+        if not d or d is None:
+            break
+        data += d
+    print(data)
     data = get_request_data(data, clientSocket)
 
     if data is None: # get_request_data returns None on error and handles response
         continue
 
     typ = data["type"]
+
+    if "req_data" in typ:
+        send_response(200, "OK", None, clientSocket) # also closes conn
+        continue
 
     if "data_send" in typ:
 
