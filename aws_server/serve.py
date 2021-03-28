@@ -30,6 +30,9 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
 sock.bind(("0.0.0.0", 80));
 sock.listen(1);
 
+# data configs
+temp_data_list = ["temp", "hum"]
+
 
 def send_response(code, msg, data, conn):
     if data is None:
@@ -92,7 +95,6 @@ while(True):
         if not d or d is None:
             break
         data += d
-    print(data)
     data = get_request_data(data, clientSocket)
 
     if data is None: # get_request_data returns None on error and handles response
@@ -100,16 +102,18 @@ while(True):
 
     typ = data["type"]
     x = {}
-    if "req_data" in typ:
+    if "req_data_climate" in typ:
         d = db.find({})
         h = {}
         for z in d:
             x = {}
             for zz in z:
-                if zz == "_id":
+                if zz not in temp_data_list:
+                    print(zz, "not in list")
                     continue
                 x[str(zz)] = z[zz]
-            h[str(z.get('_id'))] = x
+            if x is not {} and len(x) != 0:
+                h[str(z.get('_id'))] = x
         x = str(h)
         x += "END"
         print("Sending...", x)
