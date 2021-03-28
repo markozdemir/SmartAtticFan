@@ -35,7 +35,10 @@ def send_response(code, msg, data, conn):
     if data is None:
         clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n\r\n")
     else:
-        clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n" + str(data) + "\r\n")
+        clientSocket.send("HTTP/1.1 200 OK\r\n"
+            +"Content-Type: text/html\r\n"
+            +"\r\n"
+            +str(data)+"\r\n")
     print("Sending response with code and msg:", code, msg)
     clientSocket.close()
     print(end)
@@ -96,9 +99,21 @@ while(True):
         continue
 
     typ = data["type"]
-
+    x = {}
     if "req_data" in typ:
-        send_response(200, "OK", None, clientSocket) # also closes conn
+        d = db.find({})
+        h = {}
+        for z in d:
+            x = {}
+            for zz in z:
+                if zz == "_id":
+                    continue
+                x[str(zz)] = z[zz]
+            h[str(z.get('_id'))] = x
+        x = str(h)
+        x += "END"
+        print("Sending...", x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
         continue
 
     if "data_send" in typ:
