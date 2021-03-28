@@ -14,18 +14,24 @@
             android:text= "test Click the microphone button to send a command to Huzzah!" />
 
         <Button
-            android:id="@+id/test"
+            android:id="@+id/nn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/header_text"
-            android:text="Get Data - Test" />
+            android:text="Get Neural Net" />
+        <Button
+            android:id="@+id/climate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nn"
+            android:text="Get Climate Data" />
 
         <TextView
             android:id = "@+id/data"
             android:textSize = "30sp"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
-            android:layout_below="@id/test"
+            android:layout_below="@id/climate"
             android:text= "Data Received: " />
 
         <TextView

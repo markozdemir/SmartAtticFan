@@ -71,11 +71,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button get_data_btn = (Button) findViewById(R.id.test);
-        get_data_btn.setOnClickListener(new View.OnClickListener() {
+        final Button get_climate_btn = (Button) findViewById(R.id.climate);
+        get_climate_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
                     send_req_aws("req_data_climate");
+                } catch (IOException | ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        final Button get_nn_btn = (Button) findViewById(R.id.nn);
+        get_nn_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    send_req_aws("req_data_nn");
                 } catch (IOException | ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
