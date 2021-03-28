@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         get_data_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 try {
-                    send_req_aws("req_data");
+                    send_req_aws("req_data_climate");
                 } catch (IOException | ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -111,11 +111,7 @@ public class MainActivity extends AppCompatActivity {
         int minute = currentTime.getMinutes();
         int second = currentTime.getSeconds();
         System.out.println(hour);
-        String json =   "{\"type\": \"" + type + "\", " +
-                "\"hour\": " + hour + ", " +
-                "\"minute\": " + minute + ", " +
-                "\"second\": " + second + "" +
-                "}";
+        String json =   "{\"type\": \"" + type + "\"}";
         Toast.makeText(getApplicationContext(),
                 "Sending AWS command...",
                 Toast.LENGTH_SHORT).show();
@@ -177,9 +173,12 @@ public class MainActivity extends AppCompatActivity {
                     String line;
                     InputStream is = con.getInputStream();
                     BufferedReader in = new BufferedReader(new InputStreamReader(is));
-                    line=in.readLine();
-                    if (line != null)
+                    while (!(line=in.readLine()).equals("END")) {
+                        if (line == null)
+                            break;
                         response+=line;
+                        break;
+                    }
                     out.close();
                     con.disconnect();
                 }
