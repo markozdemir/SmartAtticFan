@@ -101,7 +101,15 @@ while(True):
         continue
 
     typ = data["type"]
-    x = {}
+    if "req_data_nn" in typ:
+        x = ""
+        with open('nn_test_junk.sav', 'r') as file:
+            x = file.read().replace('\n', ' ')
+        x += "\r\nEND"
+        print("Sending...", x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+
     if "req_data_climate" in typ:
         d = db.find({})
         h = {}
