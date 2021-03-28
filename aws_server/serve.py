@@ -115,7 +115,7 @@ while(True):
             if x is not {} and len(x) != 0:
                 h[str(z.get('_id'))] = x
         x = str(h)
-        x += "END"
+        x += "\r\nEND"
         print("Sending...", x)
         send_response(200, "OK", x, clientSocket) # also closes conn
         continue
