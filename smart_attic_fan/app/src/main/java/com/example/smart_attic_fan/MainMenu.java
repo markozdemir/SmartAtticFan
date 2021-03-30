@@ -27,16 +27,16 @@ public class MainMenu extends AppCompatActivity {
 
         fan_info = (RelativeLayout) findViewById(R.id.fan_information);
         fan_info_text = (TextView) findViewById(R.id.fan_info_text);
-        fan_info_text.setTypeface(font);
+        fan_info_text.setTypeface(font); // For font awesome
         fan_data = (RelativeLayout) findViewById(R.id.fan_data);
         fan_data_text = (TextView) findViewById(R.id.fan_data_text);
-        fan_data_text.setTypeface(font);
+        fan_data_text.setTypeface(font); // For font awesome
         fan_options = (RelativeLayout) findViewById(R.id.fan_options);
         fan_options_text = (TextView) findViewById(R.id.fan_options_text);
-        fan_options_text.setTypeface(font);
+        fan_options_text.setTypeface(font); // For font awesome
         about = (RelativeLayout) findViewById(R.id.about);
         about_text = (TextView) findViewById(R.id.about_text);
-        about_text.setTypeface(font);
+        about_text.setTypeface(font); // For font awesome
 
         fan_info.setOnClickListener(new View.OnClickListener() {
             @Override

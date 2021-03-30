@@ -6,8 +6,6 @@
     android:background="@color/menu_card_bg">
 
 
-    <include layout="@layout/footer" />
-
     <!-- Content below header and above footer -->
 
     <RelativeLayout
@@ -16,14 +14,91 @@
         android:background="@drawable/gradient_background">
 
         <RelativeLayout
-            android:id="@+id/fan_information"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
+            android:padding="15dp"
+            android:id="@+id/temp_r"
             android:gravity="center">
 
             <TextView
+                android:id="@+id/temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/menu_card_text"
+                android:text="Information ..."
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:padding="15dp"
+            android:id="@+id/humid_r"
+            android:layout_below="@id/temp_r"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/humid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/menu_card_text"
+                android:text="Information ..."
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:padding="15dp"
+            android:id="@+id/rpm_r"
+            android:layout_below="@id/humid_r"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/rpm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/menu_card_text"
+                android:text="Information ..."
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:padding="15dp"
+            android:gravity="center"
+            android:id="@+id/power_r"
+            android:layout_below="@id/rpm_r">
+
+            <TextView
+                android:id="@+id/power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/menu_card_text"
+                android:text="Information ..."
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:padding="15dp"
+            android:gravity="center"
+            android:layout_below="@id/power_r">
+
+            <TextView
+                android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/menu_card_text"

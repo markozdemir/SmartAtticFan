@@ -27,8 +27,8 @@
 
             <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
+                android:layout_height="fill_parent">
+
                 <TextView
                     android:id="@+id/fan_info_text"
                     android:layout_width="wrap_content"
@@ -39,7 +39,8 @@
                     android:textSize="60sp"
                     android:layout_gravity="left"
                     android:layout_marginTop="@dimen/fa_top_margin_card"
-                    android:layout_marginLeft="@dimen/fa_right_margin_card"/>
+                    android:layout_marginLeft="@dimen/fa_right_margin_card" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
                     android:layout_marginTop="@dimen/text_margin_top_card"
                     android:layout_marginLeft="@dimen/text_margin_left_card"
                     android:layout_gravity="left" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,8 +83,8 @@
 
             <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
+                android:layout_height="fill_parent">
+
                 <TextView
                     android:id="@+id/fan_options_text"
                     android:layout_width="wrap_content"
@@ -93,7 +95,8 @@
                     android:textSize="55sp"
                     android:layout_gravity="left"
                     android:layout_marginTop="@dimen/fa_top_margin_card"
-                    android:layout_marginLeft="@dimen/fa_right_margin_card"/>
+                    android:layout_marginLeft="@dimen/fa_right_margin_card" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,6 +107,7 @@
                     android:layout_marginTop="@dimen/text_margin_top_card"
                     android:layout_marginLeft="@dimen/text_margin_left_card"
                     android:layout_gravity="left" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -129,8 +133,8 @@
 
             <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
+                android:layout_height="fill_parent">
+
                 <TextView
                     android:id="@+id/fan_data_text"
                     android:layout_width="wrap_content"
@@ -141,7 +145,8 @@
                     android:textSize="55sp"
                     android:layout_gravity="left"
                     android:layout_marginTop="@dimen/fa_top_margin_card"
-                    android:layout_marginLeft="@dimen/fa_right_margin_card"/>
+                    android:layout_marginLeft="@dimen/fa_right_margin_card" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -152,6 +157,7 @@
                     android:layout_marginTop="@dimen/text_margin_top_card"
                     android:layout_marginLeft="@dimen/text_margin_left_card"
                     android:layout_gravity="left" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -176,8 +182,8 @@
 
             <FrameLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                >
+                android:layout_height="fill_parent">
+
                 <TextView
                     android:id="@+id/about_text"
                     android:layout_width="wrap_content"
@@ -188,7 +194,8 @@
                     android:textSize="55sp"
                     android:layout_gravity="left"
                     android:layout_marginTop="@dimen/fa_top_margin_card"
-                    android:layout_marginLeft="@dimen/fa_right_margin_card"/>
+                    android:layout_marginLeft="@dimen/fa_right_margin_card" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -199,6 +206,7 @@
                     android:layout_marginTop="@dimen/text_margin_top_card"
                     android:layout_marginLeft="@dimen/text_margin_left_card"
                     android:layout_gravity="left" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
