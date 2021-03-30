@@ -1,3 +1,8 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin_left_card">360px</dimen>
+    <dimen name="text_margin_top_card">140px</dimen>
+    <dimen name="text_arrow_right_card">120px</dimen>
+    <dimen name="fa_top_margin_card">120px</dimen>
+    <dimen name="fa_right_margin_card">100px</dimen>
 </resources>
