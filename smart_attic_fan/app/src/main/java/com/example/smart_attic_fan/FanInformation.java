@@ -70,7 +70,7 @@ public class FanInformation extends AppCompatActivity {
         int minute = currentTime.getMinutes();
         int second = currentTime.getSeconds();
         System.out.println(hour);
-        String json =   "{\"type\": \"" + type + "\"}";
+        String json = "{\"type\": \"" + type + "\"}";
         Toast.makeText(getApplicationContext(),
                 "Sending AWS command...",
                 Toast.LENGTH_SHORT).show();
@@ -80,7 +80,7 @@ public class FanInformation extends AppCompatActivity {
         JSONObject responseObj = new JSONObject(response);
         Iterator<String> keys = responseObj.keys();
         JSONObject mostRecent = null;
-        while(keys.hasNext()) {
+        while (keys.hasNext()) {
             String key = keys.next();
             if (responseObj.get(key) instanceof JSONObject) {
                 if (keys.hasNext() == false) {
@@ -89,12 +89,13 @@ public class FanInformation extends AppCompatActivity {
             }
         }
 
-        temp.setText("Temperature:  " + mostRecent.get("temp") +" F");
+        temp.setText("Temperature:  " + mostRecent.get("temp") + " F");
         humid.setText("Humidity:  " + mostRecent.get("hum") + " units");
         rpm.setText("RPMs:");
         power.setText("Power:");
         time.setText("Time:");
     }
+
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android
     private class Connection extends AsyncTask<String, String, String> {
         @Override
@@ -124,16 +125,16 @@ public class FanInformation extends AppCompatActivity {
                 writer.close();
 
                 // Get response
-                responseCode=con.getResponseCode();
+                responseCode = con.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     con.connect();
                     String line;
                     InputStream is = con.getInputStream();
                     BufferedReader in = new BufferedReader(new InputStreamReader(is));
-                    while (!(line=in.readLine()).equals("END")) {
+                    while (!(line = in.readLine()).equals("END")) {
                         if (line == null)
                             break;
-                        response+=line;
+                        response += line;
                         break;
                     }
                     out.close();
