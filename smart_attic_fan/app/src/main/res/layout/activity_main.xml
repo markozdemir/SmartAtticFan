@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fan Information >"
+            android:text="Fan Information ❯"
             android:fontFamily="sans-serif-medium"
             android:textColor="#FFF"
             android:textSize="20sp" />
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fan Options >"
+            android:text="Fan Options ❯"
             android:fontFamily="sans-serif-medium"
             android:textColor="#FFF"
             android:textSize="20sp" />
@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fan Data >"
+            android:text="Fan Data ❯"
             android:fontFamily="sans-serif-medium"
             android:textColor="#FFF"
             android:textSize="20sp" />
@@ -93,7 +93,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About Us >"
+            android:text="About Us ❯"
             android:fontFamily="sans-serif-medium"
             android:textColor="#FFF"
             android:textSize="20sp" />
