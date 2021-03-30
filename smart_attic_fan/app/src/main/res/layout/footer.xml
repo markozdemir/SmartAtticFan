@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:id="@+id/footer"
-android:layout_width="match_parent"
-android:layout_height="200px"
-android:layout_alignParentBottom="true"
-android:background="#42CCC8"
-android:gravity="center" >
+    android:id="@+id/footer"
+    android:layout_width="match_parent"
+    android:layout_height="200px"
+    android:layout_alignParentBottom="true"
+    android:background="#42CCC8"
+    android:gravity="center">
 
 
     <TextView

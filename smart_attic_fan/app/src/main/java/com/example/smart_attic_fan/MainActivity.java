@@ -3,22 +3,54 @@
 package com.example.smart_attic_fan;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
-import android.view.Menu;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 
 // Followed: https://www.tutorialspoint.com/how-to-integrate-android-speech-to-text
 // For getting text to speech
 public class MainActivity extends AppCompatActivity {
-    private final int REQ_CODE = 100;
-    private final String ngrokURL = "06e3e0a1a4ae.ngrok.io";
-    private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
-    TextView textView, dataTextView;
+    RelativeLayout fan_info, fan_data, fan_options, about;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fan_info = (RelativeLayout) findViewById(R.id.fan_information);
+        fan_data = (RelativeLayout) findViewById(R.id.fan_data);
+        fan_options = (RelativeLayout) findViewById(R.id.fan_options);
+        about = (RelativeLayout) findViewById(R.id.about);
+
+        fan_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), FanInformation.class));
+            }
+        });
+
+        fan_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), FanData.class));
+            }
+        });
+
+        fan_options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), FanData.class));
+            }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), AboutUs.class));
+            }
+        });
 
     }
 
