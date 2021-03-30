@@ -3,14 +3,13 @@
     android:id="@+id/header"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:elevation="80dp"
-    android:background="#000">
+    android:background="@drawable/gradient_background2">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200px"
         android:layout_alignParentTop="true"
-        android:background="#42CCC8"
+        android:background="@color/foothead_background"
         android:layout_marginBottom="1dp"
         android:gravity="center">
 

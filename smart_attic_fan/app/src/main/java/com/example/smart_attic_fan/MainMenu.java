@@ -12,12 +12,12 @@ import android.widget.RelativeLayout;
 
 // Followed: https://www.tutorialspoint.com/how-to-integrate-android-speech-to-text
 // For getting text to speech
-public class MainActivity extends AppCompatActivity {
+public class MainMenu extends AppCompatActivity {
     RelativeLayout fan_info, fan_data, fan_options, about;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.menu);
 
         fan_info = (RelativeLayout) findViewById(R.id.fan_information);
         fan_data = (RelativeLayout) findViewById(R.id.fan_data);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         fan_options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), FanData.class));
+                startActivity(new Intent(v.getContext(), FanOptions.class));
             }
         });
 

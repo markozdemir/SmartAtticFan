@@ -43,7 +43,7 @@ public class FanData extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page1);
+        setContentView(R.layout.fan_data);
         textView = (TextView) findViewById(R.id.text);
         dataTextView = (TextView) findViewById(R.id.data);
         ImageView microphone = findViewById(R.id.mic);
