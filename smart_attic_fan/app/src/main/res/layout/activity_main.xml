@@ -1,62 +1,84 @@
-<?xml version = "1.0" encoding = "utf-8"?>
-<RelativeLayout xmlns:android = "http://schemas.android.com/apk/res/android"
-    xmlns:app = "http://schemas.android.com/apk/res-auto"
-    xmlns:tools = "http://schemas.android.com/tools"
-    android:layout_width = "match_parent"
-    android:layout_height = "match_parent"
-    tools:context = ".MainActivity">
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background = "@drawable/gradient_background">
+
+    <include layout="@layout/header" />
+
+    <!-- Content below header and above footer -->
+
+    <RelativeLayout
+        android:id="@+id/fan_information"
+        android:layout_width="fill_parent"
+        android:layout_height="300px"
+        android:layout_below="@id/header"
+        android:background = "#4EACD0"
+        android:elevation="30dp"
+        android:gravity="center" >
 
         <TextView
-            android:textSize = "30sp"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:id="@+id/header_text"
-            android:text= "test Click the microphone button to send a command to Huzzah!" />
-
-        <Button
-            android:id="@+id/nn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/header_text"
-            android:text="Get Neural Net" />
-        <Button
-            android:id="@+id/climate"
+            android:text="Fan Information >"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fan_options"
+        android:layout_width="fill_parent"
+        android:layout_height="300px"
+        android:layout_below="@id/fan_information"
+        android:background = "#4975AA"
+        android:elevation="30dp"
+        android:gravity="center" >
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/nn"
-            android:text="Get Climate Data" />
+            android:text="Fan Options >"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/fan_data"
+        android:layout_width="fill_parent"
+        android:layout_height="300px"
+        android:layout_below="@id/fan_options"
+        android:background = "#5A5388"
+        android:elevation="30dp"
+        android:gravity="center" >
 
         <TextView
-            android:id = "@+id/data"
-            android:textSize = "30sp"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:layout_below="@id/climate"
-            android:text= "Data Received: " />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fan Data >"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/about"
+        android:layout_width="fill_parent"
+        android:layout_height="300px"
+        android:layout_below="@id/fan_data"
+        android:background = "#554269"
+        android:elevation="30dp"
+        android:gravity="center" >
 
         <TextView
-            android:id = "@+id/text"
-            android:textSize = "30sp"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:layout_below="@id/data"
-            android:text= "Command sent: -" />
-
-
-
-    <LinearLayout
-        android:layout_width = "wrap_content"
-        android:layout_alignParentBottom = "true"
-        android:layout_centerInParent = "true"
-        android:orientation = "vertical"
-        android:layout_height = "wrap_content">
-        <!--Followed: https://www.tutorialspoint.com/how-to-integrate-android-speech-to-text
-            For the mic -->
-        <ImageView
-            android:id="@+id/mic"
-            android:layout_width="121dp"
-            android:layout_height="124dp"
-            android:background="?selectableItemBackground"
-            android:src="@android:drawable/ic_btn_speak_now" />
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About Us >"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+    </RelativeLayout>
 </RelativeLayout>
