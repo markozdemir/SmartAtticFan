@@ -6,16 +6,27 @@
     android:background = "@drawable/gradient_background">
 
     <include layout="@layout/header" />
+    <include layout="@layout/footer" />
 
     <!-- Content below header and above footer -->
 
     <RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:elevation="80dp"
+    android:background = "#000"
+    android:layout_below="@id/header" >
+    <RelativeLayout
         android:id="@+id/fan_information"
         android:layout_width="fill_parent"
         android:layout_height="300px"
-        android:layout_below="@id/header"
         android:background = "#4EACD0"
-        android:elevation="30dp"
+        android:elevation="80dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="0dp"
         android:gravity="center" >
 
         <TextView
@@ -33,7 +44,9 @@
         android:layout_height="300px"
         android:layout_below="@id/fan_information"
         android:background = "#4975AA"
-        android:elevation="30dp"
+        android:elevation="80dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         android:gravity="center" >
 
         <TextView
@@ -53,6 +66,8 @@
         android:layout_below="@id/fan_options"
         android:background = "#5A5388"
         android:elevation="30dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         android:gravity="center" >
 
         <TextView
@@ -70,7 +85,9 @@
         android:layout_height="300px"
         android:layout_below="@id/fan_data"
         android:background = "#554269"
-        android:elevation="30dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="2dp"
         android:gravity="center" >
 
         <TextView
@@ -80,5 +97,6 @@
             android:fontFamily="sans-serif-medium"
             android:textColor="#FFF"
             android:textSize="20sp" />
+    </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
