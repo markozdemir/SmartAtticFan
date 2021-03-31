@@ -40,6 +40,7 @@ public class AboutUs extends AppCompatActivity {
     private final String ngrokURL = "06e3e0a1a4ae.ngrok.io";
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     TextView about_us_text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
