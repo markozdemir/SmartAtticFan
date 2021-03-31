@@ -39,11 +39,17 @@ public class AboutUs extends AppCompatActivity {
     private final int REQ_CODE = 100;
     private final String ngrokURL = "06e3e0a1a4ae.ngrok.io";
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
-    TextView textView, dataTextView;
+    TextView about_us_text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_us);
-
+        about_us_text = (TextView) findViewById(R.id.about_us_text);
+        about_us_text.setText("Columbia University \n" +
+                "EECS E4764 Fall'19 IoT \n \n" +
+                "Smart Attic Fan \n \n" +
+                "James Mastran, jam2454 \n" +
+                "Mark Ozdemir, mo2804 \n" +
+                "Yin Zhang, yz4053");
     }
 }

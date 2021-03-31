@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,77 +41,22 @@ public class FanData extends AppCompatActivity {
     private final int REQ_CODE = 100;
     private final String ngrokURL = "06e3e0a1a4ae.ngrok.io";
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
-    TextView textView, dataTextView;
+    TextView data_text, dataTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fan_data);
-        textView = (TextView) findViewById(R.id.text);
-        dataTextView = (TextView) findViewById(R.id.data);
-        ImageView microphone = findViewById(R.id.mic);
-        microphone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please speak!");
-                try {
-                    startActivityForResult(intent, REQ_CODE);
-                } catch (ActivityNotFoundException a) {
-                    Toast.makeText(getApplicationContext(),
-                            "Device is not supported",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        final Button get_climate_btn = (Button) findViewById(R.id.climate);
-        get_climate_btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try {
-                    send_req_aws("req_data_climate");
-                } catch (IOException | ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        final Button get_nn_btn = (Button) findViewById(R.id.nn);
-        get_nn_btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                try {
-                    send_req_aws("req_data_nn");
-                } catch (IOException | ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQ_CODE: {
-                if (resultCode == RESULT_OK && data != null) {
-                    ArrayList result = data
-                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    textView.setText("Command sent: " + result.get(0));
-                    Toast.makeText(getApplicationContext(),
-                            "Sending command...",
-                            Toast.LENGTH_SHORT).show();
-                    try {
-                        send_to_huzzah(result.get(0) + "");
-                    } catch (IOException | ExecutionException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
-            }
+        data_text = (TextView) findViewById(R.id.data_text);
+        try {
+            set_information();
+        } catch (IOException | ExecutionException | InterruptedException e) {
+            e.printStackTrace();
         }
+        //req_data_nn
     }
 
-    private void send_req_aws(String type) throws IOException, ExecutionException, InterruptedException {
+    private void set_information() throws IOException, ExecutionException, InterruptedException {
+        String type = "req_data_nn";
         Date currentTime = Calendar.getInstance().getTime();
         int hour = currentTime.getHours();
         int minute = currentTime.getMinutes();
@@ -117,30 +64,30 @@ public class FanData extends AppCompatActivity {
         System.out.println(hour);
         String json =   "{\"type\": \"" + type + "\"}";
         Toast.makeText(getApplicationContext(),
-                "Sending AWS command...",
+                "loading..",
                 Toast.LENGTH_SHORT).show();
-        textView.setText("Data Received: " + type);
+        data_text.setText("Loading data...");
         Connection c = new Connection();
         String response = c.execute("http://" + aws_url, json, type).get();
-        dataTextView.setText("Data Received: " + type + "\nServer Response: " + response);
+        data_text.setText("Data Received: " + type + "\nServer Response: " + response);
     }
-
-    private void send_to_huzzah(String cmd) throws IOException, ExecutionException, InterruptedException {
-        Date currentTime = Calendar.getInstance().getTime();
-        int hour = currentTime.getHours();
-        int minute = currentTime.getMinutes();
-        int second = currentTime.getSeconds();
-        System.out.println(hour);
-        String json =   "{\"cmd\": \"" + cmd + "\"" +
-                "\"hour\": " + hour + "" +
-                "\"minute\": " + minute + "" +
-                "\"second\": " + second + "" +
-                "}";
-        textView.setText("Command sent: " + cmd);
-        Connection c = new Connection();
-        String response = c.execute("http://" + ngrokURL, json, cmd).get();
-        textView.setText("Command sent: " + cmd + "\nServer Response: " + response);
-    }
+//
+//    private void send_to_huzzah(String cmd) throws IOException, ExecutionException, InterruptedException {
+//        Date currentTime = Calendar.getInstance().getTime();
+//        int hour = currentTime.getHours();
+//        int minute = currentTime.getMinutes();
+//        int second = currentTime.getSeconds();
+//        System.out.println(hour);
+//        String json =   "{\"cmd\": \"" + cmd + "\"" +
+//                "\"hour\": " + hour + "" +
+//                "\"minute\": " + minute + "" +
+//                "\"second\": " + second + "" +
+//                "}";
+//        textView.setText("Command sent: " + cmd);
+//        Connection c = new Connection();
+//        String response = c.execute("http://" + ngrokURL, json, cmd).get();
+//        textView.setText("Command sent: " + cmd + "\nServer Response: " + response);
+//    }
 
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android
     private class Connection extends AsyncTask<String, String, String> {
