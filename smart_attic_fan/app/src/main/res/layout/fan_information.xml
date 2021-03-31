@@ -1,110 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/menu_card_bg">
+    android:background="@mipmap/city">
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="371dp"
+        android:layout_marginTop="900px"
+        app:srcCompat="@drawable/house" />
 
-    <!-- Content below header and above footer -->
-
-    <RelativeLayout
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_background">
+        android:layout_marginTop="1150px"
+        android:layout_marginLeft="375px"
+        android:textColor="@color/black"
+        android:textSize="55sp"
+        android:text="Attic" />
 
-        <RelativeLayout
-            android:background="@color/menu_card_bg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:padding="15dp"
-            android:id="@+id/temp_r"
-            android:gravity="center">
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1360px"
+        android:layout_marginLeft="310px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="@string/icon_temp" />
+    <TextView
+        android:id="@+id/temp_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1350px"
+        android:layout_marginLeft="350px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text=" Temperature: " />
 
-            <TextView
-                android:id="@+id/temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/menu_card_text"
-                android:text="Information ..."
-                android:fontFamily="sans-serif-medium"
-                android:textSize="30sp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:background="@color/menu_card_bg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:padding="15dp"
-            android:id="@+id/humid_r"
-            android:layout_below="@id/temp_r"
-            android:gravity="center">
 
-            <TextView
-                android:id="@+id/humid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/menu_card_text"
-                android:text="Information ..."
-                android:fontFamily="sans-serif-medium"
-                android:textSize="30sp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:background="@color/menu_card_bg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:padding="15dp"
-            android:id="@+id/rpm_r"
-            android:layout_below="@id/humid_r"
-            android:gravity="center">
 
-            <TextView
-                android:id="@+id/rpm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/menu_card_text"
-                android:text="Information ..."
-                android:fontFamily="sans-serif-medium"
-                android:textSize="30sp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:background="@color/menu_card_bg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:padding="15dp"
-            android:gravity="center"
-            android:id="@+id/power_r"
-            android:layout_below="@id/rpm_r">
+    <TextView
+        android:id="@+id/humid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1460px"
+        android:layout_marginLeft="310px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="@string/icon_water" />
+    <TextView
+        android:id="@+id/humid_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1450px"
+        android:layout_marginLeft="350px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text=" Humidity: " />
 
-            <TextView
-                android:id="@+id/power"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/menu_card_text"
-                android:text="Information ..."
-                android:fontFamily="sans-serif-medium"
-                android:textSize="30sp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:background="@color/menu_card_bg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:padding="15dp"
-            android:gravity="center"
-            android:layout_below="@id/power_r">
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/menu_card_text"
-                android:text="Information ..."
-                android:fontFamily="sans-serif-medium"
-                android:textSize="30sp" />
-        </RelativeLayout>
-    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/rpm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1560px"
+        android:layout_marginLeft="310px"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:text="@string/icon_sync" />
+    <TextView
+        android:id="@+id/rpm_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1545px"
+        android:layout_marginLeft="353px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text=" RPMs: " />
+
+
+
+    <TextView
+        android:id="@+id/power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1660px"
+        android:layout_marginLeft="310px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="@string/icon_power" />
+    <TextView
+        android:id="@+id/power_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1650px"
+        android:layout_marginLeft="353px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text=" Power Use: " />
+
+
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1750px"
+        android:layout_marginLeft="310px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="@string/icon_time" />
+    <TextView
+        android:id="@+id/time_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1740px"
+        android:layout_marginLeft="353px"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text=" Time: " />
 </RelativeLayout>

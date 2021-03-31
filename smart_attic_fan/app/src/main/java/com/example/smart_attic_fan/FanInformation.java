@@ -4,6 +4,7 @@ package com.example.smart_attic_fan;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -43,18 +44,31 @@ import java.util.concurrent.ExecutionException;
 public class FanInformation extends AppCompatActivity {
 
     TextView temp, humid, rpm, power, time;
+    TextView temp_t, humid_t, rpm_t, power_t, time_t;
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fan_information);
+        Typeface font = Typeface.createFromAsset( getAssets(), "fontawesome-webfont.ttf" );
 
         temp = (TextView) findViewById(R.id.temp);
+        temp.setTypeface(font); // For font awesome
         humid = (TextView) findViewById(R.id.humid);
+        humid.setTypeface(font); // For font awesome
         rpm = (TextView) findViewById(R.id.rpm);
+        rpm.setTypeface(font); // For font awesome
         power = (TextView) findViewById(R.id.power);
+        power.setTypeface(font); // For font awesome
         time = (TextView) findViewById(R.id.time);
+        time.setTypeface(font); // For font awesome
+
+        temp_t = (TextView) findViewById(R.id.temp_t);
+        humid_t = (TextView) findViewById(R.id.humid_t);
+        rpm_t = (TextView) findViewById(R.id.rpm_t);
+        power_t = (TextView) findViewById(R.id.power_t);
+        time_t = (TextView) findViewById(R.id.time_t);
 
         try {
             set_information();
@@ -74,7 +88,7 @@ public class FanInformation extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),
                 "Sending AWS command...",
                 Toast.LENGTH_SHORT).show();
-        temp.setText("Loading Fan Information....");
+        // temp.setText("Loading Fan Information....");
         Connection c = new Connection();
         String response = c.execute("http://" + aws_url, json, type).get();
         JSONObject responseObj = new JSONObject(response);
@@ -89,11 +103,11 @@ public class FanInformation extends AppCompatActivity {
             }
         }
 
-        temp.setText("Temperature:  " + mostRecent.get("temp") + " F");
-        humid.setText("Humidity:  " + mostRecent.get("hum") + " units");
-        rpm.setText("RPMs:");
-        power.setText("Power:");
-        time.setText("Time:");
+        temp_t.setText(" Temperature:  " + mostRecent.get("temp") + " F");
+        humid_t.setText(" Humidity:  " + mostRecent.get("hum") + " %");
+        rpm_t.setText(" RPMs:");
+        power_t.setText(" Power:");
+        time_t.setText(" Time:");
     }
 
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android
