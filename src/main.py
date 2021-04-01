@@ -1,4 +1,5 @@
 import machine, time, dht, ujson, network, urequests
+from ntptime import settime
 
 # info at https://randomnerdtutorials.com/esp32-esp8266-dht11-dht22-micropython-temperature-humidity-sensor/
 aws_URL = "http://ec2-3-141-199-6.us-east-2.compute.amazonaws.com"
@@ -17,40 +18,17 @@ def connect_wifi(ssid, pw):
 
 server_on = True
 def send_data(temp, hum):
+    global server_on
+
     if server_on:
-        r = urequests.request("POST", aws_URL, json={"type":"data_send_train", "data": {"temp": temp, "hum": hum, "time": time.time()}}, headers={"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"})
-        print("response=", r.text)
-
-#
-#print("Trying to connect...")
-#
-#
-#ipconfig = connect_wifi('SSID', 'PASSWORD')
-#print("ip:", ipconfig[0])
-#
-#try:
-#    urequests.request("POST", aws_URL, json={"type":"check"}, headers={})
-#    print("Server online")
-#except:
-#    print("Server offline, this may cause problems")
-#    server_on = False
-
-
-
-def run():
-    sensor = dht.DHT22(machine.Pin(14))
-    while True:
-        try:
-            time.sleep(2)
-            sensor.measure()
-            temp = sensor.temperature()
-            hum = sensor.humidity()
-            print('Temperature: %3.1f C' %temp)
-            print('Humidity: %3.1f %%' %hum)
-            send_data(temp, hum)
-        except OSError as e:
-            print('Failed to read sensor.')
-
+        rpm_val = 0
+        power_val = 0
+        if temp > 26.7 or hum > 45:
+            rpm_val = 1100
+            power_val = 50
+        
+        r = urequests.request("POST", aws_URL, json={"type":"data_send_train", "data": {"temp (C)": temp, "hum": hum, "RPM": rpm_val, "Power (W)": power_val, "time": time.time()}}, headers={"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"})
+#        print("response=", r.text)
 
 
 def get_rpm():
@@ -81,6 +59,43 @@ def get_rpm():
     print("RPM: ", rpm_val)
     time.sleep(1)
     
+
+def run():
+    global server_on
+#    print("Trying to connect...")
+
+    ipconfig = connect_wifi('ZEYNET', 'Pamukkale1')
+#    print("ip:", ipconfig[0])
+
+    try:
+        urequests.request("POST", aws_URL, json={"type":"check"}, headers={})
+        print("Server online")
+    except:
+        print("Server offline, this may cause problems")
+        server_on = False
+
+    settime()
+    sensor = dht.DHT22(machine.Pin(14))
+    temp = -1
+    hum = -1
+    try:
+        sensor.measure()
+        temp = sensor.temperature()
+        hum = sensor.humidity()
+#        print('Temperature: %3.1f C' %temp)
+#        print('Humidity: %3.1f %%' %hum)
+    except OSError as e:
+        print('Failed to read sensor.')
+    else:
+        send_data(temp, hum)
+
+    #10000
+    machine.deepsleep(1200000)
+
+
+run()
+
+
     
 #import esp32
 ## internal temp and hall sensor
@@ -88,3 +103,5 @@ def get_rpm():
 #esp_temp_val esp32.raw_temperature()
 #print("esp's hall sens val = ", esp_hs_val)
 #print("esp's temp =", esp_temp_val)
+
+
