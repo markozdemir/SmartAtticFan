@@ -26,8 +26,17 @@ def send_data(temp, hum):
         if temp > 26.7 or hum > 45:
             rpm_val = 1100
             power_val = 50
-        
-        r = urequests.request("POST", aws_URL, json={"type":"data_send_train", "data": {"temp (C)": temp, "hum": hum, "RPM": rpm_val, "Power (W)": power_val, "time": time.time()}}, headers={"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"})
+
+        json = { "type":"data_send_train",
+                 "data": {  "temp (C)": temp,
+                            "hum": hum,
+                            "RPM": rpm_val,
+                            "Power (W)": power_val,
+                            "time": time.time()
+                         }
+                }
+        headers = { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
+        r = urequests.request("POST", aws_URL, json=json, headers=headers)
 #        print("response=", r.text)
 
 
