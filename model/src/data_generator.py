@@ -9,9 +9,26 @@ delta_T -- temperature that makes people feel comfort
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+import data_obtainer as do
 
 
 def main():
+    # Yin: Here is how you use my data conversion:
+    data = do.get_data("fan", ["temp (C)", "hum"], "tuple")
+    print("Data in array of tuples:")
+    print(data)
+    print()
+    # OR:
+    data = do.get_data("fan", ["temp (C)", "hum"], "array")
+    print("Data in array of arrays:")
+    print(data)
+    print()
+    # OR:
+    print("Data in array of hashes:")
+    data = do.get_data("fan", ["temp (C)", "hum"], "hash")
+    print(data)
+    print()
+
     ### generate relationship between T and Phi
     X=np.linspace(1,1000,200,endpoint=True)
     f_T_phi = np.power(X,-0.2)

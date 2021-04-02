@@ -113,6 +113,7 @@ while(True):
     if "req_data_climate" in typ:
         d = db.find({})
         h = {}
+        id_ = 1
         for z in d:
             x = {}
             for zz in z:
@@ -121,7 +122,8 @@ while(True):
                     continue
                 x[str(zz)] = z[zz]
             if x is not {} and len(x) != 0:
-                h[str(z.get('_id'))] = x
+                h[str(id_)] = x
+                id_ += 1
         x = str(h)
         x += "\r\nEND"
         print("Sending...", x)
