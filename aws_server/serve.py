@@ -18,6 +18,7 @@ import pickle
 import time
 from sklearn import svm
 import local_weather as lw
+import local_time as lt
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -116,6 +117,8 @@ while(True):
     if typ == "check":
         location = data["data"]
         set_location(location)
+        send_response(200, "OK", lt.get_curr_time(), clientSocket) # also closes conn
+        continue
 
     if "req_data_nn" in typ:
         x = ""
