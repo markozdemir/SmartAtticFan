@@ -32,6 +32,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +44,7 @@ import java.util.concurrent.ExecutionException;
 // For getting text to speech
 public class FanInformation extends AppCompatActivity {
 
-    TextView temp, humid, rpm, power, time;
+    TextView temp, humid, rpm, power, time, local_temp;
     TextView temp_t, humid_t, rpm_t, power_t, time_t;
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
 
@@ -63,6 +64,8 @@ public class FanInformation extends AppCompatActivity {
         power.setTypeface(font); // For font awesome
         time = (TextView) findViewById(R.id.time);
         time.setTypeface(font); // For font awesome
+        local_temp = (TextView) findViewById(R.id.local_temp);
+        local_temp.setTypeface(font); // For font awesome
 
         temp_t = (TextView) findViewById(R.id.temp_t);
         humid_t = (TextView) findViewById(R.id.humid_t);
@@ -75,6 +78,13 @@ public class FanInformation extends AppCompatActivity {
         } catch (IOException | ExecutionException | InterruptedException | JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    String get_date(int unix_seconds) {
+        Date date = new Date(unix_seconds * 1000);
+        SimpleDateFormat jdf = new SimpleDateFormat("HH:mm:ss");
+        String java_date = jdf.format(date);
+        return java_date;
     }
 
     private void set_information() throws IOException, ExecutionException, InterruptedException, JSONException {
@@ -91,23 +101,25 @@ public class FanInformation extends AppCompatActivity {
         // temp.setText("Loading Fan Information....");
         Connection c = new Connection();
         String response = c.execute("http://" + aws_url, json, type).get();
+        response = response.replaceAll("u'", "'");
         JSONObject responseObj = new JSONObject(response);
+        JSONObject mostRecent = (JSONObject) responseObj.get("recent");
         Iterator<String> keys = responseObj.keys();
-        JSONObject mostRecent = null;
         while (keys.hasNext()) {
             String key = keys.next();
-            if (responseObj.get(key) instanceof JSONObject) {
-                if (keys.hasNext() == false) {
-                    mostRecent = (JSONObject) responseObj.get(key);
-                }
-            }
+            System.out.println(key);
         }
 
-        temp_t.setText(" Temperature:  " + mostRecent.get("temp") + " F");
+        temp_t.setText(" Temp:  " + to_fahrenheit( (Double) mostRecent.get("temp (C)")) + " F");
         humid_t.setText(" Humidity:  " + mostRecent.get("hum") + " %");
-        rpm_t.setText(" RPMs:");
-        power_t.setText(" Power:");
-        time_t.setText(" Time:");
+        rpm_t.setText(" RPMs:  " + mostRecent.get("RPM") + " RPMs");
+        power_t.setText(" Power:  " + mostRecent.get("Power (W)") + " W");
+        time_t.setText(" Time:  "  + get_date((Integer) mostRecent.get("time")));
+        local_temp.setText(responseObj.get("local_temp") + " F " + responseObj.get("local_desc"));
+    }
+
+    double to_fahrenheit(double celsius) {
+        return ( ( celsius*9 ) / 5 ) + 32;
     }
 
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android

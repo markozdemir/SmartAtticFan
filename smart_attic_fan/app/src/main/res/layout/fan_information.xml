@@ -12,6 +12,15 @@
         android:layout_height="371dp"
         android:layout_marginTop="900px"
         app:srcCompat="@drawable/house" />
+    <TextView
+        android:id="@+id/local_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400px"
+        android:layout_marginLeft="275px"
+        android:textColor="@color/black"
+        android:textSize="55sp"
+        android:text="xxx" />
 
     <TextView
         android:id="@+id/textView"
