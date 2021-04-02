@@ -115,7 +115,7 @@ def get_rpm():
 def run():
     global server_on, connected_wifi
 
-    ipconfig = connect_wifi('ORBI83', 'jaggedzoo924')
+    ipconfig = connect_wifi('ZEYNET', 'Pamukkale1')
     get_location()
 #    print("ip:", ipconfig[0])
     if connected_wifi:
