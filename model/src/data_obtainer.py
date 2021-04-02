@@ -62,7 +62,6 @@ def get_data(db_name, fields, type_of_convert):
     # fields contains the headers/fields wanted and in that order
     # type_of_convert can be array of arrays or tuples or hashes
 
-    db_name = "fan"
     client = pymongo.MongoClient("mongodb://localhost:27017/")
     DB = client[db_name]
     db = DB["user"]
