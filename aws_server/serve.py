@@ -17,6 +17,7 @@ import random
 import pickle
 import time
 from sklearn import svm
+import local_weather as lw
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -32,6 +33,10 @@ sock.listen(1);
 
 # data configs
 temp_data_list = ["temp", "hum"]
+
+# location info
+longitude = 0
+latitude = 0
 
 
 def send_response(code, msg, data, conn):
@@ -79,6 +84,13 @@ def ins_data_to_mongo(data):
         r = db.insert(data)
         print("Inserted data")
 
+def set_location(location_hash):
+    global longitude, latitude
+    longitude = location_hash["longitude"]
+    latitude = location_hash["latitude"]
+    temp, desc = lw.get_weather(longitude, latitude)
+    print("local weather:", temp, desc)
+
 print("Smart Attic Fan Running!")
 while(True):
     print("Waiting...")
@@ -101,6 +113,10 @@ while(True):
         continue
 
     typ = data["type"]
+    if typ == "check":
+        location = data["data"]
+        set_location(location)
+
     if "req_data_nn" in typ:
         x = ""
         with open('nn_test_junk.sav', 'r') as file:
@@ -117,14 +133,21 @@ while(True):
         for z in d:
             x = {}
             for zz in z:
-                if zz not in temp_data_list:
-                    print(zz, "not in list")
-                    continue
+                # if zz not in temp_data_list:
+                #    print(zz, "not in list")
+                #    continue
                 x[str(zz)] = z[zz]
             if x is not {} and len(x) != 0:
                 h[str(id_)] = x
                 id_ += 1
-        x = str(h)
+
+        temp, desc = lw.get_weather(longitude, latitude)
+        h2 = {}
+        h2["recent"] = h[str(id_ - 1)]
+        h2["local_temp"] = temp
+        h2["local_desc"] = desc
+        print("Sending local weather:", temp, desc)
+        x = str(h2)
         x += "\r\nEND"
         print("Sending...", x)
         send_response(200, "OK", x, clientSocket) # also closes conn
