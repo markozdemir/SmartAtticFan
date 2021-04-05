@@ -166,6 +166,34 @@ def get_data_from_text():
     plt.plot(y_train,'r',label='Label')
     plt.plot(knn_y_pred_temp,'b',label='Pred')
 
+    # from sklearn.linear_model import LogisticRegression
+    # logisticRegr = LogisticRegression().fit(X_train, y_train)
+    # lr_y_pred_temp = logisticRegr.predict(X_train)
+    # print(f'Temp MAE LOGI_REGRESSION: {metrics.mean_absolute_error(y_train, lr_y_pred_temp)}')
+
+    from sklearn.linear_model import LinearRegression
+    linearReg = LinearRegression().fit(X_train, y_train)
+    linearR_y_pred_temp = linearReg.predict(X_train)
+    print(f'Temp MAE LINEAR_REGRESSION: {metrics.mean_absolute_error(y_train, linearR_y_pred_temp)}')
+
+
+    plt.figure()
+    plt.plot(y_train,'r',label='Label')
+    plt.plot(linearR_y_pred_temp,'b',label='Pred')
+
+    plt.show()
+
+    import pdb; pdb.set_trace()
+
+    plt.plot(temp,'-*',label='temp')
+    plt.plot(hum,'-*',label='hum')
+    plt.plot(power,'-*',label='power')
+    # plt.plot(rpm,'-*',label='rpm')
+    plt.legend()
+    plt.show()
+
+    import pdb; pdb.set_trace()
+
 
 def main():
     # Yin: Here is how you use my data conversion:
