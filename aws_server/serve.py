@@ -120,10 +120,10 @@ while(True):
         send_response(200, "OK", lt.get_curr_time(), clientSocket) # also closes conn
         continue
 
-    if "req_test_jpg" in typ:
+    if "req_test_img" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('test.jpg', 'r') as file:
+        with open('test.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
