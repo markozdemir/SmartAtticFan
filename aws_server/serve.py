@@ -42,12 +42,12 @@ latitude = 0
 
 def send_response(code, msg, data, conn):
     if data is None:
-        clientSocket.send("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n\r\n")
+        clientSocket.sendall("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n\r\n")
     else:
-        clientSocket.send("HTTP/1.1 200 OK\r\n"
+        clientSocket.sendall("HTTP/1.1 200 OK\r\n"
             +"Content-Type: text/html\r\n"
             +"\r\n"
-            +str(data)+"\r\n")
+            +str(data)+"")
     print("Sending response with code and msg:", code, msg)
     clientSocket.close()
     print(end)
@@ -118,6 +118,20 @@ while(True):
         location = data["data"]
         set_location(location)
         send_response(200, "OK", lt.get_curr_time(), clientSocket) # also closes conn
+        continue
+
+    if "req_test_jpg" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('test.jpg', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
+            +"Content-Type: text/html\r\n"
+            +"\r\n"
+            +str(x)+"")
+        clientSocket.close()'''
+        send_response(200, "OK", x, clientSocket) # also closes conn
         continue
 
     if "req_data_nn" in typ:
