@@ -3,12 +3,15 @@
 package com.example.smart_attic_fan;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,16 +41,26 @@ import java.util.concurrent.ExecutionException;
 
 public class FanData extends AppCompatActivity {
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
-    TextView data_text, dataTextView;
+    TextView data_text;
+    Button next;
+    String[] request_round_robin = new String[]{"req_test_img", "req_test_img2"};
+    int index_on = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fan_data);
         data_text = (TextView) findViewById(R.id.data_text);
         set_information(0);
+        next = (Button) findViewById(R.id.next);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                set_information(0);
+            }
+        });
     }
     private void set_information() throws Exception {
-        String type = "req_test_img";
+        String type = get_req_type();
         String json =   "{\"type\": \"" + type + "\"}";
         data_text.setText("Downloading data...");
         Connection c = new Connection();
@@ -58,6 +71,12 @@ public class FanData extends AppCompatActivity {
         ImageView myImage = (ImageView) findViewById(R.id.imageView3);
         myImage.setImageBitmap(b);
         data_text.setText("Graph 1:");
+    }
+
+    private String get_req_type() {
+        String type = request_round_robin[index_on];
+        index_on = (index_on + 1) % request_round_robin.length;
+        return type;
     }
 
     private void set_information(int attmpts)  {
