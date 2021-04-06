@@ -36,12 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
-
-// Followed: https://www.tutorialspoint.com/how-to-integrate-android-speech-to-text
-// For getting text to speech
 public class FanData extends AppCompatActivity {
-    private final int REQ_CODE = 100;
-    private final String ngrokURL = "06e3e0a1a4ae.ngrok.io";
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     TextView data_text, dataTextView;
     @Override
@@ -52,16 +47,8 @@ public class FanData extends AppCompatActivity {
         set_information(0);
     }
     private void set_information() throws Exception {
-        String type = "req_test_jpg";
-        Date currentTime = Calendar.getInstance().getTime();
-        int hour = currentTime.getHours();
-        int minute = currentTime.getMinutes();
-        int second = currentTime.getSeconds();
-        System.out.println(hour);
+        String type = "req_test_img";
         String json =   "{\"type\": \"" + type + "\"}";
-        Toast.makeText(getApplicationContext(),
-                "loading..",
-                Toast.LENGTH_SHORT).show();
         data_text.setText("Downloading data...");
         Connection c = new Connection();
         Bitmap b = c.execute("http://" + aws_url, json, type).get();
@@ -70,6 +57,7 @@ public class FanData extends AppCompatActivity {
         }
         ImageView myImage = (ImageView) findViewById(R.id.imageView3);
         myImage.setImageBitmap(b);
+        data_text.setText("Graph 1:");
     }
 
     private void set_information(int attmpts)  {
