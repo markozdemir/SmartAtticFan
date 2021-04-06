@@ -153,7 +153,10 @@ while(True):
                 # if zz not in temp_data_list:
                 #    print(zz, "not in list")
                 #    continue
-                x[str(zz)] = z[zz]
+                if zz is "time":
+                    x[str(zz)] = z[zz] + 946684800
+                else:
+                    x[str(zz)] = z[zz]
             if x is not {} and len(x) != 0:
                 h[str(id_)] = x
                 id_ += 1

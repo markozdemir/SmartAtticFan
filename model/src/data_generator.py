@@ -197,18 +197,18 @@ def get_data_from_text():
 
 def main():
     # Yin: Here is how you use my data conversion:
-    data = do.get_data("fan", ["temp (C)", "hum"], "tuple")
+    data = do.get_data("fan", ["temp (C)", "hum", "time"], "tuple")
     print("Data in array of tuples:")
     print(data)
     print()
     # OR:
-    data = do.get_data("fan", ["temp (C)", "hum"], "array")
+    data = do.get_data("fan", ["temp (C)", "hum", "time"], "array")
     print("Data in array of arrays:")
     print(data)
     print()
     # OR:
     print("Data in array of hashes:")
-    data = do.get_data("fan", ["temp (C)", "hum"], "hash")
+    data = do.get_data("fan", ["temp (C)", "hum", "time"], "hash")
     print(data)
     print()
 
