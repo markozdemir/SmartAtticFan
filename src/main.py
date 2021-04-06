@@ -1,5 +1,5 @@
 import machine, time, dht, ujson, network, urequests, socket
-import binascii
+import binascii, utime
 from ntptime import settime
 
 # info at https://randomnerdtutorials.com/esp32-esp8266-dht11-dht22-micropython-temperature-humidity-sensor/
@@ -10,6 +10,9 @@ server_on = True
 connected_wifi = True
 longitude = 0
 latitude = 0
+
+def get_timestamp():
+    return 946684800 + utime.time()
 
 def connect_wifi(ssid, pw):
     global sta_if, connected_wifi
@@ -42,7 +45,7 @@ def send_data(temp, hum):
                             "hum": hum,
                             "RPM": rpm_val,
                             "Power (W)": power_val,
-                            "time": time.time()
+                            "time": get_timestamp()
                          }
                 }
         headers = { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
@@ -116,6 +119,7 @@ def run():
     global server_on, connected_wifi
 
     ipconfig = connect_wifi('ZEYNET', 'Pamukkale1')
+    #ipconfig = connect_wifi('ORBI83', 'jaggedzoo924')
     get_location()
 #    print("ip:", ipconfig[0])
     if connected_wifi:
@@ -135,6 +139,8 @@ def run():
         sever_on = False
 
     settime()
+    print(get_timestamp())
+
     sensor = dht.DHT22(machine.Pin(14))
     temp = -1
     hum = -1
