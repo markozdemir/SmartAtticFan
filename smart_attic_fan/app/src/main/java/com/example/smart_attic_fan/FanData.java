@@ -2,24 +2,25 @@
 // Columbia University Project
 package com.example.smart_attic_fan;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
-
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,6 +30,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,16 +49,10 @@ public class FanData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fan_data);
         data_text = (TextView) findViewById(R.id.data_text);
-        try {
-            set_information();
-        } catch (IOException | ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        //req_data_nn
+        set_information(0);
     }
-
-    private void set_information() throws IOException, ExecutionException, InterruptedException {
-        String type = "req_data_nn";
+    private void set_information() throws Exception {
+        String type = "req_test_jpg";
         Date currentTime = Calendar.getInstance().getTime();
         int hour = currentTime.getHours();
         int minute = currentTime.getMinutes();
@@ -66,46 +62,48 @@ public class FanData extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),
                 "loading..",
                 Toast.LENGTH_SHORT).show();
-        data_text.setText("Loading data...");
+        data_text.setText("Downloading data...");
         Connection c = new Connection();
-        String response = c.execute("http://" + aws_url, json, type).get();
-        data_text.setText("Data Received: " + type + "\nServer Response: " + response);
+        Bitmap b = c.execute("http://" + aws_url, json, type).get();
+        if (b == null) {
+            throw new Exception();
+        }
+        ImageView myImage = (ImageView) findViewById(R.id.imageView3);
+        myImage.setImageBitmap(b);
     }
-//
-//    private void send_to_huzzah(String cmd) throws IOException, ExecutionException, InterruptedException {
-//        Date currentTime = Calendar.getInstance().getTime();
-//        int hour = currentTime.getHours();
-//        int minute = currentTime.getMinutes();
-//        int second = currentTime.getSeconds();
-//        System.out.println(hour);
-//        String json =   "{\"cmd\": \"" + cmd + "\"" +
-//                "\"hour\": " + hour + "" +
-//                "\"minute\": " + minute + "" +
-//                "\"second\": " + second + "" +
-//                "}";
-//        textView.setText("Command sent: " + cmd);
-//        Connection c = new Connection();
-//        String response = c.execute("http://" + ngrokURL, json, cmd).get();
-//        textView.setText("Command sent: " + cmd + "\nServer Response: " + response);
-//    }
+
+    private void set_information(int attmpts)  {
+        int threshold = 5;
+        if (attmpts > threshold) {
+            data_text.setText("Failed Loading Data");
+            return;
+        }
+        try {
+            set_information();
+        } catch (IOException | ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            set_information(attmpts+1);
+        } catch (Exception e2) {
+            e2.printStackTrace();
+            set_information(attmpts+1);
+        }
+    }
 
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android
-    private class Connection extends AsyncTask<String, String, String> {
+    private class Connection extends AsyncTask<String, String, android.graphics.Bitmap> {
         @Override
-        protected String doInBackground(String... args) {
+        protected android.graphics.Bitmap doInBackground(String... args) {
             String ngrokString = args[0]; // URL to call
             String commandJson = args[1]; //data to post
-            String raw_cmd = args[2];
             OutputStream out = null;
-            String response = "";
-            int responseCode = -1;
+            android.graphics.Bitmap bitmap = null;
 
             try {
                 // Url info
                 URL url = new URL(ngrokString);
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                con.setReadTimeout(2500);
-                con.setConnectTimeout(2500);
+                con.setReadTimeout(400);
+                con.setConnectTimeout(400);
                 con.setRequestMethod("GET");
                 con.setDoInput(true);
                 con.setDoOutput(true);
@@ -118,21 +116,10 @@ public class FanData extends AppCompatActivity {
                 writer.close();
 
                 // Get response
-                responseCode=con.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    con.connect();
-                    String line;
-                    InputStream is = con.getInputStream();
-                    BufferedReader in = new BufferedReader(new InputStreamReader(is));
-                    while (!(line=in.readLine()).equals("END")) {
-                        if (line == null)
-                            break;
-                        response+=line;
-                        break;
-                    }
-                    out.close();
-                    con.disconnect();
-                }
+                InputStream is = con.getInputStream();
+                bitmap = BitmapFactory.decodeStream(new BufferedInputStream(is));
+                out.close();
+                con.disconnect();
 
                 // Error handling
             } catch (MalformedURLException e) {
@@ -143,10 +130,7 @@ public class FanData extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (!response.equals("")) {
-                System.out.println("response: " + response);
-            }
-            return response + "\nStatus Code: " + responseCode;
+            return bitmap;
         }
     }
 }
