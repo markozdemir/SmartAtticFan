@@ -39,6 +39,11 @@ temp_data_list = ["temp", "hum"]
 longitude = 0
 latitude = 0
 
+def is_fan_broken(RPM, temp):
+    if RPM < 10:
+        if temp > 31:
+            return True
+    return False
 
 def send_response(code, msg, data, conn):
     if data is None:
@@ -181,6 +186,8 @@ while True:
         temp, desc = lw.get_weather(longitude, latitude)
         h2 = {}
         h2["recent"] = h[str(id_ - 1)]
+        is_broke = is_fan_broken(h2["recent"]["RPM"], h2["recent"]["temp (C)"])
+        h2["broke"] = is_broke
         h2["local_temp"] = temp
         h2["local_desc"] = desc
         print("Sending local weather:", temp, desc)
