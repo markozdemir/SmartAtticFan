@@ -43,7 +43,8 @@ public class FanData extends AppCompatActivity {
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     TextView data_text;
     Button next;
-    String[] request_round_robin = new String[]{"req_test_img", "req_test_img2"};
+    String[] request_round_robin = new String[]{"req_LR", "req_knn", "req_relationships"};
+    String[] titles = new String[]{"linear regression", "knn", "relationship"};
     int index_on = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +56,12 @@ public class FanData extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                set_information(0);
+                    set_information(0);
             }
         });
     }
     private void set_information() throws Exception {
+        String title = titles[index_on];
         String type = get_req_type();
         String json =   "{\"type\": \"" + type + "\"}";
         data_text.setText("Downloading data...");
@@ -70,10 +72,11 @@ public class FanData extends AppCompatActivity {
         }
         ImageView myImage = (ImageView) findViewById(R.id.imageView3);
         myImage.setImageBitmap(b);
-        data_text.setText("Graph 1:");
+        data_text.setText("Graph " + title);
     }
 
     private String get_req_type() {
+        System.out.println("Req type: " + index_on);
         String type = request_round_robin[index_on];
         index_on = (index_on + 1) % request_round_robin.length;
         return type;
