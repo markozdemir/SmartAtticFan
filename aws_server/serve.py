@@ -63,7 +63,7 @@ def get_request_data(data, conn):
     else:
         send_response(400, "Bad Request 1", None, conn)
         return  None
-    if len(data) < 20:
+    if len(data) < 10:
         send_response(400, "Bad Request 2", None, conn)
         return None
     try:
@@ -120,10 +120,10 @@ while(True):
         send_response(200, "OK", lt.get_curr_time(), clientSocket) # also closes conn
         continue
 
-    if "req_test_img" in typ:
+    if "req_LR" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('test.png', 'r') as file:
+        with open('linearR_pred_temp.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
@@ -133,6 +133,35 @@ while(True):
         clientSocket.close()'''
         send_response(200, "OK", x, clientSocket) # also closes conn
         continue
+
+    if "req_knn" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('knn_pred_temp.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
+            +"Content-Type: text/html\r\n"
+            +"\r\n"
+            +str(x)+"")
+        clientSocket.close()'''
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+
+    if "req_relationships" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('relationship.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
+            +"Content-Type: text/html\r\n"
+            +"\r\n"
+            +str(x)+"")
+        clientSocket.close()'''
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+
 
     if "req_data_nn" in typ:
         x = ""

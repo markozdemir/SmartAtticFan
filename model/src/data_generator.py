@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import data_obtainer as do
 from sklearn import metrics
 
-save_results_to = '../../../SmartAtticFan/res/'
+save_results_to = '../../aws_server/'
 
 # np.save('path/to/file',file)
 
@@ -21,7 +21,7 @@ def ObjectId(t):
 
 def get_data_from_text():
     #examine data will change later
-    data = [
+    '''data = [
             { "_id" : ObjectId("60650f1b4df28e2843e115c7"), "temp (C)" : 25.6, "hum" : 30.6, "Power (W)" : 0, "time" : 670550939, "RPM" : 0 },
             { "_id" : ObjectId("60650f2c4df28e2843e115c8"), "temp (C)" : 25.6, "hum" : 30.8, "Power (W)" : 0, "time" : 670550955, "RPM" : 0 },
             { "_id" : ObjectId("60650f3b4df28e2843e115c9"), "temp (C)" : 25.6, "hum" : 30.9, "Power (W)" : 0, "time" : 670550970, "RPM" : 0 },
@@ -119,8 +119,8 @@ def get_data_from_text():
             #{ "_id" : ObjectId("60674d801d4f780e36a1b959"), "temp (C)" : 0, "hum" : 0, "Power (W)" : 0, "time" : 670697983, "RPM" : 0 },
             { "_id" : ObjectId("60675ac8a9aef9ce38764881"), "temp (C)" : 3.2, "hum" : 41.1, "Power (W)" : 0, "time" : 670701383, "RPM" : 0 },
             { "_id" : ObjectId("6067c7b27706c5c90f5f810b"), "temp (C)" : 26.1, "hum" : 31.4, "Power (W)" : 0, "time" : 670729266, "RPM" : 0 },
-            ]
-
+            ]'''
+    data = do.get_data("fan", ["temp (C)", "hum", "Power (W)", "time", "RPM"], "hash")
     temp=[]
     hum=[]
     power=[]
@@ -207,20 +207,20 @@ def get_data_from_text():
 
 def main():
     # Yin: Here is how you use my data conversion:
-    data = do.get_data("fan", ["temp (C)", "hum", "time"], "tuple")
-    print("Data in array of tuples:")
-    print(data)
-    print()
+    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "tuple")
+    #print("Data in array of tuples:")
+    #print(data)
+    #print()
     # OR:
-    data = do.get_data("fan", ["temp (C)", "hum", "time"], "array")
-    print("Data in array of arrays:")
-    print(data)
-    print()
+    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "array")
+    #print("Data in array of arrays:")
+    #print(data)
+    #print()
     # OR:
-    print("Data in array of hashes:")
-    data = do.get_data("fan", ["temp (C)", "hum", "time"], "hash")
-    print(data)
-    print()
+    #print("Data in array of hashes:")
+    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "hash")
+    #print(data)
+    #print()
 
     ### generate relationship between T and Phi
     X=np.linspace(1,1000,200,endpoint=True)
