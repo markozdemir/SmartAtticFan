@@ -5,12 +5,14 @@ Phi -- Rotation Speed of Fan
 T -- temperature in the house. (around sensor)
 delta_T -- temperature that makes people feel comfort
 '''
-
+#import Image
 import numpy as np
 import os
 import matplotlib.pyplot as plt
 import data_obtainer as do
 from sklearn import metrics
+
+save_results_to = '../../../SmartAtticFan/res/'
 
 # np.save('path/to/file',file)
 
@@ -165,6 +167,7 @@ def get_data_from_text():
     plt.figure()
     plt.plot(y_train,'r',label='Label')
     plt.plot(knn_y_pred_temp,'b',label='Pred')
+    plt.savefig(save_results_to + 'knn_pred_temp.png')
 
     # from sklearn.linear_model import LogisticRegression
     # logisticRegr = LogisticRegression().fit(X_train, y_train)
@@ -180,37 +183,44 @@ def get_data_from_text():
     plt.figure()
     plt.plot(y_train,'r',label='Label')
     plt.plot(linearR_y_pred_temp,'b',label='Pred')
+    #plt.savefig('testplot1.png')
+    plt.savefig(save_results_to + 'linearR_pred_temp.png')
+
 
     plt.show()
 
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
 
     plt.plot(temp,'-*',label='temp')
     plt.plot(hum,'-*',label='hum')
     plt.plot(power,'-*',label='power')
     # plt.plot(rpm,'-*',label='rpm')
     plt.legend()
+    #plt.savefig('testplot2.png')
     plt.show()
 
-    import pdb; pdb.set_trace()
+
+
+
+    #import pdb; pdb.set_trace()
 
 
 def main():
     # Yin: Here is how you use my data conversion:
-    data = do.get_data("fan", ["temp (C)", "hum", "time"], "tuple")
-    print("Data in array of tuples:")
-    print(data)
-    print()
+    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "tuple")
+    #print("Data in array of tuples:")
+    #print(data)
+    #print()
     # OR:
-    data = do.get_data("fan", ["temp (C)", "hum", "time"], "array")
-    print("Data in array of arrays:")
-    print(data)
-    print()
+    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "array")
+    #print("Data in array of arrays:")
+    #print(data)
+    #print()
     # OR:
-    print("Data in array of hashes:")
-    data = do.get_data("fan", ["temp (C)", "hum", "time"], "hash")
-    print(data)
-    print()
+    #print("Data in array of hashes:")
+    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "hash")
+    #print(data)
+    #print()
 
     ### generate relationship between T and Phi
     X=np.linspace(1,1000,200,endpoint=True)
@@ -245,8 +255,8 @@ def main():
         plt.plot(t, each_rela)
     plt.show()
 
-    import pdb; pdb.set_trace()
-
+    #import pdb; pdb.set_trace()
+    get_data_from_text()
 
     ### define a model that can learn from data to explore targeted relationship
 
