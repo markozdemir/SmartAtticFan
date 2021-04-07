@@ -196,7 +196,7 @@ def get_data_from_text():
     plt.plot(power,'-*',label='power')
     # plt.plot(rpm,'-*',label='rpm')
     plt.legend()
-    #plt.savefig('testplot2.png')
+    plt.savefig(save_results_to + 'relationship.png')
     plt.show()
 
 
@@ -207,20 +207,20 @@ def get_data_from_text():
 
 def main():
     # Yin: Here is how you use my data conversion:
-    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "tuple")
-    #print("Data in array of tuples:")
-    #print(data)
-    #print()
+    data = do.get_data("fan", ["temp (C)", "hum", "time"], "tuple")
+    print("Data in array of tuples:")
+    print(data)
+    print()
     # OR:
-    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "array")
-    #print("Data in array of arrays:")
-    #print(data)
-    #print()
+    data = do.get_data("fan", ["temp (C)", "hum", "time"], "array")
+    print("Data in array of arrays:")
+    print(data)
+    print()
     # OR:
-    #print("Data in array of hashes:")
-    #data = do.get_data("fan", ["temp (C)", "hum", "time"], "hash")
-    #print(data)
-    #print()
+    print("Data in array of hashes:")
+    data = do.get_data("fan", ["temp (C)", "hum", "time"], "hash")
+    print(data)
+    print()
 
     ### generate relationship between T and Phi
     X=np.linspace(1,1000,200,endpoint=True)
