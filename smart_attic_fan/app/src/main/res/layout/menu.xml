@@ -208,6 +208,18 @@
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:id="@+id/server"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="aws server off"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="12sp"
+                    android:layout_marginTop="350px"
+                    android:layout_marginLeft="420px"
+                    android:layout_gravity="left" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/menu_card_text"

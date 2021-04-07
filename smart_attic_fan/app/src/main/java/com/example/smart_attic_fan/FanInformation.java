@@ -90,15 +90,7 @@ public class FanInformation extends AppCompatActivity {
     private void set_information() throws IOException, ExecutionException, InterruptedException, JSONException {
         String type = "req_data_climate";
         Date currentTime = Calendar.getInstance().getTime();
-        int hour = currentTime.getHours();
-        int minute = currentTime.getMinutes();
-        int second = currentTime.getSeconds();
-        System.out.println(hour);
         String json = "{\"type\": \"" + type + "\"}";
-        Toast.makeText(getApplicationContext(),
-                "Sending AWS command...",
-                Toast.LENGTH_SHORT).show();
-        // temp.setText("Loading Fan Information....");
         Connection c = new Connection();
         String response = c.execute("http://" + aws_url, json, type).get();
         response = response.replaceAll("u'", "'");
