@@ -92,8 +92,7 @@ def set_location(location_hash):
     temp, desc = lw.get_weather(longitude, latitude)
     print("local weather:", temp, desc)
 
-print("Smart Attic Fan Running!")
-while(True):
+while True:
     print("Waiting...")
     (clientSocket, clientAddress) = sock.accept();
     data = ""
@@ -120,17 +119,16 @@ while(True):
         send_response(200, "OK", lt.get_curr_time(), clientSocket) # also closes conn
         continue
 
+    if typ == "android_check":
+        send_response(200, "OK", None, clientSocket) # also closes conn
+        continue
+
     if "req_LR" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
         with open('linearR_pred_temp.png', 'r') as file:
             x = file.read()
         num_b = len(x)
-        '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
-            +"Content-Type: text/html\r\n"
-            +"\r\n"
-            +str(x)+"")
-        clientSocket.close()'''
         send_response(200, "OK", x, clientSocket) # also closes conn
         continue
 
@@ -140,11 +138,6 @@ while(True):
         with open('knn_pred_temp.png', 'r') as file:
             x = file.read()
         num_b = len(x)
-        '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
-            +"Content-Type: text/html\r\n"
-            +"\r\n"
-            +str(x)+"")
-        clientSocket.close()'''
         send_response(200, "OK", x, clientSocket) # also closes conn
         continue
 
@@ -154,11 +147,6 @@ while(True):
         with open('relationship.png', 'r') as file:
             x = file.read()
         num_b = len(x)
-        '''clientSocket.sendall("HTTP/1.1 200 OK\r\n"
-            +"Content-Type: text/html\r\n"
-            +"\r\n"
-            +str(x)+"")
-        clientSocket.close()'''
         send_response(200, "OK", x, clientSocket) # also closes conn
         continue
 
@@ -216,3 +204,4 @@ while(True):
             data_print(data)
 
     send_response(200, "OK", None, clientSocket) # also closes conn
+
