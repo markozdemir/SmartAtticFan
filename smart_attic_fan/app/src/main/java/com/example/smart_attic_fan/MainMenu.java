@@ -103,7 +103,6 @@ public class MainMenu extends AppCompatActivity {
         });
 
         run_check_server();
-        person_text.setText("Welcome Back, James!");
 
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -128,10 +127,13 @@ public class MainMenu extends AppCompatActivity {
         String json = "{\"type\": \"" + type + "\"}";
         MainMenu.Connection c = new MainMenu.Connection();
         int r = c.execute("http://" + aws_url, json, type).get();
-        if (r == 200)
+        if (r == 200) {
             server.setText("server is on");
-        else
+            person_text.setText("Welcome Back, James!");
+        } else {
             server.setText("server is off");
+            person_text.setText("Offline. App functionality limited.");
+        }
     }
 
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android

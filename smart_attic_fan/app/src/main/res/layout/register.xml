@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/menu_card_bg">
-    
+
     <!-- Content below header and above footer -->
 
     <RelativeLayout
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:padding="50px"
                 android:textSize="30sp"
-                android:text="Register your name and email to receive email updates about your fan and if it breaks." />
+                android:text="" />
 
         </RelativeLayout>
 
