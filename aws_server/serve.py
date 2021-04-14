@@ -19,6 +19,8 @@ import time
 from sklearn import svm
 import local_weather as lw
 import local_time as lt
+from subprocess import Popen
+
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -38,6 +40,10 @@ temp_data_list = ["temp", "hum"]
 # location info
 longitude = 0
 latitude = 0
+
+def send_fail_email():
+    Process=Popen('./send_email.sh %s %s' % ("jamesmastran@gmail.com", "James"), shell=True)
+send_fail_email()
 
 def is_fan_broken(RPM, temp):
     if RPM < 10:
