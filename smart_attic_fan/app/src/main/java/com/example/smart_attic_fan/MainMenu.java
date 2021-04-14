@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedOutputStream;
@@ -24,8 +25,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Calendar;
@@ -38,7 +41,7 @@ import java.util.concurrent.ExecutionException;
 public class MainMenu extends AppCompatActivity {
     RelativeLayout fan_info, fan_data, fan_options, about, register;
     TextView fan_info_text, fan_data_text, fan_options_text, about_text, server, register_text,
-             person_text;
+            person_text;
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     final Handler handler = new Handler();
     final int delay = 20000;
@@ -46,7 +49,7 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Typeface font = Typeface.createFromAsset( getAssets(), "fontawesome-webfont.ttf" );
+        Typeface font = Typeface.createFromAsset(getAssets(), "fontawesome-webfont.ttf");
         setContentView(R.layout.menu);
 
         fan_info = (RelativeLayout) findViewById(R.id.fan_information);
@@ -115,31 +118,51 @@ public class MainMenu extends AppCompatActivity {
     private void run_check_server() {
         try {
             check_server();
-        } catch (ExecutionException e) {
+        } catch (ExecutionException | JSONException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-    private void check_server() throws ExecutionException, InterruptedException {
+
+    private void check_server() throws ExecutionException, InterruptedException, JSONException {
         String type = "android_check";
         Date currentTime = Calendar.getInstance().getTime();
         String json = "{\"type\": \"" + type + "\"}";
+        person_text.setText("Offline. App functionality limited.");
         MainMenu.Connection c = new MainMenu.Connection();
-        int r = c.execute("http://" + aws_url, json, type).get();
-        if (r == 200) {
-            server.setText("server is on");
-            person_text.setText("Welcome Back, James!");
+        CodeAndString cas = c.execute("http://" + aws_url, json, type).get();
+        String response =  cas.response.replaceAll("u'", "'");
+        JSONObject obj = new JSONObject(response);
+        String name = obj.getString("name");
+        int valid = obj.getInt("valid");
+        if (cas.code == 200) {
+            server.setText("");
+            if (valid == 1) {
+                person_text.setText("Welcome Back, " + name + "!");
+            } else {
+                person_text.setText("Please register for more functionality.");
+            }
         } else {
-            server.setText("server is off");
+            server.setText("");
             person_text.setText("Offline. App functionality limited.");
         }
     }
 
+    private class CodeAndString {
+        int code;
+        String response;
+
+        public CodeAndString(int c, String r) {
+            code = c;
+            response = r;
+        }
+    }
+
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android
-    private class Connection extends AsyncTask<String, String, Integer> {
+    private class Connection extends AsyncTask<String, String, CodeAndString> {
         @Override
-        protected Integer doInBackground(String... args) {
+        protected CodeAndString doInBackground(String... args) {
             String ngrokString = args[0]; // URL to call
             String commandJson = args[1]; //data to post
             String raw_cmd = args[2];
@@ -166,18 +189,34 @@ public class MainMenu extends AppCompatActivity {
 
                 // Get response
                 responseCode = con.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    con.connect();
+                    String line;
+                    InputStream is = con.getInputStream();
+                    BufferedReader in = new BufferedReader(new InputStreamReader(is));
+                    while (!(line = in.readLine()).equals("END")) {
+                        if (line == null)
+                            break;
+                        response += line;
+                        break;
+                    }
+                }
                 con.disconnect();
 
                 // Error handling
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (SocketTimeoutException e) {
-                // do nothing
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            return responseCode;
-        }
-    }
+            CodeAndString c = new CodeAndString(responseCode, response);
+            return c;
 
+        }
+
+    }
 }

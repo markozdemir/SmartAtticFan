@@ -68,9 +68,14 @@ public class Register extends AppCompatActivity {
         String json = "{\"type\": \"" + type + "\", \"data\": {\"name\": \""+name+"\", \"email\": \""+email+"\"}}";
         Register.Connection c = new Register.Connection();
         int r = c.execute("http://" + aws_url, json, type).get();
-        desc.setText("Thank you for registering!\nYou will receive updates via email about your attic fan!" +
-                "\nYou should receive an email confirming this registration." +
-                "\n\nRegister again:");
+        if (r == 200) {
+            desc.setText("Thank you for registering!\nYou will receive updates via email about your attic fan!" +
+                    "\nYou should receive an email confirming this registration." +
+                    "\n\nRegister again:");
+        } else {
+            desc.setText("We are experiencing technical difficulties currently. Please try again later." +
+                    "\n\nRegister again:");
+        }
     }
 
 
