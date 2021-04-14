@@ -20,4 +20,6 @@
     <string name="icon_sync">&#xf021;</string>
     <string name="icon_power">&#xf0e7;</string>
     <string name="icon_time">&#xf017;</string>
+    <string name="icon_add">&#xf067;</string>
+    <string name="icon_email">&#xf199;</string>
 </resources>

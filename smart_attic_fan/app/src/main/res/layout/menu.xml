@@ -18,10 +18,36 @@
         android:layout_below="@id/header">
 
         <RelativeLayout
+            android:id="@+id/person"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="90px"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/person_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text=""
+                    android:layout_marginLeft="@dimen/fa_right_margin_card"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="20sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="20px"/>
+            </FrameLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/fan_information"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
+            android:layout_height="@dimen/main_card_size"
+            android:layout_below="@id/person"
             android:layout_marginBottom="1dp"
             android:gravity="center">
 
@@ -69,7 +95,7 @@
             android:id="@+id/fan_options"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
+            android:layout_height="@dimen/main_card_size"
             android:layout_below="@id/fan_information"
             android:layout_marginBottom="1.2dp"
             android:gravity="center">
@@ -126,7 +152,7 @@
             android:id="@+id/fan_data"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
+            android:layout_height="@dimen/main_card_size"
             android:layout_below="@id/fan_options"
             android:layout_marginBottom="1dp"
             android:gravity="center">
@@ -170,13 +196,62 @@
                     android:layout_gravity="right" />
             </FrameLayout>
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/register"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/main_card_size"
+            android:layout_below="@id/fan_data"
+            android:layout_marginBottom="1dp"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/register_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="@string/icon_email"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="55sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="@dimen/fa_top_margin_card"
+                    android:layout_marginLeft="@dimen/fa_right_margin_card" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="Register"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="30sp"
+                    android:layout_marginTop="@dimen/text_margin_top_card"
+                    android:layout_marginLeft="@dimen/text_margin_left_card"
+                    android:layout_gravity="left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="❯"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="30sp"
+                    android:layout_marginTop="@dimen/text_margin_top_card"
+                    android:layout_marginRight="@dimen/text_arrow_right_card"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/about"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
-            android:layout_below="@id/fan_data"
+            android:layout_height="@dimen/main_card_size"
+            android:layout_below="@id/register"
             android:layout_marginBottom="1dp"
             android:gravity="center">
 
@@ -208,6 +283,16 @@
                     android:layout_gravity="left" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="❯"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="30sp"
+                    android:layout_marginTop="@dimen/text_margin_top_card"
+                    android:layout_marginRight="@dimen/text_arrow_right_card"
+                    android:layout_gravity="right" />
+                <TextView
                     android:id="@+id/server"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -215,7 +300,7 @@
                     android:text="aws server off"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="12sp"
-                    android:layout_marginTop="350px"
+                    android:layout_marginTop="260px"
                     android:layout_marginLeft="420px"
                     android:layout_gravity="left" />
 

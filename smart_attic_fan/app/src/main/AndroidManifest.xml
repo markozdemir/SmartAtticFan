@@ -29,6 +29,7 @@
         <activity android:name=".FanData" />
         <activity android:name=".FanOptions" />
         <activity android:name=".AboutUs" />
+        <activity android:name=".Register" />
     </application>
 
 </manifest>

@@ -36,8 +36,9 @@ import java.util.concurrent.ExecutionException;
 // Followed: https://www.tutorialspoint.com/how-to-integrate-android-speech-to-text
 // For getting text to speech
 public class MainMenu extends AppCompatActivity {
-    RelativeLayout fan_info, fan_data, fan_options, about;
-    TextView fan_info_text, fan_data_text, fan_options_text, about_text, server;
+    RelativeLayout fan_info, fan_data, fan_options, about, register;
+    TextView fan_info_text, fan_data_text, fan_options_text, about_text, server, register_text,
+             person_text;
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     final Handler handler = new Handler();
     final int delay = 20000;
@@ -61,6 +62,10 @@ public class MainMenu extends AppCompatActivity {
         about_text = (TextView) findViewById(R.id.about_text);
         about_text.setTypeface(font); // For font awesome
         server = (TextView) findViewById(R.id.server);
+        register = (RelativeLayout) findViewById(R.id.register);
+        register_text = (TextView) findViewById(R.id.register_text);
+        register_text.setTypeface(font); // For font awesome
+        person_text = (TextView) findViewById(R.id.person_text);
 
         fan_info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +95,15 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), Register.class));
+            }
+        });
+
         run_check_server();
+        person_text.setText("Welcome Back, James!");
 
         handler.postDelayed(new Runnable() {
             public void run() {
