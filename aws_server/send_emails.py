@@ -23,7 +23,10 @@ def send_fail_email(password, receiver_email, name):
             Hi """+name+"""!\n
             \n
             We've detected that your attic fan might not be working properly.
-            Please go check your attic fan as soon as you can!<
+            Please go check your attic fan as soon as you can!
+            \n
+            Best,
+            The Smart Attic Team
            """
     html = """\
         <html>
@@ -33,6 +36,9 @@ def send_fail_email(password, receiver_email, name):
                 <br />
                 <p>We've detected that your attic fan might not be working properly.</p>
                 <p>Please go check your attic fan as soon as you can!</p>
+                </br>
+                <p>Best,</p>
+                <p><i>The Smart Attic Team</i></p>
             </body>
         </html>
         """
