@@ -22,9 +22,9 @@ def send_reg_email(password, receiver_email, name):
     text = """\
             Hi """+name+"""!\n
             \n
-            We are excited to have you on board! Your registration was succesful.\n
+            We are excited to have you on board! Your registration was succesful. \n
             You will receive emails from us from time-to-time if we have to get your attention
-            about your attic fan.\n\n
+            about your attic fan. \n\n
             Best,\n
             The Smart Attic Team
            """

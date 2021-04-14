@@ -20,7 +20,7 @@ def send_fail_email(password, receiver_email, name):
 
     # Create the plain-text and HTML version of your message
     text = """\
-            Hi """+name+"""!\n
+            Hi """+name+"""! \n
             \n
             We've detected that your attic fan might not be working properly.
             Please go check your attic fan as soon as you can!
