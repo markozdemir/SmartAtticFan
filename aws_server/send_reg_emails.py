@@ -11,10 +11,10 @@ file = open("pw.txt")
 password = file.read().replace("\n", "")
 file.close()
 
-def send_fail_email(password, receiver_email, name):
+def send_reg_email(password, receiver_email, name):
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "[Alert] Update on Your Attic Fan"
+    message["Subject"] = "[Notification] Registration Was Successful!"
     message["From"] = sender_email
     message["To"] = receiver_email
 
@@ -22,8 +22,11 @@ def send_fail_email(password, receiver_email, name):
     text = """\
             Hi """+name+"""!\n
             \n
-            We've detected that your attic fan might not be working properly.
-            Please go check your attic fan as soon as you can!<
+            We are excited to have you on board! Your registration was succesful.\n
+            You will receive emails from us from time-to-time if we have to get your attention
+            about your attic fan.\n\n
+            Best,\n
+            The Smart Attic Team
            """
     html = """\
         <html>
@@ -31,8 +34,11 @@ def send_fail_email(password, receiver_email, name):
                 <p><b>Hi """+name+"""!</b></p>
                 <img src="https://images.cooltext.com/5521216.png" />
                 <br />
-                <p>We've detected that your attic fan might not be working properly.</p>
-                <p>Please go check your attic fan as soon as you can!</p>
+                <p>We are excited to have you on board! Your registration was succesful.</p.
+                <p>You will receive emails from us from time-to-time if we have to get your attention about your attic fan.</p>
+                <br />
+                <p>Best,</p>
+                <p><i>The Smart Attic Team</i></p>
             </body>
         </html>
         """
@@ -56,4 +62,4 @@ def send_fail_email(password, receiver_email, name):
 
 send_e = sys.argv[1]
 name = sys.argv[2]
-send_fail_email(password,name,send_e)
+send_reg_email(password,name,send_e)

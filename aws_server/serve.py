@@ -27,6 +27,8 @@ client = pymongo.MongoClient("mongodb://localhost:27017/")
 DB = client["fan"]
 db = DB["user"]
 filename = "nn.sav"
+users = client["users"]
+user_db = users["user"]
 
 # Server setup
 end = "=============================================\n\n"
@@ -41,9 +43,16 @@ temp_data_list = ["temp", "hum"]
 longitude = 0
 latitude = 0
 
-def send_fail_email():
-    Process=Popen('./send_email.sh %s %s' % ("jamesmastran@gmail.com", "James"), shell=True)
-send_fail_email()
+def register_user(data):
+    user_db.remove({})
+    r = user_db.insert(data)
+    send_register_email(data['name'], data['email'])
+
+def send_fail_email(to, name):
+    Process=Popen('./send_email.sh %s %s' % (to, name), shell=True)
+
+def send_register_email(to, name):
+    Process=Popen('./send_reg_email.sh %s %s' % (to, name), shell=True)
 
 def is_fan_broken(RPM, temp):
     if RPM < 10:
@@ -131,6 +140,20 @@ while True:
         continue
 
     if typ == "android_check":
+        row = user_db.find({})
+        name = None
+        email = None
+        v = 0
+        for r in row:
+            print(r)
+            name = r['name']
+            email = r['email']
+            v = 1
+        send_response(200, "OK", {"valid": str(v), "name":name, "email":email}, clientSocket) # also closes conn
+        continue
+
+    if typ == "android_register":
+        register_user(data['data'])
         send_response(200, "OK", None, clientSocket) # also closes conn
         continue
 
