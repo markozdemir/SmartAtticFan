@@ -85,21 +85,21 @@ def register_user(data):
     send_register_email(data['name'], data['email'])
 
 def send_push():
-    Process=Popen('./send_push.sh', shell=True)
+    Process=Popen('./aux/send_push.sh', shell=True)
 
 def send_push_new():
-    Process=Popen('./send_push_new.sh', shell=True)
+    Process=Popen('./aux/send_push_new.sh', shell=True)
 
 def send_fail_email(to, name):
     global time_fail_sent
     threshold = 3600
     if time.time() - time_fail_sent > threshold:
-        Process=Popen('./send_email.sh %s %s' % (name, to), shell=True)
+        Process=Popen('./aux/send_email.sh %s %s' % (name, to), shell=True)
         send_push()
         time_fail_sent = time.time()
 
 def send_register_email(to, name):
-    Process=Popen('./send_reg_email.sh %s %s' % (to, name), shell=True)
+    Process=Popen('./aux/send_reg_email.sh %s %s' % (to, name), shell=True)
     send_push_new()
 
 def is_fan_broken(RPM):
