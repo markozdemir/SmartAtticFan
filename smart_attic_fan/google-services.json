@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "532295253191",
+    "project_id": "iot-columbia",
+    "storage_bucket": "iot-columbia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532295253191:android:d4981332623686f253d2e2",
+        "android_client_info": {
+          "package_name": "com.example.smart_attic_fan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532295253191-l3v8btm2kecqq2dupclluokn2a9tvphf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMkzBhAj1VuLxIcHsF1K710QCpXNwUTGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532295253191-l3v8btm2kecqq2dupclluokn2a9tvphf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,9 +13,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.pusher.pushnotifications.PushNotifications;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -29,7 +30,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
@@ -70,6 +70,9 @@ public class MainMenu extends AppCompatActivity {
         register_text.setTypeface(font); // For font awesome
         person_text = (TextView) findViewById(R.id.person_text);
 
+        PushNotifications.start(getApplicationContext(), "a765f340-7836-4b30-9876-beadf29c5b52");
+        PushNotifications.addDeviceInterest("hello");
+        
         fan_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

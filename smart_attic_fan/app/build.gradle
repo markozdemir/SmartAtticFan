@@ -1,3 +1,5 @@
+
+
 plugins {
     id 'com.android.application'
 }
@@ -12,6 +14,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+		multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,7 +38,16 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment:2.3.3'
     implementation 'androidx.navigation:navigation-ui:2.3.3'
+	implementation 'com.android.support:multidex:1.0.3'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+	implementation platform('com.google.firebase:firebase-bom:27.0.0')
+	implementation 'com.google.firebase:firebase-analytics'    
+	implementation 'com.google.firebase:firebase-core:17.4.4'
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+    implementation 'com.pusher:push-notifications-android:1.6.2'
 }
+
+
+apply plugin: 'com.google.gms.google-services'
