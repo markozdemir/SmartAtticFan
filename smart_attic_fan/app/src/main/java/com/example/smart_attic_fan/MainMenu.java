@@ -3,13 +3,25 @@
 package com.example.smart_attic_fan;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -42,6 +54,12 @@ public class MainMenu extends AppCompatActivity {
     RelativeLayout fan_info, fan_data, fan_options, about, register;
     TextView fan_info_text, fan_data_text, fan_options_text, about_text, server, register_text,
             person_text;
+    private Context mContext;
+    private Resources mResources;
+    private RelativeLayout mRelativeLayout;
+    private Button mBTN;
+    private ImageView mImageView;
+    private Bitmap mBitmap;
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     final Handler handler = new Handler();
     final int delay = 20000;
@@ -72,7 +90,7 @@ public class MainMenu extends AppCompatActivity {
 
         PushNotifications.start(getApplicationContext(), "a765f340-7836-4b30-9876-beadf29c5b52");
         PushNotifications.addDeviceInterest("hello");
-        
+
         fan_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,23 +150,42 @@ public class MainMenu extends AppCompatActivity {
         String type = "android_check";
         Date currentTime = Calendar.getInstance().getTime();
         String json = "{\"type\": \"" + type + "\"}";
-        person_text.setText("Offline. App functionality limited.");
+        person_text.setText("Offline. Limited\nfunctionality.");
         MainMenu.Connection c = new MainMenu.Connection();
         CodeAndString cas = c.execute("http://" + aws_url, json, type).get();
         String response =  cas.response.replaceAll("u'", "'");
         JSONObject obj = new JSONObject(response);
         String name = obj.getString("name");
+        String default_img = "https://i.pinimg.com/originals/54/7a/9c/547a9cc6b93e10261f1dd8a8af474e03.jpg";
+        String img = obj.getString("image");
+        if ((img.contains(".") && (img.endsWith(".png") || img.endsWith(".jpg") || img.endsWith((".jpeg")))) == false)
+            img = default_img;
+        if (img.length() < 5)
+            img = default_img;
+        if (!img.startsWith("http://") && !img.startsWith("https://"))
+            img = "http://" + img;
         int valid = obj.getInt("valid");
         if (cas.code == 200) {
             server.setText("");
             if (valid == 1) {
-                person_text.setText("Welcome Back, " + name + "!");
+                person_text.setText("Welcome Back,\n" + name + "!");
+                mContext = getApplicationContext();
+                mResources = getResources();
+                mImageView = (ImageView) findViewById(R.id.profile_pic);
+                GetBitmapFromURLAsync getBitmapFromURLAsync = new GetBitmapFromURLAsync();
+                mBitmap = getBitmapFromURLAsync.execute(img).get();
+                mImageView.setImageBitmap(mBitmap);
+                mImageView.setImageBitmap(mBitmap);
+                RoundedBitmapDrawable drawable = null;
+                drawable = createRoundedBitmapDrawableWithBorder(mBitmap);
+                mImageView.setImageDrawable(drawable);
+
             } else {
-                person_text.setText("Please register for more functionality.");
+                person_text.setText("Please register for\nmore functionality.");
             }
         } else {
             server.setText("");
-            person_text.setText("Offline. App functionality limited.");
+            person_text.setText("Offline. Limited\nfunctionality.");
         }
     }
 
@@ -161,7 +198,52 @@ public class MainMenu extends AppCompatActivity {
             response = r;
         }
     }
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    private class GetBitmapFromURLAsync extends AsyncTask<String, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            return getBitmapFromURL(params[0]);
+        }
+    }
 
+    // https://stackoverflow.com/questions/2471935/how-to-load-an-imageview-by-url-in-android
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
     // Idea is from https://stackoverflow.com/questions/2938502/sending-post-data-in-android
     private class Connection extends AsyncTask<String, String, CodeAndString> {
         @Override
@@ -221,5 +303,38 @@ public class MainMenu extends AppCompatActivity {
 
         }
 
+    }
+
+    /* Inspiration from Android's docs */
+    private RoundedBitmapDrawable createRoundedBitmapDrawableWithBorder(Bitmap bitmap){
+        if (bitmap == null)
+            return null;
+        int bitmapWidth = bitmap.getWidth();
+        int bitmapHeight = bitmap.getHeight();
+        int borderWidthHalf = 40;
+        int bitmapRadius = Math.min(bitmapWidth,bitmapHeight)/2;
+        int bitmapSquareWidth = Math.min(bitmapWidth,bitmapHeight);
+        int newBitmapSquareWidth = bitmapSquareWidth+borderWidthHalf;
+        Bitmap roundedBitmap = Bitmap.createBitmap(newBitmapSquareWidth,newBitmapSquareWidth,Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(roundedBitmap);
+        canvas.drawColor(Color.WHITE);
+        int x = borderWidthHalf + bitmapSquareWidth - bitmapWidth;
+        int y = borderWidthHalf + bitmapSquareWidth - bitmapHeight;
+        canvas.drawBitmap(bitmap, x, y, null);
+
+        Paint borderPaint = new Paint();
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(borderWidthHalf*2);
+        int col = Color.parseColor("#000000");
+        borderPaint.setColor(col);
+
+        canvas.drawCircle(canvas.getWidth()/2, canvas.getWidth()/2, newBitmapSquareWidth/2, borderPaint);
+
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(mResources,roundedBitmap);
+
+        roundedBitmapDrawable.setCornerRadius(bitmapRadius);
+
+        roundedBitmapDrawable.setAntiAlias(true);
+        return roundedBitmapDrawable;
     }
 }

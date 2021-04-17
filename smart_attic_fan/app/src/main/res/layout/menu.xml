@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1FBFA">
+    android:background="@color/menu_card_bg">
 
     <include layout="@layout/header" />
 
@@ -21,8 +22,16 @@
             android:id="@+id/person"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="90px"
+            android:layout_height="320px"
             android:gravity="center">
+
+            <ImageView
+                android:id="@+id/profile_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="35px"
+                android:layout_marginLeft="550px"
+                android:translationZ="90dp"/>
 
             <FrameLayout
                 android:layout_width="fill_parent"
@@ -36,9 +45,9 @@
                     android:text=""
                     android:layout_marginLeft="@dimen/fa_right_margin_card"
                     android:fontFamily="sans-serif-medium"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:layout_gravity="left"
-                    android:layout_marginTop="20px"/>
+                    android:layout_marginTop="100px"/>
             </FrameLayout>
         </RelativeLayout>
 
@@ -144,6 +153,7 @@
                     android:layout_marginTop="@dimen/text_margin_top_card"
                     android:layout_marginRight="@dimen/text_arrow_right_card"
                     android:layout_gravity="right" />
+
             </FrameLayout>
         </RelativeLayout>
 
@@ -252,7 +262,6 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/main_card_size"
             android:layout_below="@id/register"
-            android:layout_marginBottom="1dp"
             android:gravity="center">
 
             <FrameLayout

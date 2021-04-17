@@ -34,7 +34,7 @@ public class Register extends AppCompatActivity {
 
     TextView desc;
     Button submit;
-    EditText name_edit, email_edit;
+    EditText name_edit, email_edit, img_edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,7 @@ public class Register extends AppCompatActivity {
         desc = (TextView) findViewById(R.id.desc_text);
         name_edit   = (EditText)findViewById(R.id.edit_name);
         email_edit   = (EditText)findViewById(R.id.edit_email);
+        img_edit   = (EditText)findViewById(R.id.edit_img);
 
         desc.setText("Register your name and email to receive email updates about your fan and if it breaks.");
         submit.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +65,9 @@ public class Register extends AppCompatActivity {
         String type = "android_register";
         String name = name_edit.getText().toString();
         String email = email_edit.getText().toString();
+        String img = img_edit.getText().toString();
         Date currentTime = Calendar.getInstance().getTime();
-        String json = "{\"type\": \"" + type + "\", \"data\": {\"name\": \""+name+"\", \"email\": \""+email+"\"}}";
+        String json = "{\"type\": \"" + type + "\", \"data\": {\"name\": \""+name+"\", \"email\": \""+email+"\", \"image\": \""+img+"\"}}";
         Register.Connection c = new Register.Connection();
         int r = c.execute("http://" + aws_url, json, type).get();
         if (r == 200) {

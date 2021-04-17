@@ -47,6 +47,7 @@ dependencies {
 	implementation 'com.google.firebase:firebase-core:17.4.4'
     implementation 'com.google.firebase:firebase-messaging:20.2.3'
     implementation 'com.pusher:push-notifications-android:1.6.2'
+	implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 
