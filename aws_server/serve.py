@@ -48,11 +48,19 @@ def register_user(data):
     r = user_db.insert(data)
     send_register_email(data['name'], data['email'])
 
+def send_push():
+    Process=Popen('./send_push.sh', shell=True)
+
+def send_push_new():
+    Process=Popen('./send_push_new.sh', shell=True)
+
 def send_fail_email(to, name):
-    Process=Popen('./send_email.sh %s %s' % (to, name), shell=True)
+    Process=Popen('./send_email.sh %s %s' % (name, to), shell=True)
+    send_push()
 
 def send_register_email(to, name):
     Process=Popen('./send_reg_email.sh %s %s' % (to, name), shell=True)
+    send_push_new()
 
 def is_fan_broken(RPM, temp):
     if RPM < 10:
