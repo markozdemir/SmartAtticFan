@@ -53,7 +53,7 @@ import java.util.concurrent.ExecutionException;
 public class MainMenu extends AppCompatActivity {
     RelativeLayout fan_info, fan_data, fan_options, about, register;
     TextView fan_info_text, fan_data_text, fan_options_text, about_text, server, register_text,
-            person_text;
+            person_text, fan_work_text, fan_work_icon, fan_broke_icon, edit_icon;
     private Context mContext;
     private Resources mResources;
     private RelativeLayout mRelativeLayout;
@@ -63,6 +63,7 @@ public class MainMenu extends AppCompatActivity {
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     final Handler handler = new Handler();
     final int delay = 20000;
+    String name, email, img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,14 @@ public class MainMenu extends AppCompatActivity {
         register_text = (TextView) findViewById(R.id.register_text);
         register_text.setTypeface(font); // For font awesome
         person_text = (TextView) findViewById(R.id.person_text);
+        fan_work_text = (TextView) findViewById(R.id.fan_work);
+        fan_work_icon = (TextView) findViewById(R.id.fan_work_icon);
+        fan_work_icon.setTypeface(font); // For font awesome
+        fan_broke_icon = (TextView) findViewById(R.id.fan_broke_icon);
+        fan_broke_icon.setTypeface(font); // For font awesome
+        mImageView = (ImageView) findViewById(R.id.profile_pic);
+        edit_icon = (TextView) findViewById(R.id.edit_icon);
+        edit_icon.setTypeface(font); // For font awesome
 
         PushNotifications.start(getApplicationContext(), "a765f340-7836-4b30-9876-beadf29c5b52");
         PushNotifications.addDeviceInterest("hello");
@@ -126,6 +135,19 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Update.class);
+                Bundle user_info = new Bundle();
+                user_info.putString("name", name);
+                user_info.putString("email", email);
+                user_info.putString("image", img);
+                intent.putExtras(user_info); //Put your id to your next Intent
+                startActivity(intent);
+            }
+        });
+
         run_check_server();
 
         handler.postDelayed(new Runnable() {
@@ -151,13 +173,17 @@ public class MainMenu extends AppCompatActivity {
         Date currentTime = Calendar.getInstance().getTime();
         String json = "{\"type\": \"" + type + "\"}";
         person_text.setText("Offline. Limited\nfunctionality.");
+        fan_work_icon.setVisibility(View.INVISIBLE);
+        fan_broke_icon.setVisibility(View.INVISIBLE);
         MainMenu.Connection c = new MainMenu.Connection();
         CodeAndString cas = c.execute("http://" + aws_url, json, type).get();
         String response =  cas.response.replaceAll("u'", "'");
         JSONObject obj = new JSONObject(response);
-        String name = obj.getString("name");
+        name = obj.getString("name");
+        boolean broke = obj.getBoolean("is_broke");
         String default_img = "https://i.pinimg.com/originals/54/7a/9c/547a9cc6b93e10261f1dd8a8af474e03.jpg";
-        String img = obj.getString("image");
+        img = obj.getString("image");
+        email = obj.getString("email");
         if ((img.contains(".") && (img.endsWith(".png") || img.endsWith(".jpg") || img.endsWith((".jpeg")))) == false)
             img = default_img;
         if (img.length() < 5)
@@ -169,6 +195,19 @@ public class MainMenu extends AppCompatActivity {
             server.setText("");
             if (valid == 1) {
                 person_text.setText("Welcome Back,\n" + name + "!");
+                if (!broke) {
+                    fan_work_text.setText("Fan is Working");
+                    int col = Color.parseColor("#5B5B5B");
+                    fan_work_text.setTextColor(col);
+                    fan_work_icon.setVisibility(View.VISIBLE);
+                    fan_broke_icon.setVisibility(View.INVISIBLE);
+                } else {
+                    fan_work_text.setText("Fan is Broken - Email sent");
+                    int col = Color.parseColor("#FF2424");
+                    fan_work_text.setTextColor(col);
+                    fan_broke_icon.setVisibility(View.VISIBLE);
+                    fan_work_icon.setVisibility(View.INVISIBLE);
+                }
                 mContext = getApplicationContext();
                 mResources = getResources();
                 mImageView = (ImageView) findViewById(R.id.profile_pic);

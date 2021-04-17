@@ -105,7 +105,7 @@ public class FanInformation extends AppCompatActivity {
         temp_t.setText(" Temp:  " + to_fahrenheit( (Double) mostRecent.get("temp (C)")) + " F");
         humid_t.setText(" Humidity:  " + mostRecent.get("hum") + " %");
         rpm_t.setText(" RPMs:  " + mostRecent.get("RPM") + " RPMs");
-        power_t.setText(" Power:  " + mostRecent.get("Power (W)") + " W");
+        power_t.setText(" Power:  " + mostRecent.get("power") + " W");
         time_t.setText(" Time:  "  + get_date((Integer) mostRecent.get("time")));
         local_temp.setText(responseObj.get("local_temp") + " F " + responseObj.get("local_desc"));
     }

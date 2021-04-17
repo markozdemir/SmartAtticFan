@@ -30,6 +30,7 @@
         <activity android:name=".FanOptions" />
         <activity android:name=".AboutUs" />
         <activity android:name=".Register" />
+        <activity android:name=".Update" />
     </application>
 
 </manifest>
