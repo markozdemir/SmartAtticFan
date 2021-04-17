@@ -156,8 +156,9 @@ while True:
             print(r)
             name = r['name']
             email = r['email']
+            image = r['image']
             v = 1
-        send_response(200, "OK", {"valid": str(v), "name":name, "email":email}, clientSocket) # also closes conn
+        send_response(200, "OK", {"valid": str(v), "name":name, "email":email, "image":image}, clientSocket) # also closes conn
         continue
 
     if typ == "android_register":
