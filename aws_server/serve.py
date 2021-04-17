@@ -20,6 +20,8 @@ from sklearn import svm
 import local_weather as lw
 import local_time as lt
 from subprocess import Popen
+import signal
+import sys
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -34,6 +36,10 @@ end = "=============================================\n\n"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
 sock.bind(("0.0.0.0", 80));
 sock.listen(1);
+def signal_handler(signal, frame):
+        sock.close()
+        sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
 
 # data configs
 temp_data_list = ["temp", "hum"]
@@ -179,9 +185,10 @@ while True:
     try:
         (clientSocket, clientAddress) = sock.accept();
     except KeyboardInterrupt:
+        sock.close()
         break
-    except:
-        print("error handled...?")
+    except Exception as e:
+        print("error handled...?", e)
         continue
     data = ""
     clientSocket.settimeout(.3)
