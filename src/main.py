@@ -69,8 +69,10 @@ def send_data(temp, hum, rpm_val=0):
                 }
         headers = { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
         r = urequests.request("POST", aws_URL, json=json, headers=headers)
-#        print("response=", r.text)
-
+        print("response=", r.text)
+        print("responseCode=", r.status_code)
+        return ujson.loads(r.text.replace("'", '"'))
+        
 
 def format_mac(mac):
     mac_string = binascii.hexlify(mac)
@@ -117,8 +119,9 @@ def get_rpm():
 
     start = time.ticks_us()
 
-    # set time out for more than 300 sec (5 min)
-    while((time.ticks_us() - start)/1000000.0 > 300):
+# TODO: CHANGE TIME
+    # set time out for more than 10sec   ## 300sec (5 min)
+    while((time.ticks_us() - start)/1000000.0 < 10):
         if hs.value() == 0:
             if not on_state:
                 on_state = True
@@ -202,29 +205,30 @@ def run():
     except OSError as e:
         print('Failed to read sensor.')
     else:
-        send_data(temp, hum)
+        resp_dict = send_data(temp, hum, get_rpm())
+        
+        set_relay_switch(resp_dict['speed'])
 
 
 
     # get data from server
-    ap_if = network.WLAN(network.AP_IF)
-    huzz_ip = ap_if.ifconfig()[0]
-    
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(('0.0.0.0', 80))
-    s.listen(1)
-    while(1):
-        try:
-            (conn, address) = s.accept()
-        except OSError:
-            print("Nothing")
-        else:
-            print('Connection from %s' % str(address))
-            rec = conn.recv(4096)
-            # rec = rec.split(b'\r\n\r\n')
-            rec = str(rec)[2:-1]
-            print('----------\nAfter Split = ', rec)
-            
+#    ap_if = network.WLAN(network.AP_IF)
+#    huzz_ip = ap_if.ifconfig()[0]
+#
+#    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#    s.bind(('0.0.0.0', 80))
+#    s.listen(1)
+#    while(1):
+#        try:
+#            (conn, address) = s.accept()
+#        except OSError:
+#            print("Nothing")
+#        else:
+#            print('Connection from %s' % str(address))
+#            rec = conn.recv(4096)
+#            # rec = rec.split(b'\r\n\r\n')
+#            rec = str(rec)[2:-1]
+#            print('----------\nAfter Split = ', rec)
 #            post_data = (rec.split("PostData=")[-1])
 #            post_data = post_data.replace('{', '')
 #            post_data = post_data.replace('}', '')
