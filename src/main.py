@@ -11,8 +11,19 @@ connected_wifi = True
 longitude = 0
 latitude = 0
 
+# ESP32 relay pins
+relay_low  = machine.Pin(27, machine.Pin.OUT)
+relay_med  = machine.Pin(21, machine.Pin.OUT)
+relay_high = machine.Pin(4, machine.Pin.OUT)
+
+# hall sensor
+hs = machine.Pin(15, machine.Pin.IN)
+
+
+
 def get_timestamp():
     return 946684800 + utime.time()
+
 
 def connect_wifi(ssid, pw):
     global sta_if, connected_wifi
@@ -30,7 +41,8 @@ def connect_wifi(ssid, pw):
                 return None
     return sta_if.ifconfig()
 
-def send_data(temp, hum):
+
+def send_data(temp, hum, rpm_val=0):
     global server_on, connected_wifi
 
     if server_on and connected_wifi:
@@ -39,6 +51,13 @@ def send_data(temp, hum):
         if temp > 26.7 or hum > 45:
             rpm_val = 1100
             power_val = 50
+
+# TODO: CHANGE THIS LATER TO GET_RPM()
+#        hs = machine.Pin(15, machine.Pin.IN)
+        if hs.value() == 1:
+            rpm_val = 0
+        else:
+            rpm_val = 1100
 
         json = { "type":"data_send_train",
                  "data": {  "temp (C)": temp,
@@ -52,6 +71,7 @@ def send_data(temp, hum):
         r = urequests.request("POST", aws_URL, json=json, headers=headers)
 #        print("response=", r.text)
 
+
 def format_mac(mac):
     mac_string = binascii.hexlify(mac)
     formatted_mac = ""
@@ -63,6 +83,7 @@ def format_mac(mac):
         count += 1
     print("Formatted mac addr of router from %s to %s" % (mac, formatted_mac))
     return formatted_mac
+
 
 def get_location():
     global connected_wifi, latitude, longitude
@@ -86,16 +107,18 @@ def get_location():
     longitude = location_data["lng"]
     return (location_data["lat"], location_data["lng"])
 
+
 def get_rpm():
     hall_thresh = 100
     hall_count = 0
     on_state = False
     
-    hs = machine.Pin(15, machine.Pin.IN)
+#    hs = machine.Pin(15, machine.Pin.IN)
 
     start = time.ticks_us()
 
-    while(1):
+    # set time out for more than 300 sec (5 min)
+    while((time.ticks_us() - start)/1000000.0 > 300):
         if hs.value() == 0:
             if not on_state:
                 on_state = True
@@ -112,8 +135,34 @@ def get_rpm():
     
     rpm_val = (hall_count/time_passed)*60.0
     print("RPM: ", rpm_val)
-    time.sleep(1)
-    
+    return rpm_val
+
+ 
+def turn_all_relays_off():
+    # check and turn off if any relays are on
+    if relay_low.value() == 0:
+        relay_low.value(1)
+    if relay_med.value() == 0:
+        relay_med.value(1)
+    if relay_high.value() == 0:
+        relay_high.value(1)
+    return True
+
+
+def set_relay_switch(gear):
+    which_fan_speed = 0
+    if turn_all_relays_off():
+        if gear == 1:
+            relay_low.value(0)
+            which_fan_speed = 1
+        elif gear == 2:
+            relay_med.value(0)
+            which_fan_speed = 2
+        elif gear == 3:
+            relay_high.value(0)
+            which_fan_speed = 3
+    return which_fan_speed
+
 
 def run():
     global server_on, connected_wifi
@@ -155,11 +204,49 @@ def run():
     else:
         send_data(temp, hum)
 
+
+
+    # get data from server
+    ap_if = network.WLAN(network.AP_IF)
+    huzz_ip = ap_if.ifconfig()[0]
+    
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(('0.0.0.0', 80))
+    s.listen(1)
+    while(1):
+        try:
+            (conn, address) = s.accept()
+        except OSError:
+            print("Nothing")
+        else:
+            print('Connection from %s' % str(address))
+            rec = conn.recv(4096)
+            # rec = rec.split(b'\r\n\r\n')
+            rec = str(rec)[2:-1]
+            print('----------\nAfter Split = ', rec)
+            
+#            post_data = (rec.split("PostData=")[-1])
+#            post_data = post_data.replace('{', '')
+#            post_data = post_data.replace('}', '')
+#            post_data = post_data.replace('\"', '')
+#            voiceCommand = post_data.split(":")[1]
+#            print('Voice Command=<%s>' % voiceCommand)
+#
+#            ret_data = get_command(voiceCommand)
+#
+#            conn.send('HTTP/1.1 200 OK\n')
+#            conn.send('Content-Type: text/html\n')
+#            conn.send('Connection: close\n\n')
+#            conn.sendall(ret_data)
+#            conn.close()
+
+
+    time.sleep(5)
     #10000
-    machine.deepsleep(1200000)
+#    machine.deepsleep(10000)
 
 
-run()
+#run()
 
 
 
