@@ -237,7 +237,7 @@ while True:
     if "req_LR" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('linearR_pred_temp.png', 'r') as file:
+        with open('./model/linearR_pred_temp.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         send_response(200, "OK", x, clientSocket) # also closes conn
@@ -246,7 +246,7 @@ while True:
     if "req_knn" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('knn_pred_temp.png', 'r') as file:
+        with open('./model/knn_pred_temp.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         send_response(200, "OK", x, clientSocket) # also closes conn
@@ -255,7 +255,7 @@ while True:
     if "req_relationships" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('relationship.png', 'r') as file:
+        with open('./model/relationship.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         send_response(200, "OK", x, clientSocket) # also closes conn
