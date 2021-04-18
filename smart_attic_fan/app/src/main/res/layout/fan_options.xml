@@ -29,5 +29,14 @@
                 android:fontFamily="sans-serif-medium"
                 android:textSize="30sp" />
         </RelativeLayout>
+
+        <Switch
+            android:id="@+id/fan_on_off"
+            android:layout_below="@id/fan_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/menu_card_bg"
+            android:textSize="20sp"
+            android:text="Turn fan off (Green means fan is off):" />
     </RelativeLayout>
 </RelativeLayout>

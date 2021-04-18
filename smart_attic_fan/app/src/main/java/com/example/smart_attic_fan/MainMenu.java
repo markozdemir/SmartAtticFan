@@ -175,6 +175,7 @@ public class MainMenu extends AppCompatActivity {
         person_text.setText("Offline. Limited\nfunctionality.");
         fan_work_icon.setVisibility(View.INVISIBLE);
         fan_broke_icon.setVisibility(View.INVISIBLE);
+        edit_icon.setVisibility(View.INVISIBLE);
         MainMenu.Connection c = new MainMenu.Connection();
         CodeAndString cas = c.execute("http://" + aws_url, json, type).get();
         String response =  cas.response.replaceAll("u'", "'");
@@ -218,6 +219,7 @@ public class MainMenu extends AppCompatActivity {
                 RoundedBitmapDrawable drawable = null;
                 drawable = createRoundedBitmapDrawableWithBorder(mBitmap);
                 mImageView.setImageDrawable(drawable);
+                edit_icon.setVisibility(View.VISIBLE);
 
             } else {
                 person_text.setText("Please register for\nmore functionality.");
