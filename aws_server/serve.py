@@ -124,8 +124,27 @@ def trigger_ai():
 
 def get_fan_speed_from_ai():
     global fan_speed
-    l = [0, 1, 2, 3]
-    fan_speed = random.choice(l)
+    d = db.find({})
+    h = {}
+    id_ = 1
+    for z in d:
+        x = {}
+        for zz in z:
+            if zz is "time":
+                x[str(zz)] = z[zz] + 946684800
+            else:
+                x[str(zz)] = z[zz]
+        if x is not {} and len(x) != 0:
+            h[str(id_)] = x
+            id_ += 1
+    h2 = {}
+    h2["recent"] = h[str(id_ - 1)]
+    if "temp" in h2["recent"]:
+        if h2["recent"]["temp"] > 90:
+            l = [1, 2, 3]
+            fan_speed = random.choice(l)
+        else:
+            fan_speed = 0
     return fan_speed
 
 def send_response(code, msg, data, conn):
