@@ -20,7 +20,7 @@
         android:layout_marginLeft="275px"
         android:textColor="@color/black"
         android:textSize="55sp"
-        android:text="xxx" />
+        android:text="AWS Server is Offline" />
 
     <TextView
         android:id="@+id/textView"

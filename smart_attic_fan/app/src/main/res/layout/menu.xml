@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1FBFA">
+    android:background="@color/menu_card_bg">
 
     <include layout="@layout/header" />
 
@@ -18,10 +19,90 @@
         android:layout_below="@id/header">
 
         <RelativeLayout
+            android:id="@+id/person"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="320px"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/profile_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="35px"
+                android:layout_marginLeft="550px"
+                android:translationZ="90dp"/>
+            <TextView
+                android:id="@+id/edit_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/icon_edit"
+                android:layout_marginLeft="900px"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="22sp"
+                android:layout_gravity="left"
+                android:layout_marginTop="260px"
+                android:translationZ="89dp"/>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/person_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text=""
+                    android:layout_marginLeft="@dimen/fa_right_margin_card"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="25sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="100px"/>
+
+                <TextView
+                    android:id="@+id/fan_work_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#089B0E"
+                    android:text="@string/icon_check"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="14sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="280px"
+                    android:layout_marginLeft="105px"/>
+                <TextView
+                    android:id="@+id/fan_broke_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B61717"
+                    android:text="@string/icon_exclamation"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="12sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="285px"
+                    android:layout_marginLeft="105px"/>
+                <TextView
+                    android:id="@+id/fan_work"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="loading"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="12sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="280px"
+                    android:layout_marginLeft="150px"/>
+            </FrameLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/fan_information"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
+            android:layout_height="@dimen/main_card_size"
+            android:layout_below="@id/person"
             android:layout_marginBottom="1dp"
             android:gravity="center">
 
@@ -69,7 +150,7 @@
             android:id="@+id/fan_options"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
+            android:layout_height="@dimen/main_card_size"
             android:layout_below="@id/fan_information"
             android:layout_marginBottom="1.2dp"
             android:gravity="center">
@@ -118,6 +199,7 @@
                     android:layout_marginTop="@dimen/text_margin_top_card"
                     android:layout_marginRight="@dimen/text_arrow_right_card"
                     android:layout_gravity="right" />
+
             </FrameLayout>
         </RelativeLayout>
 
@@ -126,7 +208,7 @@
             android:id="@+id/fan_data"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
+            android:layout_height="@dimen/main_card_size"
             android:layout_below="@id/fan_options"
             android:layout_marginBottom="1dp"
             android:gravity="center">
@@ -170,14 +252,62 @@
                     android:layout_gravity="right" />
             </FrameLayout>
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/register"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/main_card_size"
+            android:layout_below="@id/fan_data"
+            android:layout_marginBottom="1dp"
+            android:gravity="center">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/register_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="@string/icon_email"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="55sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="@dimen/fa_top_margin_card"
+                    android:layout_marginLeft="@dimen/fa_right_margin_card" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="Register"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="30sp"
+                    android:layout_marginTop="@dimen/text_margin_top_card"
+                    android:layout_marginLeft="@dimen/text_margin_left_card"
+                    android:layout_gravity="left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="❯"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="30sp"
+                    android:layout_marginTop="@dimen/text_margin_top_card"
+                    android:layout_marginRight="@dimen/text_arrow_right_card"
+                    android:layout_gravity="right" />
+            </FrameLayout>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/about"
             android:background="@color/menu_card_bg"
             android:layout_width="fill_parent"
-            android:layout_height="405px"
-            android:layout_below="@id/fan_data"
-            android:layout_marginBottom="1dp"
+            android:layout_height="@dimen/main_card_size"
+            android:layout_below="@id/register"
             android:gravity="center">
 
             <FrameLayout
@@ -205,6 +335,28 @@
                     android:textSize="30sp"
                     android:layout_marginTop="@dimen/text_margin_top_card"
                     android:layout_marginLeft="@dimen/text_margin_left_card"
+                    android:layout_gravity="left" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="❯"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="30sp"
+                    android:layout_marginTop="@dimen/text_margin_top_card"
+                    android:layout_marginRight="@dimen/text_arrow_right_card"
+                    android:layout_gravity="right" />
+                <TextView
+                    android:id="@+id/server"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="aws server off"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="12sp"
+                    android:layout_marginTop="260px"
+                    android:layout_marginLeft="420px"
                     android:layout_gravity="left" />
 
                 <TextView

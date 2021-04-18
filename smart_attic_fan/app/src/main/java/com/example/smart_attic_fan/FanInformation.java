@@ -90,15 +90,7 @@ public class FanInformation extends AppCompatActivity {
     private void set_information() throws IOException, ExecutionException, InterruptedException, JSONException {
         String type = "req_data_climate";
         Date currentTime = Calendar.getInstance().getTime();
-        int hour = currentTime.getHours();
-        int minute = currentTime.getMinutes();
-        int second = currentTime.getSeconds();
-        System.out.println(hour);
         String json = "{\"type\": \"" + type + "\"}";
-        Toast.makeText(getApplicationContext(),
-                "Sending AWS command...",
-                Toast.LENGTH_SHORT).show();
-        // temp.setText("Loading Fan Information....");
         Connection c = new Connection();
         String response = c.execute("http://" + aws_url, json, type).get();
         response = response.replaceAll("u'", "'");
@@ -113,7 +105,7 @@ public class FanInformation extends AppCompatActivity {
         temp_t.setText(" Temp:  " + to_fahrenheit( (Double) mostRecent.get("temp (C)")) + " F");
         humid_t.setText(" Humidity:  " + mostRecent.get("hum") + " %");
         rpm_t.setText(" RPMs:  " + mostRecent.get("RPM") + " RPMs");
-        power_t.setText(" Power:  " + mostRecent.get("Power (W)") + " W");
+        power_t.setText(" Power:  " + mostRecent.get("power") + " W");
         time_t.setText(" Time:  "  + get_date((Integer) mostRecent.get("time")));
         local_temp.setText(responseObj.get("local_temp") + " F " + responseObj.get("local_desc"));
     }
