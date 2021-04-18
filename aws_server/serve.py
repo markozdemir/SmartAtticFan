@@ -262,10 +262,12 @@ while True:
         continue
 
     if typ == "android_toggle_fan":
-        if user_off:
-            user_off = False
-        else:
+        user_off = data['data']['off']
+        if 'rue' in user_off:
             user_off = True
+        elif "alse" in user_off:
+            user_off = False
+        print("TOGGLED:", user_off)
         send_response(200, "OK", {"user_off": user_off}, clientSocket) # also closes conn
         continue
 
