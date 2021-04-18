@@ -52,6 +52,7 @@ latitude = 0
 fan_speed = -1
 is_broke = False
 time_fail_sent = 0
+user_off = False
 
 def get_power(x):
     if is_broke:
@@ -124,6 +125,11 @@ def trigger_ai():
 
 def get_fan_speed_from_ai():
     global fan_speed
+
+    if user_off:
+        fan_speed = 0
+        return 0
+
     d = db.find({})
     h = {}
     id_ = 1
@@ -201,6 +207,8 @@ def set_location(location_hash):
 
 while True:
     print("Waiting...")
+    if user_off:
+        print("User turned fan off!")
     try:
         (clientSocket, clientAddress) = sock.accept();
     except KeyboardInterrupt:
@@ -251,6 +259,14 @@ while True:
     if typ == "android_register":
         register_user(data['data'])
         send_response(200, "OK", None, clientSocket) # also closes conn
+        continue
+
+    if typ == "android_toggle_fan":
+        if user_off:
+            user_off = False
+        else:
+            user_off = True
+        send_response(200, "OK", {"user_off": user_off}, clientSocket) # also closes conn
         continue
 
     if "req_LR" in typ:
