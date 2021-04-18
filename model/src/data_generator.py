@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import data_obtainer as do
 from sklearn import metrics
 
-save_results_to = '../../aws_server/'
+save_results_to = '../../aws_server/model'
 
 # np.save('path/to/file',file)
 
