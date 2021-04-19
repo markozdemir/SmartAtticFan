@@ -89,8 +89,13 @@ class STATE_GRAPH():
         pass
 
 
+def main(start_temp: int, target_temp: int):
+    """
 
-def main():
+    :param start_temp:
+    :param target_temp:
+    :return:
+    """
 
     #### make data for Temp and Time given different gear level 0, 1, 2, 3
 
@@ -139,8 +144,10 @@ def main():
                                         vars()[f'power_gear_1'][:,np.newaxis],
                                         vars()[f'power_gear_2'][:,np.newaxis],
                                         vars()[f'power_gear_3'][:,np.newaxis]),1)
-    start_temp = 80
-    target_temp = 76
+
+    # start_temp = 80
+    # target_temp = 76
+
     graph_ob = STATE_GRAPH(start_temp=start_temp, time_limit=80, target_temp=target_temp, temp_time_gear_relation=temp_time_gear_arr, power_gear_level=power_gear_arr)
     graph = graph_ob.build_graph()
     # import pdb; pdb.set_trace()
@@ -193,7 +200,11 @@ def main():
         for subkey in graph[key].keys():
             G.add_weighted_edges_from([(key, subkey, graph[key][subkey])])
     predecessors, _ = nx.floyd_warshall_predecessor_and_distance(G)
-    print(nx.reconstruct_path("node_0_0", lowest_cost_node, predecessors))
+    #print(nx.reconstruct_path("node_0_0", lowest_cost_node, predecessors))
+
+    opt = nx.reconstruct_path("node_0_0", lowest_cost_node, predecessors)
+    x, y, z = opt[-1].split('_')
+    print(z)
     # import pdb; pdb.set_trace()
     dis = Dijkstra(graph, 'node_0_0')
     # import pdb; pdb.set_trace()
@@ -225,7 +236,9 @@ def main():
     #
     # plt.plot(result_list)
     # plt.show()
+    return z
 
 
 if __name__ == '__main__':
-    main()
+    plan = main(start_temp=80, target_temp=76)
+    #print(plan)
