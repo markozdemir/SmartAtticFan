@@ -13,8 +13,9 @@ latitude = 0
 
 # ESP32 relay pins
 relay_low  = machine.Pin(27, machine.Pin.OUT)
-relay_med  = machine.Pin(21, machine.Pin.OUT)
-relay_high = machine.Pin(4, machine.Pin.OUT)
+relay_med  = machine.Pin(4, machine.Pin.OUT) # pin 'A5'
+relay_high = machine.Pin(21, machine.Pin.OUT)
+fan_setting = -1
 
 # hall sensor
 hs = machine.Pin(15, machine.Pin.IN)
@@ -43,7 +44,7 @@ def connect_wifi(ssid, pw):
 
 
 def send_data(temp, hum, rpm_val=0):
-    global server_on, connected_wifi
+    global server_on, connected_wifi, fan_setting
 
     if server_on and connected_wifi:
         rpm_val = 0
@@ -54,10 +55,11 @@ def send_data(temp, hum, rpm_val=0):
 
 # TODO: CHANGE THIS LATER TO GET_RPM()
 #        hs = machine.Pin(15, machine.Pin.IN)
-        if hs.value() == 1:
-            rpm_val = 0
-        else:
-            rpm_val = 1100
+#        if hs.value() == 1:
+#            rpm_val = 0
+#        else:
+#            rpm_val = 1100
+        rpm_val = 1100
 
         json = { "type":"data_send_train",
                  "data": {  "temp (C)": temp,
@@ -65,6 +67,7 @@ def send_data(temp, hum, rpm_val=0):
                             "RPM": rpm_val,
                             "Power (W)": power_val,
                             "time": get_timestamp()
+                            "fan_setting": fan_setting
                          }
                 }
         headers = { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
@@ -143,12 +146,12 @@ def get_rpm():
  
 def turn_all_relays_off():
     # check and turn off if any relays are on
-    if relay_low.value() == 0:
-        relay_low.value(1)
-    if relay_med.value() == 0:
-        relay_med.value(1)
-    if relay_high.value() == 0:
-        relay_high.value(1)
+    if relay_low.value() == 1:
+        relay_low.value(0)
+    if relay_med.value() == 1:
+        relay_med.value(0)
+    if relay_high.value() == 1:
+        relay_high.value(0)
     return True
 
 
@@ -156,19 +159,19 @@ def set_relay_switch(gear):
     which_fan_speed = 0
     if turn_all_relays_off():
         if gear == 1:
-            relay_low.value(0)
+            relay_low.value(1)
             which_fan_speed = 1
         elif gear == 2:
-            relay_med.value(0)
+            relay_med.value(1)
             which_fan_speed = 2
         elif gear == 3:
-            relay_high.value(0)
+            relay_high.value(1)
             which_fan_speed = 3
     return which_fan_speed
 
 
 def run():
-    global server_on, connected_wifi
+    global server_on, connected_wifi, fan_setting
 
     ipconfig = connect_wifi('ZEYNET', 'Pamukkale1')
     #ipconfig = connect_wifi('ORBI83', 'jaggedzoo924')
@@ -190,24 +193,25 @@ def run():
         print("Failed to connect to wifi")
         sever_on = False
 
-    settime()
-    print(get_timestamp())
+    if server_on:
+        settime()
+        print(get_timestamp())
 
-    sensor = dht.DHT22(machine.Pin(14))
-    temp = -1
-    hum = -1
-    try:
-        sensor.measure()
-        temp = sensor.temperature()
-        hum = sensor.humidity()
-#        print('Temperature: %3.1f C' %temp)
-#        print('Humidity: %3.1f %%' %hum)
-    except OSError as e:
-        print('Failed to read sensor.')
-    else:
-        resp_dict = send_data(temp, hum, get_rpm())
-        
-        set_relay_switch(resp_dict['speed'])
+        sensor = dht.DHT22(machine.Pin(14))
+        temp = -1
+        hum = -1
+        try:
+            sensor.measure()
+            temp = sensor.temperature()
+            hum = sensor.humidity()
+    #        print('Temperature: %3.1f C' %temp)
+    #        print('Humidity: %3.1f %%' %hum)
+        except OSError as e:
+            print('Failed to read sensor.')
+        else:
+            resp_dict = send_data(temp, hum, get_rpm())
+            
+            fan_setting = set_relay_switch(resp_dict['speed'])
 
 
 
