@@ -185,8 +185,6 @@ public class MainMenu extends AppCompatActivity {
         String default_img = "https://i.pinimg.com/originals/54/7a/9c/547a9cc6b93e10261f1dd8a8af474e03.jpg";
         img = obj.getString("image");
         email = obj.getString("email");
-        if ((img.contains(".") && (img.endsWith(".png") || img.endsWith(".jpg") || img.endsWith((".jpeg")))) == false)
-            img = default_img;
         if (img.length() < 5)
             img = default_img;
         if (!img.startsWith("http://") && !img.startsWith("https://"))

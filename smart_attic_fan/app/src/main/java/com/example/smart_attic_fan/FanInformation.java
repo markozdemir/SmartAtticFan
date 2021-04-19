@@ -5,15 +5,12 @@ package com.example.smart_attic_fan;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.icu.number.Precision;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,7 +84,8 @@ public class FanInformation extends AppCompatActivity {
         return java_date;
     }
 
-    private void set_information() throws IOException, ExecutionException, InterruptedException, JSONException {
+    private void set_information() throws IOException, ExecutionException, InterruptedException,
+            JSONException {
         String type = "req_data_climate";
         Date currentTime = Calendar.getInstance().getTime();
         String json = "{\"type\": \"" + type + "\"}";
@@ -101,13 +99,31 @@ public class FanInformation extends AppCompatActivity {
             String key = keys.next();
             System.out.println(key);
         }
+        Date time = new Date((long)mostRecent.getInt("time")*1000);
+        String pattern = "hh:mm a";
+        //String pattern = "MM/dd/yy hh:mm a";
+        String time_string = android.text.format.DateFormat.format(pattern, time).toString();
 
-        temp_t.setText(" Temp:  " + to_fahrenheit( (Double) mostRecent.get("temp (C)")) + " F");
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        temp_t.setText(" Temp:  " + round(to_fahrenheit( (Double) mostRecent.get("temp (C)")),
+                            1) + " F");
         humid_t.setText(" Humidity:  " + mostRecent.get("hum") + " %");
         rpm_t.setText(" RPMs:  " + mostRecent.get("RPM") + " RPMs");
         power_t.setText(" Power:  " + mostRecent.get("power") + " W");
-        time_t.setText(" Time:  "  + get_date((Integer) mostRecent.get("time")));
-        local_temp.setText(responseObj.get("local_temp") + " F " + responseObj.get("local_desc"));
+        time_t.setText(" Time:  "  + time_string);
+        local_temp.setText(round((Double) responseObj.get("local_temp"), 1)
+                            + " F " + responseObj.get("local_desc"));
+    }
+
+    // https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
     double to_fahrenheit(double celsius) {
@@ -137,7 +153,8 @@ public class FanInformation extends AppCompatActivity {
                 out = new BufferedOutputStream(con.getOutputStream());
 
                 // Send command json
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter
+                        (new OutputStreamWriter(out, "UTF-8"));
                 writer.write(commandJson);
                 writer.flush();
                 writer.close();

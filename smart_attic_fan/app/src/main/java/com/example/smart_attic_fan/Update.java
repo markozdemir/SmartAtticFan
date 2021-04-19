@@ -48,7 +48,7 @@ public class Update extends AppCompatActivity {
         Bundle user_info = getIntent().getExtras();
         name_edit.setText(user_info.getString("name"));
         email_edit.setText(user_info.getString("email"));
-        img_edit.setText(user_info.getString("img"));
+        img_edit.setText(user_info.getString("image"));
 
         desc.setText("Update your account details below.");
         submit.setOnClickListener(new View.OnClickListener() {
