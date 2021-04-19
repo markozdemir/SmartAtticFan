@@ -32,6 +32,18 @@
                 android:layout_marginTop="35px"
                 android:layout_marginLeft="550px"
                 android:translationZ="90dp"/>
+            <TextView
+                android:id="@+id/edit_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@string/icon_edit"
+                android:layout_marginLeft="900px"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="22sp"
+                android:layout_gravity="left"
+                android:layout_marginTop="260px"
+                android:translationZ="89dp"/>
 
             <FrameLayout
                 android:layout_width="fill_parent"
@@ -48,6 +60,40 @@
                     android:textSize="25sp"
                     android:layout_gravity="left"
                     android:layout_marginTop="100px"/>
+
+                <TextView
+                    android:id="@+id/fan_work_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#089B0E"
+                    android:text="@string/icon_check"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="14sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="280px"
+                    android:layout_marginLeft="105px"/>
+                <TextView
+                    android:id="@+id/fan_broke_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#B61717"
+                    android:text="@string/icon_exclamation"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="12sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="285px"
+                    android:layout_marginLeft="105px"/>
+                <TextView
+                    android:id="@+id/fan_work"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menu_card_text"
+                    android:text="loading"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="12sp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="280px"
+                    android:layout_marginLeft="150px"/>
             </FrameLayout>
         </RelativeLayout>
 

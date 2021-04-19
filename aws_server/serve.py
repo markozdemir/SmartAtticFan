@@ -20,7 +20,8 @@ from sklearn import svm
 import local_weather as lw
 import local_time as lt
 from subprocess import Popen
-
+import signal
+import sys
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
@@ -35,6 +36,10 @@ end = "=============================================\n\n"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
 sock.bind(("0.0.0.0", 80));
 sock.listen(1);
+def signal_handler(signal, frame):
+        sock.close()
+        sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
 
 # data configs
 temp_data_list = ["temp", "hum"]
@@ -43,30 +48,110 @@ temp_data_list = ["temp", "hum"]
 longitude = 0
 latitude = 0
 
+# fan info
+fan_speed = -1
+is_broke = False
+time_fail_sent = 0
+user_off = False
+
+def get_power(x):
+    if is_broke:
+        return 0
+    if x == 0:
+        return 0
+    elif x == 1:
+        return 17
+    elif x == 2:
+        return 22
+    elif x == 3:
+        return 25
+
+    return -1
+
+def get_user_details():
+    name = None
+    email = None
+    image = None
+    row = user_db.find()
+    for r in row:
+        print(r)
+        name = r['name']
+        email = r['email']
+        image = r['image']
+    return name, email, image
+
 def register_user(data):
     user_db.remove({})
     r = user_db.insert(data)
     send_register_email(data['name'], data['email'])
 
 def send_push():
-    Process=Popen('./send_push.sh', shell=True)
+    Process=Popen('./other/send_push.sh', shell=True)
 
 def send_push_new():
-    Process=Popen('./send_push_new.sh', shell=True)
+    Process=Popen('./other/send_push_new.sh', shell=True)
 
 def send_fail_email(to, name):
-    Process=Popen('./send_email.sh %s %s' % (name, to), shell=True)
-    send_push()
+    global time_fail_sent
+    threshold = 3600
+    if time.time() - time_fail_sent > threshold:
+        Process=Popen('./other/send_email.sh %s %s' % (name, to), shell=True)
+        send_push()
+        time_fail_sent = time.time()
 
 def send_register_email(to, name):
-    Process=Popen('./send_reg_email.sh %s %s' % (to, name), shell=True)
+    Process=Popen('./other/send_reg_email.sh %s %s' % (to, name), shell=True)
     send_push_new()
 
-def is_fan_broken(RPM, temp):
-    if RPM < 10:
-        if temp > 31:
+def is_fan_broken(RPM):
+    global is_broke, fan_speed
+    if fan_speed > 0 and RPM < 10:
+            is_broke = True
             return True
+    is_broke = False
     return False
+
+def handle_failure(rpm):
+    if is_fan_broken(rpm):
+        name, email, _ = get_user_details()
+        send_fail_email(email, name)
+        send_push()
+        print("Fan is broken! - notified user")
+        return True
+    return False
+
+def trigger_ai():
+    pass
+
+def get_fan_speed_from_ai():
+    global fan_speed
+
+    if user_off:
+        fan_speed = 0
+        return 0
+
+    d = db.find({})
+    h = {}
+    id_ = 1
+    for z in d:
+        x = {}
+        for zz in z:
+            if zz is "time":
+                x[str(zz)] = z[zz] + 946684800
+            else:
+                x[str(zz)] = z[zz]
+        if x is not {} and len(x) != 0:
+            h[str(id_)] = x
+            id_ += 1
+    h2 = {}
+    h2["recent"] = h[str(id_ - 1)]
+    if "temp" in h2["recent"]:
+        if h2["recent"]["temp"] > 90:
+            l = [1, 2, 3]
+            fan_speed = random.choice(l)
+        else:
+            fan_speed = 0
+    return fan_speed
 
 def send_response(code, msg, data, conn):
     if data is None:
@@ -122,7 +207,16 @@ def set_location(location_hash):
 
 while True:
     print("Waiting...")
-    (clientSocket, clientAddress) = sock.accept();
+    if user_off:
+        print("User turned fan off!")
+    try:
+        (clientSocket, clientAddress) = sock.accept();
+    except KeyboardInterrupt:
+        sock.close()
+        break
+    except Exception as e:
+        print("error handled...?", e)
+        continue
     data = ""
     clientSocket.settimeout(.3)
     while True:
@@ -158,7 +252,8 @@ while True:
             email = r['email']
             image = r['image']
             v = 1
-        send_response(200, "OK", {"valid": str(v), "name":name, "email":email, "image":image}, clientSocket) # also closes conn
+        print("Here")
+        send_response(200, "OK", {"valid": str(v), "name":name, "email":email, "image":image, "is_broke": is_broke}, clientSocket) # also closes conn
         continue
 
     if typ == "android_register":
@@ -166,10 +261,20 @@ while True:
         send_response(200, "OK", None, clientSocket) # also closes conn
         continue
 
+    if typ == "android_toggle_fan":
+        user_off = data['data']['off']
+        if 'rue' in user_off:
+            user_off = True
+        elif "alse" in user_off:
+            user_off = False
+        print("TOGGLED:", user_off)
+        send_response(200, "OK", {"user_off": user_off}, clientSocket) # also closes conn
+        continue
+
     if "req_LR" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('linearR_pred_temp.png', 'r') as file:
+        with open('./model/linearR_pred_temp.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         send_response(200, "OK", x, clientSocket) # also closes conn
@@ -178,7 +283,7 @@ while True:
     if "req_knn" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('knn_pred_temp.png', 'r') as file:
+        with open('./model/knn_pred_temp.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         send_response(200, "OK", x, clientSocket) # also closes conn
@@ -187,7 +292,7 @@ while True:
     if "req_relationships" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
-        with open('relationship.png', 'r') as file:
+        with open('./model/relationship.png', 'r') as file:
             x = file.read()
         num_b = len(x)
         send_response(200, "OK", x, clientSocket) # also closes conn
@@ -224,10 +329,12 @@ while True:
         temp, desc = lw.get_weather(longitude, latitude)
         h2 = {}
         h2["recent"] = h[str(id_ - 1)]
-        is_broke = is_fan_broken(h2["recent"]["RPM"], h2["recent"]["temp (C)"])
+        get_fan_speed_from_ai()
+        handle_failure(h2["recent"]["RPM"],)
         h2["broke"] = is_broke
         h2["local_temp"] = temp
         h2["local_desc"] = desc
+        h2["recent"]["power"] = get_power(fan_speed)
         print("Sending local weather:", temp, desc)
         x = str(h2)
         x += "\r\nEND"
@@ -243,6 +350,11 @@ while True:
 
         if "train" in typ:
             ins_data_to_mongo(data['data'])
+            trigger_ai()
+            get_fan_speed_from_ai()
+            handle_failure(data['data']['RPM'])
+            send_response(200, "OK", {"speed": fan_speed}, clientSocket) # also closes conn
+            continue
         elif "test" in typ:
             pass
         elif "print" in typ:

@@ -4,10 +4,7 @@
 		<title>Columbia University EECS E4764 IoT Project - Smart Attic Fan</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
 	<body>
 
@@ -18,7 +15,6 @@
 
 					<!-- Logo -->
 						<div id="logo">
-							<!-- <span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span> -->
 							<h1 id="title">Project Name</h1>
 							<p>Columbia University <br>
 								EECS E4764 Fall'19 Internet of Things<br>
@@ -31,21 +27,7 @@
 							</p>
 						</div>
 
-					<!-- Nav -->
 						<nav id="nav">
-							<!--
-
-								Prologue's nav expects links in one of two formats:
-
-								1. Hash link (scrolls to a different section within the page)
-
-								   <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
-
-								2. Standard link (sends the user to another page/site)
-
-								   <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
-
-							-->
 							<ul>
 								<li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Abstract</span></a></li>
 								<li><a href="#motivation" id="motivation-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Motivation</span></a></li>
@@ -84,8 +66,12 @@
 								<iframe width="560" height="315" src="https://www.youtube.com/embed/_AlcRoqS65E" frameborder="0" allowfullscreen></iframe>
 
 								<h2 class="alt">Smart Attic Fan</h2>
-								<p>Project Wonderland is a blah blah blah</p>
-								<p>(Abstract here)</p>
+								<p>A smart attic fan that optimizes ventilation and contains a system for fan fault detection.</p>
+								<p>Our product is an esp32 chip that attaches to an attic fan that provides additional features. These features include:
+								optimized fan speed switching for best air ventilation and a fault detection system. Any attic fan can wreak the
+								benefits of our product that connects to our AWS server, stores data in a NoSQL Mongo database table, communicates
+								with a neural network, and displays all data to the user via a beautiful Android phone application. Users are emailed
+								and sent push notifications urgent information about their attic fan.</p>
 
 
 							<footer>
@@ -102,9 +88,11 @@
 							<header>
 								<h2>Motivation</h2>
 							</header>
-
-							<p align="left">You can choose to use photos or figures to help</p>
-
+							<center>
+								<div class="inline-block"  style="width:35%; margin-right: 25%">
+									<img src="images/attic2.png" alt="" />
+								</div>
+							</center>
 							<p align="left">Attic fans are extremely important for reducing house's
 							overall temperature (and in turn, air conditioning costs) and for improving
 							a home's air flow. When your attic fan breaks, your wallet will feel it in your
@@ -113,9 +101,31 @@
 							is between 5 and 15 years</a>. The Smart Attic Fan will help you improve your
 							energy savings by regulating the attic's fan speed and by notifying you
 							via an application push notification as soon as your attic fan malfunctions.
-							
+							<br />
+							<br />
 							Do you have to buy a new attic fan? NO! Smart Attic Fan attaches to your current
 							attic fan!
+							<br />
+							<br />
+							Attics are not uncommon in the United States. On the contrary, it is common that
+							attics are neglected as they are an uninhabitable area of a home. 
+							But it is extremely important to keep an eye on the attic's ventilation and 
+							insulation. The consequences of ignoring one’s attic could be quite damaging.
+							<br />
+							<br />
+							According to B. R. Stewart, an Agricultural Engineer at Texas A&M University, 
+							there exists two main reasons why ventilation is so important in a home’s attic. 
+							During the summer, heat builds up in the attic during the day which only results 
+							in additional energy costs to cool the entire house. Second, moisture produced 
+							within the home may move into the attic which can condense and cause construction 
+							materials to deteriorate if the moisture is not removed efficiently. An innocent 
+							Summer day can be 95 degrees outside, which will bake your attic up to 
+							temperatures near 160 degrees fahrenheit! 
+							(Read B. R. Stewart's report <a href="http://www.factsfacts.com/MyHomeRepair/ventilation.htm#:~:text=Attics%20can%20reach%20temperatures%20of,95%20to%2097%20degrees%20F">here</a>).
+
+							<div class="inline-block"  style="width:35%">
+								<img src="images/attic1.jpg" alt="" />
+							</div>
 
 						</div>
 					</section>
@@ -178,8 +188,11 @@
 								<h2>References</h2>
 							</header>
 
-							<p align="left">Blah blah blah</p>
+							<p align="left"><a href="http://www.factsfacts.com/MyHomeRepair/ventilation.htm#:~:text=Attics%20can%20reach%20temperatures%20of,95%20to%2097%20degrees%20F">ATTIC VENTILATION FOR HOMES, B. R. Stewart</a></p>
 
+							<p align="left"><a href="https://www.fixr.com/costs/attic-fan-repair#:~:text=Attic%20fan%20motors%20typically%20have,break%20down%20after%205%20years.">How Much Does It Cost to Repair an Attic Fan?, FixR</a></p>
+
+							<p align="left"><a href="https://phelpsheatingandair.com/blog/attic-insulation-can-save-you-money-year-round">Attic Insulation Can Save You Money Year-Round, Phelps Heating & Air</a></p>
 						</div>
 					</section>
 
@@ -198,28 +211,33 @@
 							<div class="row">
 								<div class="4u 12u$(mobile)">
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+										<center><a href="#" class="image fit" style="width: 220px; ">
+											<img src="images/yin.jpg" alt="" /></a>
+										</center>
 										<header>
-											<h3>Team Member</h3>
-											<p>Description and link</p>
+											<h3>Yin Zhang</h3>
+											<p>M.S. Electrical Engineer at SEAS.</p>
 										</header>
 									</article>
 								</div>
 								<div class="4u 12u$(mobile)">
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+										<center><a href="https://www.linkedin.com/in/markozdemir/" class="image fit"  style="width: 400px"><img src="images/mark.jpg" alt="" /></a></center>
 										<header>
-											<h3>Team Member</h3>
-											<p>Description and link</p>
+											<h3>Mark Ozdemir</h3>
+											<p>B.S. Computer Engineer at SEAS</p>
 										</header>
 									</article>
 								</div>
 								<div class="4u$ 12u$(mobile)">
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+										<center>
+											<a href="http://www.jamesmastran.com/" class="image fit"  style="width: 320px">
+											<img src="images/james.jpg" alt="" /></a>
+										</center>
 										<header>
-											<h3>Team Member</h3>
-											<p>Description and link</p>
+											<h3>James Mastran</h3>
+											<p>B.S. Computer Engineer at SEAS</p>
 										</header>
 									</article>
 								</div>
@@ -237,29 +255,15 @@
 							</header>
 
 							<p align="left">
-								<strong>Contact Name 1: </strong>email here</br>
-								<strong>Contact Name 2: </strong>email here</br>
-								<strong>Other Contact Information: </strong>other contact info</br>
+								<strong>Yin Zhang: </strong>yz4053@columbia.edu</br>
+								<strong>Mark Ozdemir: </strong>mo2804@columbia.edu</br>
+								<strong>James Mastran: </strong>jam2454@columbia.edu</br>
 							</br>
 								<strong>Columbia University </strong><a href="http://www.ee.columbia.edu">Department of Electrical Engineering</a><br>
 								<!-- <strong>Class Website:</strong>
 									<a href="https://edblogs.columbia.edu/eecs4764-001-2019-3/">Columbia University EECS E4764 Fall '19 IoT</a></br> -->
 								<strong>Instructor:</strong> <a href="http://fredjiang.com/">Professsor Xiaofan (Fred) Jiang</a>
 							</p>
-
-
-							<!-- <form method="post" action="#">
-								<div class="row">
-									<div class="6u 12u$(mobile)"><input type="text" name="name" placeholder="Name" /></div>
-									<div class="6u$ 12u$(mobile)"><input type="text" name="email" placeholder="Email" /></div>
-									<div class="12u$">
-										<textarea name="message" placeholder="Message"></textarea>
-									</div>
-									<div class="12u$">
-										<input type="submit" value="Send Message" />
-									</div>
-								</div>
-							</form> -->
 
 						</div>
 					</section>
@@ -282,7 +286,6 @@
 			<script src="assets/js/jquery.scrollzer.min.js"></script>
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
 
 	</body>

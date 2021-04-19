@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/menu_card_bg">
+
+    <!-- Content below header and above footer -->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_background">
+        <RelativeLayout
+            android:id="@+id/desc"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/desc_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="50px"
+                android:textSize="30sp"
+                android:text="" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/name"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/desc"
+            android:gravity="center">
+
+            <TextView
+                android:layout_marginTop="120px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-120px"
+                android:id="@+id/name_text"
+                android:textColor="@color/menu_card_text"
+                android:text="Name: "
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp" />
+
+            <EditText
+                android:layout_marginTop="120px"
+                android:id="@+id/edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="180px"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/email"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-120px"
+                android:id="@+id/email_text"
+                android:textColor="@color/menu_card_text"
+                android:text="Email: "
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="180px"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/image"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-120px"
+                android:id="@+id/img_text"
+                android:textColor="@color/menu_card_text"
+                android:text="Picture: "
+                android:fontFamily="sans-serif-medium"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/edit_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="180px"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn"
+            android:background="@color/menu_card_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:gravity="center">
+            <Button
+                android:id="@+id/button"
+                android:layout_marginTop="180px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update Profile!" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
