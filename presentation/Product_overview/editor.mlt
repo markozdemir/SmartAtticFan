@@ -56,7 +56,152 @@
     <property name="shotcut:caption">arch_nontransparent.png</property>
     <property name="xml">was here</property>
   </producer>
-  <producer id="producer2" in="00:00:00.000" out="00:00:08.560">
+  <producer id="producer2" in="00:00:00.000" out="00:00:12.960">
+    <property name="length">00:00:13.000</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/fan_v2.MOV</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2021-04-20T19:54:26</property>
+    <property name="shotcut:hash">2d6e24227b98a8ba5cd78ef1983247f5</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">fan_v2.MOV</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer3" in="00:00:00.000" out="00:00:25.560">
+    <property name="length">00:00:25.600</property>
+    <property name="eof">pause</property>
+    <property name="resource">0.75:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/hallsens_v1.mov</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">0.75</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/hallsens_v1.mov</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">57fd1afc1c818de6c2965c07ae8fa269</property>
+    <property name="shotcut:caption">hallsens_v1.mov (0.75x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter0" in="00:00:17.400" out="00:00:25.560">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
+  </producer>
+  <tractor id="tractor0" global_feed="1" in="00:00:00.000" out="00:00:00.760">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer2" in="00:00:09.400" out="00:00:10.160"/>
+    <track producer="producer3" in="00:00:16.240" out="00:00:17.000"/>
+    <transition id="transition0" out="00:00:00.760">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition1" out="00:00:00.760">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer4" in="00:00:00.000" out="00:00:22.680">
+    <property name="length">00:00:22.720</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/esp_ariel.MOV</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2021-04-20T19:58:24</property>
+    <property name="shotcut:hash">51b0830b4cbc0ee5d6c69629ea264428</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">esp_ariel.MOV</property>
+    <property name="xml">was here</property>
+    <filter id="filter1" in="00:00:03.360" out="00:00:11.400">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
+  </producer>
+  <tractor id="tractor1" global_feed="1" in="00:00:00.000" out="00:00:01.080">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer3" in="00:00:24.480" out="00:00:25.560"/>
+    <track producer="producer4" in="00:00:03.360" out="00:00:04.440"/>
+    <transition id="transition2" out="00:00:01.080">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition3" out="00:00:01.080">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer5" in="00:00:00.000" out="00:00:30.680">
+    <property name="length">00:00:30.720</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/esp_v2.MOV</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2021-04-20T19:57:22</property>
+    <property name="shotcut:hash">5b207b954cf2d9e0d90c589d5e531f1f</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">esp_v2.MOV</property>
+    <property name="xml">was here</property>
+    <filter id="filter2" in="00:00:01.440" out="00:00:10.360">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
+  </producer>
+  <tractor id="tractor2" global_feed="1" in="00:00:00.000" out="00:00:00.880">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer4" in="00:00:10.520" out="00:00:11.400"/>
+    <track producer="producer5" in="00:00:01.440" out="00:00:02.320"/>
+    <transition id="transition4" out="00:00:00.880">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition5" out="00:00:00.880">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer6" in="00:00:00.000" out="00:00:08.560">
     <property name="length">00:00:08.600</property>
     <property name="eof">pause</property>
     <property name="resource">1.6:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/ec2-user@ip-172-31-11-70_~_SmartAtticFan_aws_server 2021-04-20 01-58-00.mp4</property>
@@ -75,7 +220,46 @@
     <property name="global_feed">1</property>
     <property name="xml">was here</property>
   </producer>
-  <producer id="producer3" in="00:00:00.000" out="00:00:06.400">
+  <tractor id="tractor3" global_feed="1" in="00:00:00.000" out="00:00:01.120">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer5" in="00:00:09.080" out="00:00:10.200"/>
+    <track producer="producer6" in="00:00:02.160" out="00:00:03.280"/>
+    <transition id="transition6" out="00:00:01.120">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition7" out="00:00:01.120">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer7" in="00:00:00.000" out="00:09:59.960">
+    <property name="length">15000</property>
+    <property name="eof">pause</property>
+    <property name="resource">blank</property>
+    <property name="aspect_ratio">1</property>
+    <property name="text">INVALID</property>
+    <property name="fgcolour">0xffffffff</property>
+    <property name="bgcolour">0x00000000</property>
+    <property name="olcolour">0x00000000</property>
+    <property name="outline">0</property>
+    <property name="align">left</property>
+    <property name="pad">0</property>
+    <property name="family">Sans</property>
+    <property name="size">48</property>
+    <property name="style">normal</property>
+    <property name="weight">400</property>
+    <property name="encoding">UTF-8</property>
+    <property name="mlt_service">blank</property>
+    <property name="global_feed">1</property>
+  </producer>
+  <producer id="producer8" in="00:00:00.000" out="00:00:06.400">
     <property name="length">00:00:06.440</property>
     <property name="eof">pause</property>
     <property name="resource">1.6:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/ec2-user@ip-172-31-11-70_~_SmartAtticFan_aws_server 2021-04-20 01-56-34.mp4</property>
@@ -94,18 +278,18 @@
     <property name="global_feed">1</property>
     <property name="xml">was here</property>
   </producer>
-  <tractor id="tractor0" global_feed="1" in="00:00:00.000" out="00:00:00.960">
+  <tractor id="tractor4" global_feed="1" in="00:00:00.000" out="00:00:01.080">
     <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer2" in="00:00:06.360" out="00:00:07.320"/>
-    <track producer="producer3" in="00:00:01.160" out="00:00:02.120"/>
-    <transition id="transition0" out="00:00:00.960">
+    <track producer="producer7" in="00:00:06.240" out="00:00:07.320"/>
+    <track producer="producer8" in="00:00:01.040" out="00:00:02.120"/>
+    <transition id="transition8" out="00:00:01.080">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="factory">loader</property>
       <property name="mlt_service">luma</property>
       <property name="alpha_over">1</property>
     </transition>
-    <transition id="transition1" out="00:00:00.960">
+    <transition id="transition9" out="00:00:01.080">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="mlt_service">mix</property>
@@ -113,7 +297,7 @@
       <property name="accepts_blanks">1</property>
     </transition>
   </tractor>
-  <producer id="producer4" in="00:00:00.000" out="00:00:19.480">
+  <producer id="producer9" in="00:00:00.000" out="00:00:19.480">
     <property name="length">00:00:19.520</property>
     <property name="eof">pause</property>
     <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/ec2-user@ip-172-31-11-70_~_SmartAtticFan_aws_server 2021-04-20 01-53-37.mp4</property>
@@ -129,18 +313,18 @@
     <property name="shotcut:caption">ec2-user@ip-172-31-11-70_~_SmartAtticFan_aws_server 2021-04-20 01-53-37.mp4</property>
     <property name="xml">was here</property>
   </producer>
-  <tractor id="tractor1" global_feed="1" in="00:00:00.000" out="00:00:00.760">
+  <tractor id="tractor5" global_feed="1" in="00:00:00.000" out="00:00:00.760">
     <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer3" in="00:00:05.640" out="00:00:06.400"/>
-    <track producer="producer4" in="00:00:06.040" out="00:00:06.800"/>
-    <transition id="transition2" out="00:00:00.760">
+    <track producer="producer8" in="00:00:05.640" out="00:00:06.400"/>
+    <track producer="producer9" in="00:00:06.040" out="00:00:06.800"/>
+    <transition id="transition10" out="00:00:00.760">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="factory">loader</property>
       <property name="mlt_service">luma</property>
       <property name="alpha_over">1</property>
     </transition>
-    <transition id="transition3" out="00:00:00.760">
+    <transition id="transition11" out="00:00:00.760">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="mlt_service">mix</property>
@@ -148,7 +332,33 @@
       <property name="accepts_blanks">1</property>
     </transition>
   </tractor>
-  <producer id="producer5" in="00:00:00.000" out="00:01:12.240">
+  <producer id="producer10" in="00:00:00.000" out="00:00:18.800">
+    <property name="length">00:00:18.840</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.1:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/relays_v2.MOV</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">1</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.1</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/relays_v2.MOV</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">232af92c694263d1aa8770fc15d11b5b</property>
+    <property name="shotcut:caption">relays_v2.MOV (1.1x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter3" in="00:00:01.720" out="00:00:05.720">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
+  </producer>
+  <producer id="producer11" in="00:00:00.000" out="00:01:12.240">
     <property name="length">00:01:12.280</property>
     <property name="eof">pause</property>
     <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
@@ -163,7 +373,7 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">android_intro.mp4</property>
     <property name="xml">was here</property>
-    <filter id="filter0" in="00:00:09.440" out="00:00:11.280">
+    <filter id="filter4" in="00:00:09.440" out="00:00:11.280">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -171,7 +381,7 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <producer id="producer6" in="00:00:00.000" out="00:00:48.160">
+  <producer id="producer12" in="00:00:00.000" out="00:00:48.160">
     <property name="length">00:00:48.200</property>
     <property name="eof">pause</property>
     <property name="resource">1.5:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
@@ -189,7 +399,7 @@
     <property name="shotcut:caption">android_intro.mp4 (1.5x)</property>
     <property name="global_feed">1</property>
     <property name="xml">was here</property>
-    <filter id="filter1" in="00:00:15.760" out="00:00:18.640">
+    <filter id="filter5" in="00:00:15.760" out="00:00:18.640">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -197,25 +407,25 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <tractor id="tractor2" global_feed="1" in="00:00:00.000" out="00:00:00.400">
+  <tractor id="tractor6" global_feed="1" in="00:00:00.000" out="00:00:00.400">
     <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer5" in="00:00:10.880" out="00:00:11.280"/>
-    <track producer="producer6" in="00:00:13.920" out="00:00:14.320"/>
-    <transition id="transition4" out="00:00:00.400">
+    <track producer="producer11" in="00:00:10.880" out="00:00:11.280"/>
+    <track producer="producer12" in="00:00:13.920" out="00:00:14.320"/>
+    <transition id="transition12" out="00:00:00.400">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="factory">loader</property>
       <property name="mlt_service">luma</property>
       <property name="alpha_over">1</property>
     </transition>
-    <transition id="transition5" out="00:00:00.400">
+    <transition id="transition13" out="00:00:00.400">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="mlt_service">mix</property>
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
     </transition>
-    <filter id="filter2" out="00:00:00.400">
+    <filter id="filter6" out="00:00:00.400">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -223,7 +433,7 @@
       <property name="gain">0</property>
     </filter>
   </tractor>
-  <producer id="producer7" in="00:00:00.000" out="00:01:12.240">
+  <producer id="producer13" in="00:00:00.000" out="00:01:12.240">
     <property name="length">00:01:12.280</property>
     <property name="eof">pause</property>
     <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
@@ -238,7 +448,7 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">android_intro.mp4</property>
     <property name="xml">was here</property>
-    <filter id="filter3" in="00:00:14.560" out="00:00:18.000">
+    <filter id="filter7" in="00:00:14.560" out="00:00:18.000">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -246,18 +456,18 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <tractor id="tractor3" global_feed="1" in="00:00:00.000" out="00:00:00.400">
+  <tractor id="tractor7" global_feed="1" in="00:00:00.000" out="00:00:00.400">
     <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer6" in="00:00:18.240" out="00:00:18.640"/>
-    <track producer="producer7" in="00:00:14.560" out="00:00:14.960"/>
-    <transition id="transition6" out="00:00:00.400">
+    <track producer="producer12" in="00:00:18.240" out="00:00:18.640"/>
+    <track producer="producer13" in="00:00:14.560" out="00:00:14.960"/>
+    <transition id="transition14" out="00:00:00.400">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="factory">loader</property>
       <property name="mlt_service">luma</property>
       <property name="alpha_over">1</property>
     </transition>
-    <transition id="transition7" out="00:00:00.400">
+    <transition id="transition15" out="00:00:00.400">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="mlt_service">mix</property>
@@ -265,7 +475,7 @@
       <property name="accepts_blanks">1</property>
     </transition>
   </tractor>
-  <producer id="producer8" in="00:00:00.000" out="00:01:12.240">
+  <producer id="producer14" in="00:00:00.000" out="00:01:12.240">
     <property name="length">00:01:12.280</property>
     <property name="eof">pause</property>
     <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
@@ -280,7 +490,7 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">android_intro.mp4</property>
     <property name="xml">was here</property>
-    <filter id="filter4" in="00:00:19.600" out="00:00:22.800">
+    <filter id="filter8" in="00:00:19.600" out="00:00:22.800">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -288,7 +498,7 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <producer id="producer9" in="00:00:00.000" out="00:00:55.560">
+  <producer id="producer15" in="00:00:00.000" out="00:00:55.560">
     <property name="length">00:00:55.600</property>
     <property name="eof">pause</property>
     <property name="resource">1.3:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
@@ -306,7 +516,7 @@
     <property name="shotcut:caption">android_intro.mp4 (1.3x)</property>
     <property name="global_feed">1</property>
     <property name="xml">was here</property>
-    <filter id="filter5" in="00:00:29.000" out="00:00:31.800">
+    <filter id="filter9" in="00:00:29.000" out="00:00:31.800">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -314,52 +524,7 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <producer id="producer10" in="00:00:00.000" out="00:00:55.560">
-    <property name="length">00:00:55.600</property>
-    <property name="eof">pause</property>
-    <property name="resource">1.3:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
-    <property name="aspect_ratio">1</property>
-    <property name="seekable">1</property>
-    <property name="audio_index">1</property>
-    <property name="video_index">0</property>
-    <property name="mute_on_pause">1</property>
-    <property name="warp_speed">1.3</property>
-    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
-    <property name="mlt_service">timewarp</property>
-    <property name="shotcut:producer">avformat</property>
-    <property name="video_delay">0</property>
-    <property name="shotcut:hash">2899098451982105642ba528d536251e</property>
-    <property name="shotcut:caption">android_intro.mp4 (1.3x)</property>
-    <property name="global_feed">1</property>
-    <property name="xml">was here</property>
-    <filter id="filter6" in="00:00:34.520" out="00:00:41.040">
-      <property name="window">75</property>
-      <property name="max_gain">20dB</property>
-      <property name="mlt_service">volume</property>
-      <property name="shotcut:filter">muteVolume</property>
-      <property name="gain">0</property>
-    </filter>
-  </producer>
-  <tractor id="tractor4" global_feed="1" in="00:00:00.000" out="00:00:00.440">
-    <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer9" in="00:00:31.360" out="00:00:31.800"/>
-    <track producer="producer10" in="00:00:34.520" out="00:00:34.960"/>
-    <transition id="transition8" out="00:00:00.440">
-      <property name="a_track">0</property>
-      <property name="b_track">1</property>
-      <property name="factory">loader</property>
-      <property name="mlt_service">luma</property>
-      <property name="alpha_over">1</property>
-    </transition>
-    <transition id="transition9" out="00:00:00.440">
-      <property name="a_track">0</property>
-      <property name="b_track">1</property>
-      <property name="start">-1</property>
-      <property name="accepts_blanks">1</property>
-      <property name="mlt_service">mix</property>
-    </transition>
-  </tractor>
-  <producer id="producer11" in="00:00:00.000" out="00:00:42.480">
+  <producer id="producer16" in="00:00:00.000" out="00:00:42.480">
     <property name="length">00:00:42.520</property>
     <property name="eof">pause</property>
     <property name="resource">1.7:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
@@ -377,7 +542,7 @@
     <property name="shotcut:caption">android_intro.mp4 (1.7x)</property>
     <property name="global_feed">1</property>
     <property name="xml">was here</property>
-    <filter id="filter7" in="00:00:26.400" out="00:00:32.640">
+    <filter id="filter10" in="00:00:26.400" out="00:00:32.640">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -385,7 +550,26 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <producer id="producer12" in="00:00:00.000" out="00:00:51.600">
+  <tractor id="tractor8" global_feed="1" in="00:00:00.000" out="00:00:00.440">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer15" in="00:00:31.360" out="00:00:31.800"/>
+    <track producer="producer16" in="00:00:34.520" out="00:00:34.960"/>
+    <transition id="transition16" out="00:00:00.440">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition17" out="00:00:00.440">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+    </transition>
+  </tractor>
+  <producer id="producer17" in="00:00:00.000" out="00:00:51.600">
     <property name="length">00:00:51.640</property>
     <property name="eof">pause</property>
     <property name="resource">1.4:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/androidapp_intro/android_intro.mp4</property>
@@ -403,7 +587,7 @@
     <property name="shotcut:caption">android_intro.mp4 (1.4x)</property>
     <property name="global_feed">1</property>
     <property name="xml">was here</property>
-    <filter id="filter8" in="00:00:41.360" out="00:00:45.000">
+    <filter id="filter11" in="00:00:41.360" out="00:00:45.000">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -411,49 +595,56 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <tractor id="tractor5" global_feed="1" in="00:00:00.000" out="00:00:00.600">
+  <tractor id="tractor9" global_feed="1" in="00:00:00.000" out="00:00:00.600">
     <property name="shotcut:transition">lumaMix</property>
-    <track producer="producer11" in="00:00:30.760" out="00:00:31.360"/>
-    <track producer="producer12" in="00:00:42.680" out="00:00:43.280"/>
-    <transition id="transition10" out="00:00:00.600">
+    <track producer="producer16" in="00:00:30.760" out="00:00:31.360"/>
+    <track producer="producer17" in="00:00:42.680" out="00:00:43.280"/>
+    <transition id="transition18" out="00:00:00.600">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="factory">loader</property>
       <property name="mlt_service">luma</property>
       <property name="alpha_over">1</property>
     </transition>
-    <transition id="transition11" out="00:00:00.600">
+    <transition id="transition19" out="00:00:00.600">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
-      <property name="mlt_service">mix</property>
     </transition>
   </tractor>
   <playlist id="playlist1">
     <property name="shotcut:video">1</property>
     <property name="shotcut:name">V2</property>
-    <entry producer="producer1" in="00:00:00.000" out="00:00:30.080"/>
-    <blank length="00:00:09.280"/>
-    <entry producer="producer2" in="00:00:02.920" out="00:00:06.320"/>
-    <entry producer="tractor0" in="00:00:00.000" out="00:00:00.960"/>
-    <entry producer="producer3" in="00:00:02.160" out="00:00:05.600"/>
-    <entry producer="tractor1" in="00:00:00.000" out="00:00:00.760"/>
-    <entry producer="producer4" in="00:00:06.840" out="00:00:09.600"/>
-    <blank length="00:00:04.040"/>
-    <entry producer="producer5" in="00:00:09.440" out="00:00:10.840"/>
-    <entry producer="tractor2" in="00:00:00.000" out="00:00:00.400"/>
-    <entry producer="producer6" in="00:00:16.280" out="00:00:18.200"/>
-    <entry producer="tractor3" in="00:00:00.000" out="00:00:00.400"/>
-    <entry producer="producer7" in="00:00:15.000" out="00:00:18.000"/>
-    <entry producer="producer8" in="00:00:19.600" out="00:00:22.800"/>
-    <entry producer="producer9" in="00:00:29.000" out="00:00:31.320"/>
-    <entry producer="tractor4" in="00:00:00.000" out="00:00:00.440"/>
-    <entry producer="producer11" in="00:00:26.760" out="00:00:30.720"/>
-    <entry producer="tractor5" in="00:00:00.000" out="00:00:00.600"/>
-    <entry producer="producer12" in="00:00:43.320" out="00:00:45.000"/>
+    <entry producer="producer1" in="00:00:00.000" out="00:00:07.480"/>
+    <entry producer="producer2" in="00:00:01.800" out="00:00:09.360"/>
+    <entry producer="tractor0" in="00:00:00.000" out="00:00:00.760"/>
+    <entry producer="producer3" in="00:00:18.200" out="00:00:24.440"/>
+    <entry producer="tractor1" in="00:00:00.000" out="00:00:01.080"/>
+    <entry producer="producer4" in="00:00:04.480" out="00:00:10.480"/>
+    <entry producer="tractor2" in="00:00:00.000" out="00:00:00.880"/>
+    <entry producer="producer5" in="00:00:02.360" out="00:00:09.040"/>
+    <entry producer="tractor3" in="00:00:00.000" out="00:00:01.120"/>
+    <entry producer="producer6" in="00:00:03.320" out="00:00:07.840"/>
+    <entry producer="tractor4" in="00:00:00.000" out="00:00:01.080"/>
+    <entry producer="producer8" in="00:00:02.160" out="00:00:05.600"/>
+    <entry producer="tractor5" in="00:00:00.000" out="00:00:00.760"/>
+    <entry producer="producer9" in="00:00:06.840" out="00:00:09.600"/>
+    <entry producer="producer10" in="00:00:01.720" out="00:00:05.720"/>
+    <entry producer="producer11" in="00:00:09.440" out="00:00:10.840"/>
+    <entry producer="tractor6" in="00:00:00.000" out="00:00:00.400"/>
+    <entry producer="producer12" in="00:00:16.280" out="00:00:18.200"/>
+    <entry producer="tractor7" in="00:00:00.000" out="00:00:00.400"/>
+    <entry producer="producer13" in="00:00:15.000" out="00:00:18.000"/>
+    <entry producer="producer14" in="00:00:19.600" out="00:00:22.800"/>
+    <entry producer="producer15" in="00:00:29.000" out="00:00:31.320"/>
+    <entry producer="tractor8" in="00:00:00.000" out="00:00:00.440"/>
+    <entry producer="producer16" in="00:00:26.760" out="00:00:30.720"/>
+    <entry producer="tractor9" in="00:00:00.000" out="00:00:00.600"/>
+    <entry producer="producer17" in="00:00:43.320" out="00:00:45.000"/>
   </playlist>
-  <producer id="producer13" in="00:00:00.000" out="01:06:48.720">
+  <producer id="producer18" in="00:00:00.000" out="01:06:48.720">
     <property name="length">01:06:48.760</property>
     <property name="eof">pause</property>
     <property name="resource">c:/Users/Owner/Downloads/Free Upbeat, 1 Hour Happy Background Music No Copyright Music.mp3</property>
@@ -467,7 +658,7 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">Free Upbeat, 1 Hour Happy Background Music No Copyright Music.mp3</property>
     <property name="xml">was here</property>
-    <filter id="filter9" in="00:01:18.760" out="00:02:33.400">
+    <filter id="filter12" in="00:01:18.760" out="00:02:33.400">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">-41.7</property>
@@ -477,25 +668,25 @@
   <playlist id="playlist2">
     <property name="shotcut:audio">1</property>
     <property name="shotcut:name">A1</property>
-    <entry producer="producer13" in="00:01:18.760" out="00:02:33.400"/>
+    <entry producer="producer18" in="00:01:18.760" out="00:02:33.400"/>
   </playlist>
-  <tractor id="tractor6" title="Shotcut version 21.03.21" global_feed="1" in="00:00:00.000" out="00:01:14.680">
+  <tractor id="tractor10" title="Shotcut version 21.03.21" global_feed="1" in="00:00:00.000" out="00:01:14.680">
     <property name="shotcut">1</property>
     <property name="shotcut:projectAudioChannels">2</property>
     <property name="shotcut:projectFolder">0</property>
-    <property name="shotcut:scaleFactor">1.80398</property>
+    <property name="shotcut:scaleFactor">0.616288</property>
     <track producer="background"/>
     <track producer="playlist0"/>
     <track producer="playlist1"/>
     <track producer="playlist2" hide="video"/>
-    <transition id="transition12">
+    <transition id="transition20">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition13">
+    <transition id="transition21">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="version">0.9</property>
@@ -503,14 +694,14 @@
       <property name="threads">0</property>
       <property name="disable">1</property>
     </transition>
-    <transition id="transition14">
+    <transition id="transition22">
       <property name="a_track">0</property>
       <property name="b_track">2</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition15">
+    <transition id="transition23">
       <property name="a_track">1</property>
       <property name="b_track">2</property>
       <property name="version">0.9</property>
@@ -518,7 +709,7 @@
       <property name="threads">0</property>
       <property name="disable">0</property>
     </transition>
-    <transition id="transition16">
+    <transition id="transition24">
       <property name="a_track">0</property>
       <property name="b_track">3</property>
       <property name="mlt_service">mix</property>

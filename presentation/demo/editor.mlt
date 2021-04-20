@@ -89,6 +89,13 @@
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
     </transition>
+    <filter id="filter3" out="00:00:02.240">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
   </tractor>
   <producer id="producer2" in="00:00:00.000" out="00:01:33.040">
     <property name="length">00:01:33.080</property>
@@ -124,6 +131,13 @@
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
     </transition>
+    <filter id="filter4" out="00:00:02.560">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
   </tractor>
   <producer id="producer3" in="00:00:00.000" out="00:01:11.880">
     <property name="length">00:01:11.920</property>
@@ -140,11 +154,18 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">chillinOnBeach_v1.mp4</property>
     <property name="xml">was here</property>
-    <filter id="filter3" in="00:00:14.400" out="00:00:18.280">
+    <filter id="filter5" in="00:00:14.400" out="00:00:18.280">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">-70</property>
       <property name="mlt_service">volume</property>
+    </filter>
+    <filter id="filter6" in="00:00:14.400" out="00:00:18.280">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
     </filter>
   </producer>
   <tractor id="tractor2" global_feed="1" in="00:00:00.000" out="00:00:00.960">
@@ -165,6 +186,13 @@
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
     </transition>
+    <filter id="filter7" out="00:00:00.960">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
   </tractor>
   <producer id="producer4" in="00:00:00.000" out="00:01:11.880">
     <property name="length">00:01:11.920</property>
@@ -181,7 +209,7 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">chillinOnBeach_v1.mp4</property>
     <property name="xml">was here</property>
-    <filter id="filter4" in="00:00:25.800" out="00:00:29.720">
+    <filter id="filter8" in="00:00:25.800" out="00:00:29.720">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="mlt_service">volume</property>
@@ -207,6 +235,13 @@
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
     </transition>
+    <filter id="filter9" out="00:00:00.480">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="mlt_service">volume</property>
+      <property name="shotcut:filter">muteVolume</property>
+      <property name="gain">0</property>
+    </filter>
   </tractor>
   <producer id="producer5" in="00:00:00.000" out="03:59:59.960">
     <property name="length">04:00:00.000</property>
@@ -221,7 +256,6 @@
     <property name="shotcut:hash">31533ab92e71386186add93067713d13</property>
     <property name="global_feed">1</property>
     <property name="shotcut:caption">maxresdefault.jpg</property>
-    <property name="xml">was here</property>
   </producer>
   <producer id="producer6" in="00:00:00.000" out="00:00:34.760">
     <property name="length">00:00:34.800</property>
@@ -238,7 +272,7 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">fan_broke.mp4</property>
     <property name="xml">was here</property>
-    <filter id="filter5" in="00:00:27.720" out="00:00:31.720">
+    <filter id="filter10" in="00:00:27.720" out="00:00:31.720">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">-70</property>
@@ -295,8 +329,8 @@
     <entry producer="producer3" in="00:00:15.400" out="00:00:17.760"/>
     <entry producer="tractor3" in="00:00:00.000" out="00:00:00.480"/>
     <entry producer="producer4" in="00:00:26.320" out="00:00:29.720"/>
-    <blank length="00:00:00.640"/>
-    <entry producer="producer5" in="00:00:00.000" out="00:00:01.440"/>
+    <blank length="00:00:00.560"/>
+    <entry producer="producer5" in="00:00:02.440" out="00:00:03.960"/>
     <blank length="00:00:00.520"/>
     <entry producer="producer6" in="00:00:27.720" out="00:00:31.720"/>
     <blank length="00:00:00.480"/>
@@ -322,13 +356,13 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">Free Upbeat, 1 Hour Happy Background Music No Copyright Music.mp3</property>
     <property name="xml">was here</property>
-    <filter id="filter6" out="00:00:28.600">
+    <filter id="filter11" out="00:00:28.600">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">-17.8</property>
       <property name="mlt_service">volume</property>
     </filter>
-    <filter id="filter7" out="00:00:28.600">
+    <filter id="filter12" out="00:00:28.600">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">00:00:26.640=0;00:00:28.600=-60</property>
@@ -351,7 +385,7 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">Oh no, oh no, oh no no no song (TikTok Remix) Capone - Oh No.mp3</property>
     <property name="xml">was here</property>
-    <filter id="filter8" in="00:00:13.520" out="00:00:32.760">
+    <filter id="filter13" in="00:00:13.520" out="00:00:32.760">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">-8.7</property>
@@ -372,9 +406,9 @@
     <transition id="transition9" out="00:00:00.480">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
       <property name="start">-1</property>
       <property name="accepts_blanks">1</property>
-      <property name="mlt_service">mix</property>
     </transition>
   </tractor>
   <playlist id="playlist2">
