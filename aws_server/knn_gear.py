@@ -1,3 +1,9 @@
+'''==========================================
+==== Columbia University - IoT EECS4764  ====
+==== Yin Zhang, yz4053                   ====
+==== James Mastran, jam2454              ====
+==== Mark Ozdemir, mo2804                ====
+=========================================='''
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from joblib import dump, load
