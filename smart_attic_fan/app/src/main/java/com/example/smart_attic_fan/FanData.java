@@ -43,8 +43,10 @@ public class FanData extends AppCompatActivity {
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     TextView data_text;
     Button next;
-    String[] request_round_robin = new String[]{"req_LR", "req_knn", "req_relationships"};
-    String[] titles = new String[]{"linear regression", "knn", "relationship"};
+    String[] request_round_robin = new String[]{"req_temp_time", "req_hum_time", "req_rpm_time",
+                                                "req_LR", "req_knn", "req_relationships"};
+    String[] titles = new String[]{"temp vs time", "humidity vs time", "RPMs vs time",
+                                   "linear regression", "knn", "relationship"};
     int index_on = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

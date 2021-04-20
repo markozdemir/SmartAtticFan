@@ -182,6 +182,19 @@ public class MainMenu extends AppCompatActivity {
         JSONObject obj = new JSONObject(response);
         name = obj.getString("name");
         boolean broke = obj.getBoolean("is_broke");
+        if (!broke) {
+            fan_work_text.setText("Fan is Working");
+            int col = Color.parseColor("#5B5B5B");
+            fan_work_text.setTextColor(col);
+            fan_work_icon.setVisibility(View.VISIBLE);
+            fan_broke_icon.setVisibility(View.INVISIBLE);
+        } else {
+            fan_work_text.setText("Fan is Broken - Email sent");
+            int col = Color.parseColor("#FF2424");
+            fan_work_text.setTextColor(col);
+            fan_broke_icon.setVisibility(View.VISIBLE);
+            fan_work_icon.setVisibility(View.INVISIBLE);
+        }
         String default_img = "https://i.pinimg.com/originals/54/7a/9c/547a9cc6b93e10261f1dd8a8af474e03.jpg";
         img = obj.getString("image");
         email = obj.getString("email");
@@ -194,19 +207,6 @@ public class MainMenu extends AppCompatActivity {
             server.setText("");
             if (valid == 1) {
                 person_text.setText("Welcome Back,\n" + name + "!");
-                if (!broke) {
-                    fan_work_text.setText("Fan is Working");
-                    int col = Color.parseColor("#5B5B5B");
-                    fan_work_text.setTextColor(col);
-                    fan_work_icon.setVisibility(View.VISIBLE);
-                    fan_broke_icon.setVisibility(View.INVISIBLE);
-                } else {
-                    fan_work_text.setText("Fan is Broken - Email sent");
-                    int col = Color.parseColor("#FF2424");
-                    fan_work_text.setTextColor(col);
-                    fan_broke_icon.setVisibility(View.VISIBLE);
-                    fan_work_icon.setVisibility(View.INVISIBLE);
-                }
                 mContext = getApplicationContext();
                 mResources = getResources();
                 mImageView = (ImageView) findViewById(R.id.profile_pic);
