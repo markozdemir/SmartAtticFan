@@ -88,32 +88,6 @@
       <property name="gain">0</property>
     </filter>
   </producer>
-  <producer id="producer3" in="00:00:00.000" out="00:00:39.951">
-    <property name="length">00:00:39.991</property>
-    <property name="eof">pause</property>
-    <property name="resource">5:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/Recording #8.mp4</property>
-    <property name="aspect_ratio">1</property>
-    <property name="seekable">1</property>
-    <property name="audio_index">1</property>
-    <property name="video_index">0</property>
-    <property name="mute_on_pause">1</property>
-    <property name="warp_speed">5</property>
-    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/Recording #8.mp4</property>
-    <property name="mlt_service">timewarp</property>
-    <property name="shotcut:producer">avformat</property>
-    <property name="video_delay">0</property>
-    <property name="shotcut:hash">0634f115cfe98f90e04d2cea4dbab62d</property>
-    <property name="shotcut:caption">Recording #8.mp4 (5x)</property>
-    <property name="global_feed">1</property>
-    <property name="xml">was here</property>
-    <filter id="filter3" in="00:00:34.312" out="00:00:34.512">
-      <property name="window">75</property>
-      <property name="max_gain">20dB</property>
-      <property name="mlt_service">volume</property>
-      <property name="shotcut:filter">muteVolume</property>
-      <property name="gain">0</property>
-    </filter>
-  </producer>
   <producer id="producer4" in="00:00:00.000" out="00:01:19.955">
     <property name="length">00:01:19.995</property>
     <property name="eof">pause</property>
@@ -140,6 +114,25 @@
       <property name="gain">0</property>
     </filter>
   </producer>
+  <tractor id="tractor0" global_feed="1" in="00:00:00.000" out="00:00:00.800">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer2" in="00:00:12.037" out="00:00:12.837"/>
+    <track producer="producer4" in="00:01:09.118" out="00:01:09.918"/>
+    <transition id="transition0" out="00:00:00.800">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition1" out="00:00:00.800">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
   <producer id="producer5" in="00:00:00.000" out="00:03:19.995">
     <property name="length">00:03:20.035</property>
     <property name="eof">pause</property>
@@ -161,26 +154,26 @@
     <property name="shotcut:name">V1</property>
     <entry producer="producer0" in="00:02:22.355" out="00:02:53.148"/>
     <entry producer="producer1" in="00:00:05.799" out="00:00:06.479"/>
-    <entry producer="producer2" in="00:00:01.320" out="00:00:12.837"/>
-    <entry producer="producer3" in="00:00:34.312" out="00:00:34.512"/>
-    <entry producer="producer4" in="00:01:09.118" out="00:01:15.556"/>
-    <blank length="00:03:08.318"/>
+    <entry producer="producer2" in="00:00:01.320" out="00:00:11.997"/>
+    <entry producer="tractor0" in="00:00:00.000" out="00:00:00.800"/>
+    <entry producer="producer4" in="00:01:09.958" out="00:01:15.556"/>
+    <blank length="00:03:09.398"/>
     <entry producer="producer5" in="00:01:01.120" out="00:03:19.995"/>
   </playlist>
-  <tractor id="tractor0" title="Shotcut version 21.03.21" global_feed="1" in="00:00:00.000" out="00:06:17.036">
+  <tractor id="tractor1" title="Shotcut version 21.03.21" global_feed="1" in="00:00:00.000" out="00:06:17.036">
     <property name="shotcut">1</property>
     <property name="shotcut:projectAudioChannels">2</property>
     <property name="shotcut:projectFolder">0</property>
     <track producer="background"/>
     <track producer="playlist0"/>
-    <transition id="transition0">
+    <transition id="transition2">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>
     </transition>
-    <transition id="transition1">
+    <transition id="transition3">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
       <property name="version">0.9</property>
