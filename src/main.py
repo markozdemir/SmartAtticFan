@@ -114,7 +114,7 @@ def get_location():
 
 def get_rpm():
     # 300 for 3 magnets
-    hall_thresh = 300
+    hall_thresh = 100
     hall_count = 0
     on_state = False
     
