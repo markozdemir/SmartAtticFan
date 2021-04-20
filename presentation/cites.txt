@@ -5,3 +5,6 @@ http://www.factsfacts.com/MyHomeRepair/ventilation.htm#:~:text=Attics%20can%20re
 https://phelpsheatingandair.com/blog/attic-insulation-can-save-you-money-year-round
 https://homeinspectioninsider.com/what-temperature-should-an-attic-be/#:~:text=The%20ideal%20temperature%20in%20your,of%20about%20130%20degrees%20Fahrenheit
 
+[1] Lstiburek, J. (2006). Understanding attic ventilation. Ashrae Journal, 48(4), 36.
+[2] Zhao, D., Aili, A., Yin, X., Tan, G., & Yang, R. (2019). Roof-integrated radiative air-cooling system to achieve cooler attic for building energy saving. Energy and Buildings, 203, 109453.
+[3] Haese, P. M., & Teubner, M. D. (2002). Heat exchange in an attic space. International Journal of Heat and Mass Transfer, 45(25), 4925-4936.
