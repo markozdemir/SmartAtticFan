@@ -178,7 +178,7 @@ def set_relay_switch(gear):
     return fan_setting
 
 
-def run():
+def start():
     global server_on, connected_wifi, fan_setting
 
     ipconfig = connect_wifi('ZEYNET', 'Pamukkale1')
@@ -201,7 +201,11 @@ def run():
         print("Failed to connect to wifi")
         sever_on = False
 
-    if server_on:
+
+
+def run():
+    global server_on, connected_wifi, fan_setting
+    if connected_wifi and server_on:
         settime()
         print(get_timestamp())
 
@@ -212,23 +216,28 @@ def run():
             sensor.measure()
             temp = sensor.temperature()
             hum = sensor.humidity()
-    #        print('Temperature: %3.1f C' %temp)
-    #        print('Humidity: %3.1f %%' %hum)
+            print('Temperature: %3.1f C' %temp)
+            print('Humidity: %3.1f %%' %hum)
         except OSError as e:
             print('Failed to read sensor.')
         else:
-            resp_dict = send_data(temp, hum, get_rpm())
+            try:
+                resp_dict = send_data(temp, hum, get_rpm())
             
-            fan_setting = set_relay_switch(int(resp_dict['speed']))
+                fan_setting = set_relay_switch(int(resp_dict['speed']))
+            except:
+                print("Send data went wrong")
+
+    else:
+        print("not connected, could not run")
 
     #10000
 #    machine.deepsleep(10000)
 
-
-#run()
-
-
-
+start()
+while(1):
+    run()
+    time.sleep(15)
     
 #import esp32
 ## internal temp and hall sensor
