@@ -15,7 +15,8 @@ latitude = 0
 relay_low  = machine.Pin(27, machine.Pin.OUT)
 relay_med  = machine.Pin(4, machine.Pin.OUT) # pin 'A5'
 relay_high = machine.Pin(21, machine.Pin.OUT)
-fan_setting = -1
+
+fan_setting = 0
 
 # hall sensor
 hs = machine.Pin(15, machine.Pin.IN)
@@ -46,20 +47,11 @@ def send_data(temp, hum, rpm_val=0):
     global server_on, connected_wifi, fan_setting
 
     if server_on and connected_wifi:
-        rpm_val = 0
         power_val = 0
-        if temp > 26.7 or hum > 45:
-            rpm_val = 1100
+        if rpm_val > 10:
             power_val = 50
-
-# TODO: CHANGE THIS LATER TO GET_RPM()
-#        hs = machine.Pin(15, machine.Pin.IN)
-#        if hs.value() == 1:
-#            rpm_val = 0
-#        else:
-#            rpm_val = 1100
-        rpm_val = 1100
-
+            
+            
         json = { "type":"data_send_train",
                  "data": {  "temp (C)": temp,
                             "hum": hum,
@@ -141,7 +133,7 @@ def get_rpm():
     
     # divided by magnet count
     rpm_val = ((hall_count/3)/time_passed)*60.0
-    print("RPM: ", rpm_val)
+    print("RPM: ", int(rpm_val))
     return rpm_val
 
  
@@ -157,18 +149,33 @@ def turn_all_relays_off():
 
 
 def set_relay_switch(gear):
-    which_fan_speed = 0
-    if turn_all_relays_off():
-        if gear == 1:
-            relay_low.value(1)
-            which_fan_speed = 1
-        elif gear == 2:
-            relay_med.value(1)
-            which_fan_speed = 2
-        elif gear == 3:
-            relay_high.value(1)
-            which_fan_speed = 3
-    return which_fan_speed
+    global fan_setting, fan_speeds, relay_low, relay_med, relay_high
+    
+    fan_speeds = {1: relay_low, 2: relay_med, 3: relay_high}
+    
+    if gear > 3 or gear < 0:
+        return -1
+    elif gear == 0:
+        fan_setting = 0
+        turn_all_relays_off()
+        return 0
+        
+    # change gear incrementally
+    while gear != fan_setting:
+        if gear > fan_setting:
+            turn_all_relays_off()
+            time.sleep(1)
+            fan_setting += 1
+            fan_speeds[fan_setting].value(1)
+            time.sleep(4)
+        else:
+            turn_all_relays_off()
+            time.sleep(1)
+            fan_setting -= 1
+            fan_speeds[fan_setting].value(1)
+            time.sleep(2)
+    
+    return fan_setting
 
 
 def run():
@@ -212,45 +219,8 @@ def run():
         else:
             resp_dict = send_data(temp, hum, get_rpm())
             
-            fan_setting = set_relay_switch(resp_dict['speed'])
+            fan_setting = set_relay_switch(int(resp_dict['speed']))
 
-
-
-    # get data from server
-#    ap_if = network.WLAN(network.AP_IF)
-#    huzz_ip = ap_if.ifconfig()[0]
-#
-#    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#    s.bind(('0.0.0.0', 80))
-#    s.listen(1)
-#    while(1):
-#        try:
-#            (conn, address) = s.accept()
-#        except OSError:
-#            print("Nothing")
-#        else:
-#            print('Connection from %s' % str(address))
-#            rec = conn.recv(4096)
-#            # rec = rec.split(b'\r\n\r\n')
-#            rec = str(rec)[2:-1]
-#            print('----------\nAfter Split = ', rec)
-#            post_data = (rec.split("PostData=")[-1])
-#            post_data = post_data.replace('{', '')
-#            post_data = post_data.replace('}', '')
-#            post_data = post_data.replace('\"', '')
-#            voiceCommand = post_data.split(":")[1]
-#            print('Voice Command=<%s>' % voiceCommand)
-#
-#            ret_data = get_command(voiceCommand)
-#
-#            conn.send('HTTP/1.1 200 OK\n')
-#            conn.send('Content-Type: text/html\n')
-#            conn.send('Connection: close\n\n')
-#            conn.sendall(ret_data)
-#            conn.close()
-
-
-    time.sleep(5)
     #10000
 #    machine.deepsleep(10000)
 
