@@ -18,7 +18,7 @@ def get_array_of_hashes(mongo_data, field_array):
         data_fmt ={}
         for f in field_array:
             if f in data_point:
-                if f is "time" and data_point[f] < 870697983:
+                if f is "time" and data_point[f] < 970697983:
                     data_fmt[f] = data_point[f] + 946684800
                 else:
                     data_fmt[f] = data_point[f]
@@ -36,7 +36,7 @@ def get_array_of_arrays(mongo_data, field_array):
         data_fmt = []
         for f in field_array:
             if f in data_point:
-                if f is "time" and data_point[f] < 870697983:
+                if f is "time" and data_point[f] < 970697983:
                     data_fmt.append(data_point[f] + 946684800)
                 else:
                     data_fmt.append(data_point[f])
@@ -54,7 +54,7 @@ def get_array_of_tuples(mongo_data, field_array):
         data_fmt = []
         for f in field_array:
             if f in data_point:
-                if f is "time" and data_point[f] < 870697983:
+                if f is "time" and data_point[f] < 970697983:
                     data_fmt.append(data_point[f] + 946684800)
                 else:
                     data_fmt.append(data_point[f])

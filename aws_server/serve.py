@@ -26,7 +26,7 @@ import data_obtainer as do
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
-DB = client["fan"]
+DB = client["fan2"]
 db = DB["user"]
 filename = "nn.sav"
 users = client["users"]
@@ -280,6 +280,31 @@ while True:
         send_response(200, "OK", {"user_off": user_off}, clientSocket) # also closes conn
         continue
 
+    if "req_temp_time" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('./model/temp_time.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+    if "req_hum_time" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('./model/hums_time.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+    if "req_rpm_time" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('./model/rpm_time.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+
     if "req_LR" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
@@ -328,7 +353,10 @@ while True:
                 #    print(zz, "not in list")
                 #    continue
                 if zz is "time":
-                    x[str(zz)] = z[zz] + 946684800
+                    if z[zz] < 1618802818:
+                        x[str(zz)] = z[zz] + 946684800
+                    else:
+                        x[str(zz)] = z[zz]
                 else:
                     x[str(zz)] = z[zz]
             if x is not {} and len(x) != 0:
