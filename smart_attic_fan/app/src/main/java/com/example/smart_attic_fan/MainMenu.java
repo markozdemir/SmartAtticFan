@@ -62,7 +62,7 @@ public class MainMenu extends AppCompatActivity {
     private Bitmap mBitmap;
     private final String aws_url = "ec2-3-141-199-6.us-east-2.compute.amazonaws.com";
     final Handler handler = new Handler();
-    final int delay = 20000;
+    final int delay = 5000;
     String name, email, img;
 
     @Override
