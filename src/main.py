@@ -21,7 +21,6 @@ fan_setting = -1
 hs = machine.Pin(15, machine.Pin.IN)
 
 
-
 def get_timestamp():
     return 946684800 + utime.time()
 
@@ -66,7 +65,7 @@ def send_data(temp, hum, rpm_val=0):
                             "hum": hum,
                             "RPM": rpm_val,
                             "Power (W)": power_val,
-                            "time": get_timestamp()
+                            "time": get_timestamp(),
                             "fan_setting": fan_setting
                          }
                 }
@@ -114,6 +113,7 @@ def get_location():
 
 
 def get_rpm():
+    # 300 for 3 magnets
     hall_thresh = 100
     hall_count = 0
     on_state = False
@@ -139,7 +139,8 @@ def get_rpm():
     time_passed = ((end - start)/1000000.0)
     print("Time Passed:", time_passed)
     
-    rpm_val = (hall_count/time_passed)*60.0
+    # divided by magnet count
+    rpm_val = ((hall_count/3)/time_passed)*60.0
     print("RPM: ", rpm_val)
     return rpm_val
 
