@@ -22,10 +22,11 @@ import local_time as lt
 from subprocess import Popen
 import signal
 import sys
+import data_obtainer as do
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
-DB = client["fan"]
+DB = client["fan2"]
 db = DB["user"]
 filename = "nn.sav"
 users = client["users"]
@@ -145,12 +146,16 @@ def get_fan_speed_from_ai():
             id_ += 1
     h2 = {}
     h2["recent"] = h[str(id_ - 1)]
-    if "temp" in h2["recent"]:
-        if h2["recent"]["temp"] > 90:
+    print("RECENT:", h2)
+    if "temp (C)" in h2["recent"]:
+        if h2["recent"]["temp (C)"] > 20:
             l = [1, 2, 3]
             fan_speed = random.choice(l)
         else:
             fan_speed = 0
+    else:
+        print("temp is not in recent!")
+        fan_speed = 0
     return fan_speed
 
 def send_response(code, msg, data, conn):
@@ -205,6 +210,10 @@ def set_location(location_hash):
     temp, desc = lw.get_weather(longitude, latitude)
     print("local weather:", temp, desc)
 
+def make_graphs():
+    Process=Popen('./other/gen_graphs.sh', shell=True)
+
+make_graphs()
 while True:
     print("Waiting...")
     if user_off:
@@ -271,6 +280,31 @@ while True:
         send_response(200, "OK", {"user_off": user_off}, clientSocket) # also closes conn
         continue
 
+    if "req_temp_time" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('./model/temp_time.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+    if "req_hum_time" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('./model/hums_time.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+    if "req_rpm_time" in typ:
+        x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
+        num_b = 0
+        with open('./model/rpm_time.png', 'r') as file:
+            x = file.read()
+        num_b = len(x)
+        send_response(200, "OK", x, clientSocket) # also closes conn
+        continue
+
     if "req_LR" in typ:
         x = "HTTP/1.1 200 OK\r\n\r\n\r\n"
         num_b = 0
@@ -319,7 +353,10 @@ while True:
                 #    print(zz, "not in list")
                 #    continue
                 if zz is "time":
-                    x[str(zz)] = z[zz] + 946684800
+                    if z[zz] < 1618802818:
+                        x[str(zz)] = z[zz] + 946684800
+                    else:
+                        x[str(zz)] = z[zz]
                 else:
                     x[str(zz)] = z[zz]
             if x is not {} and len(x) != 0:
@@ -352,7 +389,9 @@ while True:
             ins_data_to_mongo(data['data'])
             trigger_ai()
             get_fan_speed_from_ai()
+            print("Sending fan speed:", fan_speed)
             handle_failure(data['data']['RPM'])
+            make_graphs()
             send_response(200, "OK", {"speed": fan_speed}, clientSocket) # also closes conn
             continue
         elif "test" in typ:

@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import pymongo
 import numpy as np
 import pandas as pd
 import sys
@@ -8,6 +9,10 @@ from mpl_toolkits.mplot3d import Axes3D
 import requests
 from bs4 import BeautifulSoup
 import datetime
+
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+DB = client["fan_train"]
+db = DB["user"]
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
@@ -70,5 +75,9 @@ if __name__ == '__main__':
 
                 result_df.loc[res_row] = [unix_ts, tempC, int(int(hum[0:-1])*0.8)]
                 res_row += 1
+
+                hum_conv = int(int(hum[0:-1])*0.8)
+                db.insert({"time": unix_ts, "temp (C)": tempC, "hum": hum_conv})
+
 
     result_df.to_csv("historic_weather.csv", index=False)
