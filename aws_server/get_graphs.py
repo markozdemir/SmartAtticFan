@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 
 
-data = do.get_data("fan2", ["temp (C)", "hum", "RPM", "time"], "array")
+data = do.get_data("fan", ["temp (C)", "hum", "RPM", "time"], "array")
 temps = []
 RPMs = []
 hums = []

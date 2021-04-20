@@ -16,7 +16,6 @@ import requests
 import random
 import pickle
 import time
-from sklearn import svm
 import local_weather as lw
 import local_time as lt
 from subprocess import Popen
@@ -26,7 +25,7 @@ import data_obtainer as do
 
 # Mongodb setup and other AI/ML/NN options
 client = pymongo.MongoClient("mongodb://localhost:27017/")
-DB = client["fan2"]
+DB = client["fan"]
 db = DB["user"]
 filename = "nn.sav"
 users = client["users"]
@@ -94,7 +93,7 @@ def send_push_new():
 
 def send_fail_email(to, name):
     global time_fail_sent
-    threshold = 3600
+    threshold = 60 # wait some time before ever sending email
     if time.time() - time_fail_sent > threshold:
         Process=Popen('./other/send_email.sh %s %s' % (name, to), shell=True)
         send_push()
@@ -146,16 +145,32 @@ def get_fan_speed_from_ai():
             id_ += 1
     h2 = {}
     h2["recent"] = h[str(id_ - 1)]
-    print("RECENT:", h2)
+
+    import os
+    try:
+        os.remove("./model_results.txt")
+    except:
+        print("File not found to delete model results")
+    temp = 0
+    hum = 0
     if "temp (C)" in h2["recent"]:
-        if h2["recent"]["temp (C)"] > 20:
-            l = [1, 2, 3]
-            fan_speed = random.choice(l)
-        else:
-            fan_speed = 0
-    else:
-        print("temp is not in recent!")
-        fan_speed = 0
+        temp = h2["recent"]["temp (C)"]
+    if "hum" in h2["recent"]:
+        hum = h2["recent"]["hum"]
+    print(temp, hum)
+    Process=Popen('./other/run_model.sh %s %s' % (temp, hum), shell=True)
+    time.sleep(1)
+    while True:
+        time.sleep(.05)
+        try:
+            f = open("./model_results.txt", "r")
+            fan_speed = int(f.readline())
+            f.close()
+            print("Fan speed:", fan_speed)
+        except:
+            pass
+        finally:
+            break
     return fan_speed
 
 def send_response(code, msg, data, conn):
@@ -254,6 +269,7 @@ while True:
         row = user_db.find({})
         name = None
         email = None
+        image = None
         v = 0
         for r in row:
             print(r)
