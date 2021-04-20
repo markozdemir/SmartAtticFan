@@ -36,6 +36,8 @@ end = "=============================================\n\n"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
 sock.bind(("0.0.0.0", 80));
 sock.listen(1);
+
+# Try to free binded port on exit
 def signal_handler(signal, frame):
         sock.close()
         sys.exit(0)
@@ -51,9 +53,13 @@ latitude = 0
 # fan info
 fan_speed = -1
 is_broke = False
+times_broke = 0
 time_fail_sent = 0
 user_off = False
 
+# We know mapping of speed mode to wattage
+# From the Amazon page we purchased the fan
+# from
 def get_power(x):
     if is_broke:
         return 0
@@ -68,6 +74,7 @@ def get_power(x):
 
     return -1
 
+# Android app needs these details
 def get_user_details():
     name = None
     email = None
@@ -80,11 +87,16 @@ def get_user_details():
         image = r['image']
     return name, email, image
 
+# Insert user data into mongo
 def register_user(data):
     user_db.remove({})
     r = user_db.insert(data)
     send_register_email(data['name'], data['email'])
 
+# Call shell scripts
+# Why? We run the server in sudo python2
+# These methods must be run in python3, so we
+# create a new process/child to run it for us multi-threaded :)
 def send_push():
     Process=Popen('./other/send_push.sh', shell=True)
 
@@ -92,12 +104,8 @@ def send_push_new():
     Process=Popen('./other/send_push_new.sh', shell=True)
 
 def send_fail_email(to, name):
-    global time_fail_sent
-    threshold = 60 # wait some time before ever sending email
-    if time.time() - time_fail_sent > threshold:
         Process=Popen('./other/send_email.sh %s %s' % (name, to), shell=True)
         send_push()
-        time_fail_sent = time.time()
 
 def send_register_email(to, name):
     Process=Popen('./other/send_reg_email.sh %s %s' % (to, name), shell=True)
@@ -106,23 +114,43 @@ def send_register_email(to, name):
 def is_fan_broken(RPM):
     global is_broke, fan_speed
     if fan_speed > 0 and RPM < 10:
-            is_broke = True
-            return True
+        times_broke += 1
+    else:
+        times_broke = 0
+    
+    # Want to be broken 2 times in a row to
+    # ensure race conditions don't matter
+    # >= 3 because we call handle_failure in
+    # multiple places
+    if times_broke >= 3:
+        is_broke = True
+        return True
+
     is_broke = False
     return False
 
+# Checks if fan is broken and handles appropriate action
 def handle_failure(rpm):
+
+    global time_fail_sent
+
     if is_fan_broken(rpm):
-        name, email, _ = get_user_details()
-        send_fail_email(email, name)
-        send_push()
-        print("Fan is broken! - notified user")
-        return True
+        threshold = 60 # wait some time before ever sending email, make larger in production
+        if time.time() - time_fail_sent > threshold:
+            name, email, _ = get_user_details()
+            send_fail_email(email, name)
+            send_push()
+            print("Fan is broken! - notified user")
+            time_fail_sent = time.time()
+            return True
     return False
 
+# depracted
 def trigger_ai():
     pass
 
+# Calls AI to get correct fan speed to be set
+# uses most recent mongo db entry's temp and humidity
 def get_fan_speed_from_ai():
     global fan_speed
 
@@ -173,6 +201,7 @@ def get_fan_speed_from_ai():
             break
     return fan_speed
 
+# sends response msg, (optionally) data, and code. Closes conn.
 def send_response(code, msg, data, conn):
     if data is None:
         clientSocket.sendall("HTTP/1.1 "+str(code)+" "+str(msg)+"\r\n\r\n")
@@ -218,6 +247,7 @@ def ins_data_to_mongo(data):
         r = db.insert(data)
         print("Inserted data")
 
+# Set the location of the esp32 when it requests us to
 def set_location(location_hash):
     global longitude, latitude
     longitude = location_hash["longitude"]
@@ -228,12 +258,15 @@ def set_location(location_hash):
 def make_graphs():
     Process=Popen('./other/gen_graphs.sh', shell=True)
 
+# Make sure graphs are real-time when boot
+# also called whenever data is given to server
 make_graphs()
+
 while True:
     print("Waiting...")
     if user_off:
         print("User turned fan off!")
-    try:
+    try: # error handle blank requests
         (clientSocket, clientAddress) = sock.accept();
     except KeyboardInterrupt:
         sock.close()
@@ -258,6 +291,8 @@ while True:
     if data is None: # get_request_data returns None on error and handles response
         continue
 
+    # All different cases to process
+
     typ = data["type"]
     if typ == "check":
         location = data["data"]
@@ -277,7 +312,6 @@ while True:
             email = r['email']
             image = r['image']
             v = 1
-        print("Here")
         send_response(200, "OK", {"valid": str(v), "name":name, "email":email, "image":image, "is_broke": is_broke}, clientSocket) # also closes conn
         continue
 
@@ -365,9 +399,6 @@ while True:
         for z in d:
             x = {}
             for zz in z:
-                # if zz not in temp_data_list:
-                #    print(zz, "not in list")
-                #    continue
                 if zz is "time":
                     if z[zz] < 1618802818:
                         x[str(zz)] = z[zz] + 946684800
