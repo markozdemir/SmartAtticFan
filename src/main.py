@@ -181,8 +181,7 @@ def set_relay_switch(gear):
 def start():
     global server_on, connected_wifi, fan_setting
 
-    ipconfig = connect_wifi('ZEYNET', 'Pamukkale1')
-    #ipconfig = connect_wifi('ORBI83', 'jaggedzoo924')
+    ipconfig = connect_wifi('USER', 'PW')
     get_location()
 #    print("ip:", ipconfig[0])
     if connected_wifi:
