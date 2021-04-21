@@ -4,8 +4,8 @@
   <playlist id="main_bin">
     <property name="xml_retain">1</property>
   </playlist>
-  <producer id="black" in="00:00:00.000" out="00:00:52.880">
-    <property name="length">00:00:52.920</property>
+  <producer id="black" in="00:00:00.000" out="00:00:53.400">
+    <property name="length">00:00:53.440</property>
     <property name="eof">pause</property>
     <property name="resource">0</property>
     <property name="aspect_ratio">1</property>
@@ -14,7 +14,7 @@
     <property name="set.test_audio">0</property>
   </producer>
   <playlist id="background">
-    <entry producer="black" in="00:00:00.000" out="00:00:52.880"/>
+    <entry producer="black" in="00:00:00.000" out="00:00:53.400"/>
   </playlist>
   <producer id="producer0" in="00:00:00.000" out="00:00:42.680">
     <property name="length">00:00:42.720</property>
@@ -417,16 +417,37 @@
     <property name="global_feed">1</property>
     <property name="shotcut:caption">Oh no, oh no, oh no no no song (TikTok Remix) Capone - Oh No.mp3</property>
     <property name="xml">was here</property>
-    <filter id="filter12" in="00:00:13.520" out="00:00:32.760">
+    <filter id="filter12" in="00:00:13.520" out="00:00:17.840">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
       <property name="level">-8.7</property>
       <property name="mlt_service">volume</property>
     </filter>
-    <filter id="filter13" in="00:00:13.520" out="00:00:32.760">
+  </producer>
+  <producer id="producer12" in="00:00:00.000" out="00:02:55.520">
+    <property name="length">00:02:55.560</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Downloads/Oh no, oh no, oh no no no song (TikTok Remix) Capone - Oh No.mp3</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="creation_time">2021-04-20T05:10:10</property>
+    <property name="shotcut:hash">62573a0cb07821be3f0582465b70527b</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">Oh no, oh no, oh no no no song (TikTok Remix) Capone - Oh No.mp3</property>
+    <property name="xml">was here</property>
+    <filter id="filter13" in="00:00:17.880" out="00:00:32.760">
       <property name="window">75</property>
       <property name="max_gain">20dB</property>
-      <property name="level">00:00:16.280=0;00:00:19.240=-60</property>
+      <property name="level">-19.2</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+    <filter id="filter14" in="00:00:17.880" out="00:00:32.760">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">00:00:11.920=0;00:00:14.880=-60</property>
       <property name="mlt_service">volume</property>
       <property name="shotcut:filter">fadeOutVolume</property>
       <property name="shotcut:animOut">00:00:03.000</property>
@@ -437,17 +458,56 @@
     <property name="shotcut:name">A1</property>
     <entry producer="producer10" in="00:00:00.000" out="00:00:28.080"/>
     <blank length="00:00:06.040"/>
-    <entry producer="producer11" in="00:00:14.040" out="00:00:32.760"/>
+    <entry producer="producer11" in="00:00:14.040" out="00:00:17.840"/>
+    <entry producer="producer12" in="00:00:17.880" out="00:00:32.760"/>
   </playlist>
-  <tractor id="tractor4" title="Shotcut version 21.03.21" global_feed="1" in="00:00:00.000" out="00:00:52.880">
+  <producer id="producer13" in="00:00:00.000" out="00:00:59.480">
+    <property name="length">00:00:59.520</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo/DemoNarration.m4a</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="creation_time">2021-04-20T22:16:47</property>
+    <property name="shotcut:hash">1ac7766e52efc5b3ca4f7882f2a50a3c</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">DemoNarration.m4a</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer14" in="00:00:00.000" out="00:00:59.480">
+    <property name="length">00:00:59.520</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo/DemoNarration.m4a</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="creation_time">2021-04-20T22:16:47</property>
+    <property name="shotcut:hash">1ac7766e52efc5b3ca4f7882f2a50a3c</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">DemoNarration.m4a</property>
+    <property name="xml">was here</property>
+  </producer>
+  <playlist id="playlist3">
+    <property name="shotcut:audio">1</property>
+    <property name="shotcut:name">A2</property>
+    <entry producer="producer13" in="00:00:03.480" out="00:00:31.040"/>
+    <blank length="00:00:01.320"/>
+    <entry producer="producer14" in="00:00:33.000" out="00:00:57.480"/>
+  </playlist>
+  <tractor id="tractor4" title="Shotcut version 21.03.21" global_feed="1" in="00:00:00.000" out="00:00:53.400">
     <property name="shotcut">1</property>
     <property name="shotcut:projectAudioChannels">2</property>
     <property name="shotcut:projectFolder">0</property>
-    <property name="shotcut:scaleFactor">0.943621</property>
+    <property name="shotcut:scaleFactor">1.59062</property>
     <track producer="background"/>
     <track producer="playlist0"/>
     <track producer="playlist1"/>
     <track producer="playlist2" hide="video"/>
+    <track producer="playlist3" hide="video"/>
     <transition id="transition8">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
@@ -481,6 +541,13 @@
     <transition id="transition12">
       <property name="a_track">0</property>
       <property name="b_track">3</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition13">
+      <property name="a_track">0</property>
+      <property name="b_track">4</property>
       <property name="mlt_service">mix</property>
       <property name="always_active">1</property>
       <property name="sum">1</property>

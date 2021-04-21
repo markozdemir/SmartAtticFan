@@ -1,0 +1,596 @@
+<?xml version="1.0" standalone="no"?>
+<mlt LC_NUMERIC="C" version="6.25.0" title="Shotcut version 21.03.21" producer="main_bin">
+  <profile description="automatic" width="1920" height="1020" progressive="1" sample_aspect_num="1" sample_aspect_den="1" display_aspect_num="1920" display_aspect_den="1020" frame_rate_num="2409000" frame_rate_den="79949" colorspace="709"/>
+  <playlist id="main_bin">
+    <property name="xml_retain">1</property>
+  </playlist>
+  <producer id="black" in="00:00:00.000" out="00:04:60.003">
+    <property name="length">00:05:00.033</property>
+    <property name="eof">pause</property>
+    <property name="resource">0</property>
+    <property name="aspect_ratio">1</property>
+    <property name="mlt_service">color</property>
+    <property name="mlt_image_format">rgb24a</property>
+    <property name="set.test_audio">0</property>
+  </producer>
+  <playlist id="background">
+    <entry producer="black" in="00:00:00.000" out="00:04:60.003"/>
+  </playlist>
+  <producer id="producer0" in="00:00:00.000" out="00:00:12.014">
+    <property name="length">00:00:12.047</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.1:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/people_intro/intro.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.1</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/people_intro/intro.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">51bc56d0e6fac120994791690135af95</property>
+    <property name="shotcut:caption">intro.mp4 (1.1x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="warp_pitch">1</property>
+  </producer>
+  <producer id="producer1" in="00:00:00.000" out="00:00:12.014">
+    <property name="length">00:00:12.047</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.1:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/people_intro/intro.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.1</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/people_intro/intro.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">51bc56d0e6fac120994791690135af95</property>
+    <property name="shotcut:caption">intro.mp4 (1.1x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="warp_pitch">1</property>
+  </producer>
+  <producer id="producer2" in="00:00:00.000" out="03:59:60.003">
+    <property name="length">04:00:00.033</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Desktop/Capture10.PNG</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2021-04-20T23:48:19</property>
+    <property name="shotcut:hash">969f2a4f09172fc43bba35f1b3ec4228</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">Capture10.PNG</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer3" in="00:00:00.000" out="00:00:38.962">
+    <property name="length">00:00:38.995</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.2:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/product_intro/intro_shortened~45secs.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.2</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/product_intro/intro_shortened~45secs.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">01ee271212e1fb8e52ec9a6f03b68247</property>
+    <property name="shotcut:caption">intro_shortened~45secs.mp4 (1.2x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="warp_pitch">1</property>
+    <filter id="filter0" in="00:00:00.232" out="00:00:38.962">
+      <property name="window">75</property>
+      <property name="max_gain">20dB</property>
+      <property name="level">-6.7</property>
+      <property name="mlt_service">volume</property>
+    </filter>
+  </producer>
+  <producer id="producer4" in="00:00:00.000" out="03:59:60.003">
+    <property name="length">04:00:00.033</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Desktop/Capture5.PNG</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2021-04-20T23:26:36</property>
+    <property name="shotcut:hash">a5f51dc732de2fe640b3a53de7a4a191</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">Capture5.PNG</property>
+  </producer>
+  <producer id="producer5" in="00:00:00.000" out="00:01:14.934">
+    <property name="length">00:01:14.968</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/fan_intro.mp4</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2021-04-20T23:55:49</property>
+    <property name="shotcut:hash">2e98922be22fb2aea367a7dc9510d3a0</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">fan_intro.mp4</property>
+  </producer>
+  <tractor id="tractor0" global_feed="1" in="00:00:00.000" out="00:00:00.398">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer4" in="00:00:00.929" out="00:00:01.328"/>
+    <track producer="producer5" in="00:00:00.000" out="00:00:00.398"/>
+    <transition id="transition0" out="00:00:00.398">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition1" out="00:00:00.398">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
+  <producer id="producer6" in="00:00:00.000" out="00:01:05.177">
+    <property name="length">00:01:05.210</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.15:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/fan_intro.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.15</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/Product_overview/fan_intro.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">2e98922be22fb2aea367a7dc9510d3a0</property>
+    <property name="shotcut:caption">fan_intro.mp4 (1.15x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer7" in="00:00:00.000" out="03:59:60.003">
+    <property name="length">04:00:00.033</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Desktop/Capture6.PNG</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2021-04-20T23:31:31</property>
+    <property name="shotcut:hash">6d01ae6b6add7519fabdc4b807443a3e</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">Capture6.PNG</property>
+    <property name="xml">was here</property>
+  </producer>
+  <tractor id="tractor1" global_feed="1" in="00:00:00.000" out="00:00:00.431">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer5" in="00:01:14.503" out="00:01:14.934"/>
+    <track producer="producer7" in="00:00:00.199" out="00:00:00.631"/>
+    <transition id="transition2" out="00:00:00.431">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition3" out="00:00:00.431">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
+  <tractor id="tractor2" global_feed="1" in="00:00:00.000" out="00:00:00.100">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer6" in="00:01:04.646" out="00:01:04.746"/>
+    <track producer="tractor1" in="00:00:00.000" out="00:00:00.100"/>
+    <transition id="transition4" out="00:00:00.100">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition5" out="00:00:00.100">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
+  <producer id="producer8" in="00:00:00.000" out="00:05:09.093">
+    <property name="length">00:05:09.127</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.22:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.22</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">9b49e5f88599901f0199cabb3bfefaf5</property>
+    <property name="shotcut:caption">demo_ai.mp4 (1.22x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer9" in="00:00:00.000" out="00:04:54.594">
+    <property name="length">00:04:54.627</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.28:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.28</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">9b49e5f88599901f0199cabb3bfefaf5</property>
+    <property name="shotcut:caption">demo_ai.mp4 (1.28x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer10" in="00:00:00.000" out="00:03:58.643">
+    <property name="length">00:03:58.676</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.58:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.58</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">9b49e5f88599901f0199cabb3bfefaf5</property>
+    <property name="shotcut:caption">demo_ai.mp4 (1.58x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer11" in="00:00:00.000" out="00:04:54.594">
+    <property name="length">00:04:54.627</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.28:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.28</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">9b49e5f88599901f0199cabb3bfefaf5</property>
+    <property name="shotcut:caption">demo_ai.mp4 (1.28x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer12" in="00:00:00.000" out="00:05:14.237">
+    <property name="length">00:05:14.271</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.2:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.2</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_ai/demo_ai.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">9b49e5f88599901f0199cabb3bfefaf5</property>
+    <property name="shotcut:caption">demo_ai.mp4 (1.2x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer13" in="00:00:00.000" out="03:59:60.003">
+    <property name="length">04:00:00.033</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Desktop/Capture7.PNG</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2021-04-20T23:33:35</property>
+    <property name="shotcut:hash">a574ff462c2ff36432ddb1595ece3919</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">Capture7.PNG</property>
+  </producer>
+  <tractor id="tractor3" global_feed="1" in="00:00:00.000" out="00:00:00.797">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer12" in="00:00:40.057" out="00:00:40.854"/>
+    <track producer="producer13" in="00:00:00.531" out="00:00:01.328"/>
+    <transition id="transition6" out="00:00:00.797">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition7" out="00:00:00.797">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
+  <producer id="producer14" in="00:00:00.000" out="00:00:30.333">
+    <property name="length">00:00:30.367</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.22:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_on_off/on_off_demo.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.22</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_on_off/on_off_demo.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">a85ec0347f0003785e293d677f5ac5bb</property>
+    <property name="shotcut:caption">on_off_demo.mp4 (1.22x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer15" in="00:00:00.000" out="00:00:36.971">
+    <property name="length">00:00:37.004</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo_on_off/on_off_demo.mp4</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2021-04-20T06:33:21</property>
+    <property name="shotcut:hash">a85ec0347f0003785e293d677f5ac5bb</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">on_off_demo.mp4</property>
+  </producer>
+  <producer id="producer16" in="00:00:00.000" out="03:59:60.003">
+    <property name="length">04:00:00.033</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Desktop/Capture8.PNG</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2021-04-20T23:34:47</property>
+    <property name="shotcut:hash">30eadb4def92fdec676729210f28ac17</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:caption">Capture8.PNG</property>
+  </producer>
+  <tractor id="tractor4" global_feed="1" in="00:00:00.000" out="00:00:00.465">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer15" in="00:00:36.506" out="00:00:36.971"/>
+    <track producer="producer16" in="00:00:00.000" out="00:00:00.465"/>
+    <transition id="transition8" out="00:00:00.465">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition9" out="00:00:00.465">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
+  <producer id="producer17" in="00:00:00.000" out="00:00:49.914">
+    <property name="length">00:00:49.947</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.07:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo/new_fanbeach_demo_WITH_narration.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.07</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/demo/new_fanbeach_demo_WITH_narration.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">f6fd358ef4794d79ba917f9c0684a533</property>
+    <property name="shotcut:caption">new_fanbeach_demo_WITH_narration.mp4 (1.07x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <producer id="producer18" in="00:00:00.000" out="03:59:60.003">
+    <property name="length">04:00:00.033</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Desktop/Capture9.PNG</property>
+    <property name="ttl">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="progressive">1</property>
+    <property name="seekable">1</property>
+    <property name="mlt_service">qimage</property>
+    <property name="creation_time">2021-04-20T23:45:11</property>
+    <property name="global_feed">1</property>
+    <property name="shotcut:hash">0e0e4c1ff8494c0ed4204134b3a2345c</property>
+    <property name="shotcut:caption">Capture9.PNG</property>
+  </producer>
+  <producer id="producer19" in="00:00:00.000" out="00:00:59.472">
+    <property name="length">00:00:59.505</property>
+    <property name="eof">pause</property>
+    <property name="resource">1.04:c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/conclusion/concl.mp4</property>
+    <property name="aspect_ratio">1</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="warp_speed">1.04</property>
+    <property name="warp_resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/conclusion/concl.mp4</property>
+    <property name="mlt_service">timewarp</property>
+    <property name="shotcut:producer">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="shotcut:hash">6b9ceb568211ba7ddb6e7df24a559a0b</property>
+    <property name="shotcut:caption">concl.mp4 (1.04x)</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <property name="warp_pitch">1</property>
+  </producer>
+  <tractor id="tractor5" global_feed="1" in="00:00:00.000" out="00:00:00.531">
+    <property name="shotcut:transition">lumaMix</property>
+    <track producer="producer18" in="00:00:01.792" out="00:00:02.323"/>
+    <track producer="producer19" in="00:00:00.000" out="00:00:00.531"/>
+    <transition id="transition10" out="00:00:00.531">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="factory">loader</property>
+      <property name="mlt_service">luma</property>
+      <property name="alpha_over">1</property>
+    </transition>
+    <transition id="transition11" out="00:00:00.531">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="start">-1</property>
+      <property name="accepts_blanks">1</property>
+      <property name="mlt_service">mix</property>
+    </transition>
+  </tractor>
+  <producer id="producer20" in="00:00:00.000" out="00:01:01.892">
+    <property name="length">00:01:01.925</property>
+    <property name="eof">pause</property>
+    <property name="resource">c:/Users/Owner/Documents/School/Columbia/Spring_2021/SmartAtticFan/presentation/conclusion/concl.mp4</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">1</property>
+    <property name="mlt_service">avformat</property>
+    <property name="video_delay">0</property>
+    <property name="warp_pitch">1</property>
+    <property name="shotcut:hash">6b9ceb568211ba7ddb6e7df24a559a0b</property>
+    <property name="shotcut:caption">concl.mp4</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <playlist id="playlist0">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">V1</property>
+    <entry producer="producer0" in="00:00:00.000" out="00:00:04.879"/>
+    <entry producer="producer1" in="00:00:05.210" out="00:00:11.649"/>
+    <entry producer="producer2" in="00:00:00.299" out="00:00:01.062"/>
+    <entry producer="producer3" in="00:00:00.232" out="00:00:38.962"/>
+    <entry producer="producer4" in="00:00:00.000" out="00:00:00.896"/>
+    <entry producer="tractor0" in="00:00:00.000" out="00:00:00.398"/>
+    <entry producer="producer6" in="00:00:00.365" out="00:01:04.613"/>
+    <entry producer="tractor2" in="00:00:00.000" out="00:00:00.100"/>
+    <entry producer="tractor1" in="00:00:00.133" out="00:00:00.431"/>
+    <entry producer="producer7" in="00:00:00.664" out="00:00:01.759"/>
+    <entry producer="producer8" in="00:00:00.763" out="00:00:10.454"/>
+    <entry producer="producer9" in="00:00:09.989" out="00:00:20.941"/>
+    <entry producer="producer10" in="00:00:16.992" out="00:00:17.722"/>
+    <entry producer="producer11" in="00:00:21.904" out="00:00:37.535"/>
+    <entry producer="tractor3" in="00:00:00.000" out="00:00:00.797"/>
+    <entry producer="producer13" in="00:00:01.361" out="00:00:02.091"/>
+    <entry producer="producer14" in="00:00:00.000" out="00:00:29.902"/>
+    <entry producer="tractor4" in="00:00:00.000" out="00:00:00.465"/>
+    <entry producer="producer16" in="00:00:00.498" out="00:00:01.228"/>
+    <entry producer="producer17" in="00:00:00.000" out="00:00:49.914"/>
+    <entry producer="producer18" in="00:00:01.095" out="00:00:01.759"/>
+    <entry producer="tractor5" in="00:00:00.000" out="00:00:00.531"/>
+    <entry producer="producer20" in="00:00:00.564" out="00:01:01.294"/>
+  </playlist>
+  <playlist id="playlist1">
+    <property name="shotcut:audio">1</property>
+    <property name="shotcut:name">A1</property>
+    <blank length="00:00:00.033"/>
+  </playlist>
+  <playlist id="playlist2">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">V2</property>
+    <blank length="00:00:00.033"/>
+  </playlist>
+  <tractor id="tractor6" title="Shotcut version 21.03.21" global_feed="1" in="00:00:00.000" out="00:04:60.003">
+    <property name="shotcut">1</property>
+    <property name="shotcut:projectAudioChannels">2</property>
+    <property name="shotcut:projectFolder">0</property>
+    <property name="shotcut:scaleFactor">0.795018</property>
+    <track producer="background"/>
+    <track producer="playlist0"/>
+    <track producer="playlist1" hide="video"/>
+    <track producer="playlist2"/>
+    <transition id="transition12">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition13">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="version">0.9</property>
+      <property name="mlt_service">frei0r.cairoblend</property>
+      <property name="threads">0</property>
+      <property name="disable">1</property>
+    </transition>
+    <transition id="transition14">
+      <property name="a_track">0</property>
+      <property name="b_track">2</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition15">
+      <property name="a_track">0</property>
+      <property name="b_track">3</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition16">
+      <property name="a_track">1</property>
+      <property name="b_track">3</property>
+      <property name="version">0.9</property>
+      <property name="mlt_service">frei0r.cairoblend</property>
+      <property name="threads">0</property>
+      <property name="disable">0</property>
+    </transition>
+  </tractor>
+</mlt>
