@@ -198,8 +198,6 @@ def get_fan_speed_from_ai():
             pass
         finally:
             break
-    if temp < 26:
-        fan_speed = 0
     print("Predicting optimal fan speed:", fan_speed)
     return fan_speed
 
