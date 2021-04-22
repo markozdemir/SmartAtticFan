@@ -112,7 +112,7 @@ def send_register_email(to, name):
     send_push_new()
 
 def is_fan_broken(RPM):
-    global is_broke, fan_speed
+    global is_broke, fan_speed, times_broke
     if fan_speed > 0 and RPM < 10:
         times_broke += 1
     else:
@@ -194,11 +194,11 @@ def get_fan_speed_from_ai():
             f = open("./model_results.txt", "r")
             fan_speed = int(f.readline())
             f.close()
-            print("Fan speed:", fan_speed)
         except:
             pass
         finally:
             break
+    print("Predicting optimal fan speed:", fan_speed)
     return fan_speed
 
 # sends response msg, (optionally) data, and code. Closes conn.
