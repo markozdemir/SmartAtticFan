@@ -183,7 +183,6 @@ def start():
 
     ipconfig = connect_wifi('USER', 'PW')
     get_location()
-#    print("ip:", ipconfig[0])
     if connected_wifi:
         try:
             json = { "type":"check",
@@ -230,19 +229,11 @@ def run():
     else:
         print("not connected, could not run")
 
-    #10000
-#    machine.deepsleep(10000)
-
 start()
 while(1):
     run()
     time.sleep(15)
+	# optional: machine.deepsleep(10000)
     
-#import esp32
-## internal temp and hall sensor
-#esp_hs_val = esp32.hall_sensor()
-#esp_temp_val esp32.raw_temperature()
-#print("esp's hall sens val = ", esp_hs_val)
-#print("esp's temp =", esp_temp_val)
 
 

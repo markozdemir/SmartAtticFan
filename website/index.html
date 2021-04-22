@@ -63,15 +63,14 @@
 					<section id="top" class="one dark cover">
 						<div class="container">
 
-								<iframe width="560" height="315" src="https://www.youtube.com/embed/_AlcRoqS65E" frameborder="0" allowfullscreen></iframe>
-
-								<h2 class="alt">Smart Attic Fan</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RUh1X8iTtR8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+								<h2 class="alt">The Smart Attic Fan</h2>
 								<p>A smart attic fan that optimizes ventilation and contains a system for fan fault detection.</p>
-								<p>Our product is an esp32 chip that attaches to an attic fan that provides additional features. These features include:
-								optimized fan speed switching for best air ventilation and a fault detection system. Any attic fan can wreak the
+								<p>Our product is built with an ESP32 chip that attaches to an attic fan to provide additional features. These features include
+								an optimized fan speed switching for best air ventilation and a fault detection system. Any attic fan can reap the
 								benefits of our product that connects to our AWS server, stores data in a NoSQL Mongo database table, communicates
-								with a neural network, and displays all data to the user via a beautiful Android phone application. Users are emailed
-								and sent push notifications urgent information about their attic fan.</p>
+								with a KNN model, and displays all data to the user via a beautiful Android phone application. Users are emailed urgent
+								information and sent push notifications about their attic fan.</p>
 
 
 							<footer>
@@ -93,14 +92,14 @@
 									<img src="images/attic2.png" alt="" />
 								</div>
 							</center>
-							<p align="left">Attic fans are extremely important for reducing house's
-							overall temperature (and in turn, air conditioning costs) and for improving
+							<p align="left">Attic fans are extremely important for reducing a house's
+							overall temperature (and in turn, air conditioning costs) and improving
 							a home's air flow. When your attic fan breaks, your wallet will feel it in your
 							air conditioning bill. The life span of an attic fan 
 							<a href="https://www.fixr.com/costs/attic-fan-repair#:~:text=Attic%20fan%20motors%20typically%20have,break%20down%20after%205%20years.">
 							is between 5 and 15 years</a>. The Smart Attic Fan will help you improve your
-							energy savings by regulating the attic's fan speed and by notifying you
-							via an application push notification as soon as your attic fan malfunctions.
+							energy savings by regulating the attic's fan speed and by notifying via
+							email and push notification as soon as your attic fan malfunctions.
 							<br />
 							<br />
 							Do you have to buy a new attic fan? NO! Smart Attic Fan attaches to your current
@@ -108,8 +107,8 @@
 							<br />
 							<br />
 							Attics are not uncommon in the United States. On the contrary, it is common that
-							attics are neglected as they are an uninhabitable area of a home. 
-							But it is extremely important to keep an eye on the attic's ventilation and 
+							attics are neglected as they are an uninhabitable area of a home, 
+							but it is extremely important to keep an eye on the attic's ventilation and 
 							insulation. The consequences of ignoring one’s attic could be quite damaging.
 							<br />
 							<br />
@@ -119,15 +118,35 @@
 							in additional energy costs to cool the entire house. Second, moisture produced 
 							within the home may move into the attic which can condense and cause construction 
 							materials to deteriorate if the moisture is not removed efficiently. An innocent 
-							Summer day can be 95 degrees outside, which will bake your attic up to 
+							summer day can be 95 degrees outside, which will bake your attic up to 
 							temperatures near 160 degrees fahrenheit! 
 							(Read B. R. Stewart's report <a href="http://www.factsfacts.com/MyHomeRepair/ventilation.htm#:~:text=Attics%20can%20reach%20temperatures%20of,95%20to%2097%20degrees%20F">here</a>).
-
 							<div class="inline-block"  style="width:35%">
 								<img src="images/attic1.jpg" alt="" />
 							</div>
+							<br />
+							<br />
+							<p align="left">According to <a href"https://www.buildingscience.com/documents/digests/bsd-102-understanding-attic-ventilation">BSD-102: Understanding Attic Ventilation</a> 
+							and <a href="https://books.google.com/books?id=6eBTCgAAQBAJ&q=%22attic+spaces%22">
+2015 International Building Code Illustrated Handbook</a>, unoccupied attics should be ventilated to reduce heat and moisture build up that contribute 
+							to mold growth and decay of wood rafters and ceiling joists. "In cold climates ventilation also helps to prevent ice-dams on the roof and leaks 
+							that they cause. In hot climates, ventilation reduces cooling loads." Now, imagine that your attic fan breaks and you don't know--luckily for you,
+							The Smart Attic Fan will notify you! Lastly, ventilation in an attic can always be better and our Smart Attic Fan aims to smartly cool this
+							important area of your home.</p>
 
+							<div class="inline-block"  style="width:50%">
+								<img src="images/hot.gif" alt="" />
+							</div>
+							<div class="inline-block"  style="width:50%">
+								<img src="images/blue_arrow.png" alt="" />
+							</div>
+							<div class="inline-block"  style="width:50%">
+								<img src="images/cool.gif" alt="" />
+							</div>
+							
 						</div>
+						<br /><br />
+						<p style="font-size:30px">As you can see, this product has a <b style="font-weight: 400;">huge impact</b> on a homeowner's attic.</p>
 					</section>
 
 
@@ -141,20 +160,165 @@
 							<p align="left">Remember to use combination of descriptions, photos, and figures</p>
 
 							<h3 align="left">Architecture</h3>
-
-							<p align="left">Blah blah blah</p>
+		
+							<div class="inline-block"  style="width:70%">
+								<img src="images/arch.png" alt="" style="width:100%"/>
+							</div>
+							<br />
+							<p align="left">The product is built with an ESP32 microcontroller, humidity/temperature sensors,
+							a hall-effect sensor (for determining fan's RPM), relays (for controlling fan speed), an
+							AWS server that accepts and responds to a variety of HTTP requests, and an Android Phone Application
+							as the UI. The AWS server communicates with the ESP32 as well as the Android app, acting much like
+							a middle man in the communication between the ESP32 and the phone application.
+							<br /> <br />
+							The ESP32 collects new data such as temperature, humidity, and the
+							fan’s RPMs. These data points are made into a vector (of features) which is
+							sent to the AWS server via HTTP every 10-20 minutes. 
+							<br /><br />
+							The server stores this data in a Mongo database table which is later used
+							to make graphics such as linear regression plots, temperature/humidity in the attic vs time,
+							and power consumed/RPM by the attic fan vs time.
+							Whenever new data is received by the AWS server from the ESP32, our AI model is
+							triggered to determine which speed the fan should run. The AWS server sends this
+							determination to the ESP32 in the payload of the HTTP response, which controls the fan’s
+							speed via the relays.
+							<br /> <br />
+							For the user interface, we used an android mobile application.
+							The app gives real-time data charts, attic climate information, local climate information,
+							options (such as turning the fan on/off), and push notifications for urgent updates about 
+							their attic fan. Also, the user can create an account through the app to get email updates 
+							about their fan.</p>
 
 
 							<h3 align="left">Technical Components</h3>
+								Below details our <b style="font-weight:400">technical merit</b> at each level of our product. 
+								<div align="left"><b style="font-size:30px; font-weight: 600; margin-bottom:0px" >Hardware</b></div>
+								<ul style="list-style: square; padding-left:100px">
+									<li align="left"><b style="font-weight: 400;">ESP32</b> - used to communicate with AWS server
+									
+										<div class="inline-block"  style="width:20%">
+											<img src="images/esp32.png" alt="" style="width:100%"/>
+										</div>
+									</li>
+									<li align="left"><b style="font-weight: 400;">Relays</b> - connects the ESP32 to the fan motor's inductor to control speed
+										<div class="inline-block"  style="width:20%">
+											<img src="images/relays.png" alt="" style="width:100%"/>
+										</div>
+									</li>
+									<li align="left"><b style="font-weight: 400;">Humidity and Temperature Sensor</b> - sensors that collect humidity/temperature of immediate environment
+										<div class="inline-block"  style="width:20%">
+											<img src="images/hum_temp.png" alt="" style="width:100%"/>
+										</div>
+									</li>
+									<li align="left"><b style="font-weight: 400;">Hall-Effect Sensor</b> - uses changes in magnetic field to determine rotational speed of fan
+										<div class="inline-block"  style="width:20%">
+											<img src="images/hall_sensor.png" alt="" style="width:100%"/>
+										</div>
+									</li>
+									<li align="left"><b style="font-weight: 400;">Fan</b> - modded device to work with our product to serve as proof-of-concept
+										<div class="inline-block"  style="width:20%">
+											<img src="images/fan.png" alt="" style="width:100%"/>
+										</div>
+									</li>
+								</ul>
 
-							<p align="left">Blah blah blah</p>
+								<div align="left"><b style="font-size:30px; font-weight: 600; margin-bottom:0px" >Software</b></div>
+								<ul style="list-style: square; padding-left:50px; margin-bottom:0">
+									<li><div align="left"><b style="margin-bottom:0px" >ESP32 (src folder)</b></div></li>
+								</ul>
+								<ul style="list-style: square; padding-left:100px">
+									<li align="left"><b style="font-weight: 400;">WiFi Connection</b> - to connect with the AWS server</li>
+								</ul>
+								
+								<ul style="list-style: square; padding-left:50px; margin-bottom:0">
+									<li><div align="left"><b style="margin-bottom:0px" >Amazon Web Services Server (aws_server folder)</b></div></li>
+								</ul>
+								<ul style="list-style: square; padding-left:100px">
+									<li align="left"><b style="font-weight: 400;">MongoDB</b> - stores data in two tables (user's data and collected fan data)</li>
+									<li align="left"><b style="font-weight: 400;">HTTP Server on Port 80</b> - handles multiple types of requests from the ESP32 and/or Android app, such as:</li>
+									<ul style="list-style: square; padding-left:25px; margin-bottom:0">
+										<li align="left"> Register a new user </li>
+										<li align="left"> Toggle fan's emergency on/off </li>
+										<li align="left"> Specific data charts (RPM, temperature, humidity, power consumption over time) </li>
+										<li align="left"> Get climate data of local area </li>
+										<li align="left"> CRUD operations on the MongoDB table </li>
+									</ul>
+									<li align="left"><b style="font-weight: 400;">Graph Generation</b> - uses data stored in MongoDB to make pyplots</li>
+									<li align="left"><b style="font-weight: 400;">AI, KNN model</b> - determines fan speed by calling a KNN model that was trained using
+									a training mongoDB table</li>
+									<li align="left"><b style="font-weight: 400;">Middleman Communication</b> - communicates directly with ESP32 and Android Application</li>
+								</ul>
 
-
+								<ul style="list-style: square; padding-left:50px; margin-bottom:0">
+									<li><div align="left"><b style="margin-bottom:0px" >MongoDB Tables</b></div></li>
+								</ul>
+								<ul style="list-style: square; padding-left:100px">
+									<li align="left"><b style="font-weight: 400;">Data Collection Table (Fan)</b> - stores all the user's fan data</li>
+									<li align="left"><b style="font-weight: 400;">Training Table</b> - houses (labeled) data that we collected for purposes of training AI models</li>
+									<li align="left"><b style="font-weight: 400;">User Table</b> - stores user's registration information such as name, email, and profile picture</li>
+									<li align="left"><b style="font-weight: 400;">Options</b> - provides user the ability to turn-off their attic fan</li>
+								</ul>
+								<ul style="list-style: square; padding-left:50px; margin-bottom:0">
+									<li><div align="left"><b style="margin-bottom:0px" >AI & Data (model and aws_server folders)</b></div></li>
+								</ul>
+								<ul style="list-style: square; padding-left:100px">
+									<li align="left"><b style="font-weight: 400;">Prediction</b> - uses a trained KNN classifier model to ascertain optimal fan speed.
+									Data was collected using the ESP32 and sensors which are stored in a training MongoDB table with a calculated label. These data points were used
+									to train a KNN model. This KNN model takes in the current attic climate information and returns a variable fan speed (currently between 0 and 3).</li>
+									<li align="left"><b style="font-weight: 400;">Optimization</b> - 
+									
+									for proof of concept, the StateGraph algorithm computed an optimized pathfinder to lower the temperature.
+									For each request, it calculates loss as weight, combining time and energy consumption. Then, using these weights, 
+									Dijkstra's algorithm finds the lowest cost node given certain start and target temperatures. The model determines
+									the most optimal fan speed to lower attic temperature/humidity in the least amount of time and with the least power 
+									consumption.
+									
+									*Due to the complexity of the experimental environment, this feature is still a work in progress. </li>
+								</ul>
+								
+								<ul style="list-style: square; padding-left:50px; margin-bottom:0">
+									<li><div align="left"><b style="margin-bottom:0px" >Android Application (smart_attic_fan folder)</b></div></li>
+								</ul>
+								<ul style="list-style: square; padding-left:100px">
+									<li align="left"><b style="font-weight: 400;">Registration</b> - handles functionality for user registration</li>
+									<li align="left"><b style="font-weight: 400;">Information Display</b> - shows local weather data, attic climate data, and fan details</li>
+									<li align="left"><b style="font-weight: 400;">Data Display</b> - shows python graphics that are downloaded from the AWS server</li>
+									<li align="left"><b style="font-weight: 400;">Options</b> - provides user the ability to turn-off their attic fan</li>
+								</ul>
+							<div class="inline-block"  style="width:50%">
+								<img src="images/app.png" alt="" />
+							</div>
 							<h3 align="left">Prototype</h3>
-
-							<p align="left">Blah blah blah</p>
-
-
+							<center>
+								<div class="inline-block"  style="width:50%">
+									<img src="images/fan1.jpg" alt=""   style="width:100%"/>
+								</div>
+							</center>
+							<br />
+							<div class="row">
+							  <div class="column">
+								<img src="images/a_home.png" alt="Snow" style="width:60%">
+							  </div>
+							  <div class="column">
+								<img src="images/a_fan_info.png" alt="Forest" style="width:60%">
+							  </div>
+							  <div class="column">
+								<img src="images/a_reg.png" alt="Mountains" style="width:60%">
+							  </div>
+							  <div class="column">
+								<img src="images/a_fan_graph.png" alt="Snow" style="width:60%">
+							  </div>
+							  <div class="column">
+								<img src="images/a_reg.png" alt="Forest" style="width:60%">
+							  </div>
+							  <div class="column">
+								<img src="images/a_options.png" alt="Mountains" style="width:60%">
+							  </div>
+							</div>
+							<br /> <br />
+							<p style="font-size:30px">Our prototype is <b style="font-weight: 400;">novel</b>. There currently does not exist a smart attic ventilator in the market as of this writing. 
+							<div style="font-size:22px">Based on conversations with neighbors in our respective neighbors, we have identified this need that many of the million homeowners have
+							for maintaining their home.</div></p>
 
 						</div>
 					</section>
@@ -166,16 +330,64 @@
 							<header>
 								<h2>Results</h2>
 							</header>
+							See our demo video for further explanation.
 
-							<p align="left">Remember to use figures to help illustrate results</p>
+							<div align="left"><b style="font-size:30px; font-weight: 600; margin-bottom:0px" >Fault Detection</b></div>
+							The AWS server uses data it receives from the ESP32 to determine whether the fan is broken or working properly.
+							If the fan is broken, the Android app reflects this update, and an email and push notification is sent to the 
+							user notifying them about their broken attic fan.
+							<center>
+								<article class="item" style="width:50%">
+									<a href="#" class="image fit"><img src="images/broke_email.png" alt="" /></a>
+									<header>
+										<h3>Android App gives current status of the fan using our proprietary logic.</h3>
+									</header>
+								</article>
+							</center>
+							
+							
+							<div align="left"><b style="font-size:30px; font-weight: 600; margin-bottom:0px" >Fan Speed Adjustment</b></div>
+							Using a KNN model and relays, we determine and set the fan's speed optimally.
+							<center>
+								<article class="item" style="width:50%">
+									<a href="#" class="image fit"><img src="images/fan_regulation.png" alt="" /></a>
+									<header>
+										<h3>Applying heat the the temperature sensor causes the fan to turn on.</h3>
+									</header>
+								</article>
+							</center>
 
-
-							<article class="item">
-								<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-								<header>
-									<h3>Caption</h3>
-								</header>
-							</article>
+							<div align="left"><b style="font-size:30px; font-weight: 600; margin-bottom:0px" >Graphs on Android App</b></div>
+							These graphs are generated by loading MongoDB data, using pyplot, sending the .png over a HTTP stream from the
+							AWS server to the Android app and using bit vectors to display the images. The was technically difficult to
+							send the .png over a stream and to bitmap it in Java.
+							<center>
+								<article class="item" style="width:50%">
+									<a href="#" class="image fit"><img src="images/temp_time.png" alt="" /></a>
+									<header>
+										<h3>Temperature over time</h3>
+									</header>
+								</article>
+								
+								<article class="item" style="width:50%">
+									<a href="#" class="image fit"><img src="images/hum_time.png" alt="" /></a>
+									<header>
+										<h3>Humidity over time</h3>
+									</header>
+								</article>
+								<article class="item" style="width:50%">
+									<a href="#" class="image fit"><img src="images/rpm_time.png" alt="" /></a>
+									<header>
+										<h3>RPM over time</h3>
+									</header>
+								</article>
+								<article class="item" style="width:50%">
+									<a href="#" class="image fit"><img src="images/all_graphs.png" alt="" /></a>
+									<header>
+										<h3>Temp Decrease</h3>
+									</header>
+								</article>
+							</center>
 
 
 						</div>
@@ -193,6 +405,17 @@
 							<p align="left"><a href="https://www.fixr.com/costs/attic-fan-repair#:~:text=Attic%20fan%20motors%20typically%20have,break%20down%20after%205%20years.">How Much Does It Cost to Repair an Attic Fan?, FixR</a></p>
 
 							<p align="left"><a href="https://phelpsheatingandair.com/blog/attic-insulation-can-save-you-money-year-round">Attic Insulation Can Save You Money Year-Round, Phelps Heating & Air</a></p>
+						
+							<p align="left"><a href"https://www.buildingscience.com/documents/digests/bsd-102-understanding-attic-ventilation">BSD-102: Understanding Attic Ventilation</a></p>
+							
+							<p align="left"><a href="https://books.google.com/books?id=6eBTCgAAQBAJ&q=%22attic+spaces%22">2015 International Building Code Illustrated Handbook</a></p>
+							
+							<p align="left">Lstiburek, J. (2006). Understanding attic ventilation. Ashrae Journal, 48(4), 36.</p>
+							
+							<p align="left">Zhao, D., Aili, A., Yin, X., Tan, G., & Yang, R. (2019). Roof-integrated radiative air-cooling system to achieve cooler attic for building energy saving. Energy and Buildings, 203, 109453.</p>
+							
+							<p align="left">Haese, P. M., & Teubner, M. D. (2002). Heat exchange in an attic space. International Journal of Heat and Mass Transfer, 45(25), 4925-4936.</p>
+						
 						</div>
 					</section>
 
