@@ -1,6 +1,7 @@
 # SmartAtticFan
 
 This repo contains:
-  - ESP32 code that will work directly with the fan and other hardware as well as communicate with the AWS server
-  - AWS server code and AI
-  - Android app
+  - ESP32 code that will work directly with the fan and other hardware as well as communicate with the AWS server (src)
+  - AWS server code and AI (aws_server)
+  - Android app (smart_attic_fan)
+  - AI Model (model)
