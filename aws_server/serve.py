@@ -115,6 +115,7 @@ def is_fan_broken(RPM):
     global is_broke, fan_speed, times_broke
     if fan_speed > 0 and RPM < 10:
         times_broke += 1
+        print("Broken:", times_broke)
     else:
         times_broke = 0
     
