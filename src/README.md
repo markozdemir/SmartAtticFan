@@ -8,4 +8,4 @@ If successful, the ESP32 will collect temperature, humidity, and fan RPM on ever
 
 Once the server receives the information, the ESP32 will wait to receive the correct fan speed back (3 speed) to turn the fan on to.   
 
-Note: firmware contains latest esp32 firmware we used.
+Note: [firmware](https://github.com/markozdemir/SmartAtticFan/tree/main/src/firmware) contains latest esp32 firmware used in development. Feel free to run the shell script under firmware to install.
