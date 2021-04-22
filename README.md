@@ -1,9 +1,9 @@
 # SmartAtticFan
 
 ## The Team 🤝
-James Mastran, B
-Yin Zhang, yz4053
-Mark Ozdemir, mo2804
+- James Mastran, jam2454
+- Yin Zhang, yz4053
+- Mark Ozdemir, mo2804
 
 ## About the Product 🥵
 The Smart Attic Fan optimizes ventilation and contains a system for fan fault detection. It is built with an ESP32 chip that attaches to an attic fan to provide additional features. These features include an optimized fan speed switching for best air ventilation and a fault detection system. Any attic fan can reap the benefits of our product that connects to our AWS server, stores data in a NoSQL Mongo database table, communicates with a KNN model, and displays all data to the user via a beautiful Android phone application. Users are emailed urgent information and sent push notifications about their attic fan.
